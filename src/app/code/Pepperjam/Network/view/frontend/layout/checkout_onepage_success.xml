@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="footer">
+			<block name="checkout.success.pepperjam.beacon" class="Pepperjam\Network\Block\Checkout\Onepage\Beacon" before="-" template="checkout/onepage/beacon.phtml" cacheable="false" />
+		</referenceContainer>
+	</body>
+</page>
