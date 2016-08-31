@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2016 Pepperjam Network.
+
+NOTICE OF LICENSE
+
+This source file is subject to the Pepperjam Network
+Magento Extensions End User License Agreement
+that is bundled with this package in the file LICENSE.md.
+It is also available through the world-wide-web at this URL:
+http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
+
+@copyright   Copyright (c) 2016 Pepperjam Network. (http://www.pepperjam.com/)
+@license     http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf  Pepperjam Network Magento Extensions End User License Agreement
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="pepperjam" translate="label" sortOrder="10">
+			<label>Pepperjam</label>
+		</tab>
+		<section id="pepperjam_network" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+				showInStore="1">
+			<label>Pepperjam Network</label>
+			<tab>pepperjam</tab>
+			<resource>Pepperjam_Network::pepperjam_Network</resource>
+			<group id="settings" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Settings</label>
+				<comment>
+					Your program ID and other information can be found within your Pepperjam Network advertiser account. Don’t have an account yet? Register for one today!
+				</comment>
+				<field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Enable Conversion Tracking</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="program_id" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+					<label>Program Id</label>
+					<comment>Your Program Id will be provided to you by Pepperjam</comment>
+				</field>
+				<field id="tracking_type" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Program Tracking Type</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\TrackingType</source_model>
+				</field>
+				<field id="transaction_type" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Transaction Type</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\TransactionType</source_model>
+					<comment>Sale transactions pay publishers a percentage of the sale, lead transactions pay publishes a flat amount for an action.</comment>
+					<depends>
+						<field id="*/*/tracking_type">basic</field>
+					</depends>
+				</field>
+				<field id="export_path" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Export Path</label>
+					<comment>Default local path to export feeds to. These feeds will need to be made available to Pepperjam via FTP.</comment>
+				</field>
+				<field id="attribution_enabled" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Conditional Pixel</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="source_key_name" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Query String Key Name</label>
+					<comment>Only apply the pixel if the query string includes this key.</comment>
+					<depends>
+						<field id="*/*/attribution_enabled">1</field>
+					</depends>
+				</field>
+				<field id="product_feed_enabled" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Product Feed Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="order_correction_feed_enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Order Correction Feed Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+			</group>
+			<group id="product_map" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+				<label>Product Feed Map</label>
+				<field id="age_range" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>age_range</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Suggested age range</comment>
+				</field>
+				<field id="artist" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>artist</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Media artist</comment>
+				</field>
+				<field id="aspect_ratio" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>aspect_ratio</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Screen aspect ratio</comment>
+				</field>
+				<field id="author" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>author</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Media author</comment>
+				</field>
+				<field id="battery_life" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>battery_life</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Battery life</comment>
+				</field>
+				<field id="binding" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>binding</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Book binding</comment>
+				</field>
+				<field id="buy_url" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>buy_url</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Destination URL (Required)</comment>
+					<validate>validate-no-empty</validate>
+				</field>
+				<field id="category_network" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>category_network</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Pepperjam Network specific category (sub categories optionally delimited by '&gt;')</comment>
+				</field>
+				<field id="category_program" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>category_program</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Merchant specific category (sub categories optionally delimited by '&gt;') (Recommended)</comment>
+				</field>
+				<field id="color" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>color</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Color of item</comment>
+				</field>
+				<field id="color_output" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>color_output</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Whether output is color or not</comment>
+				</field>
+				<field id="condition" translate="label comment" type="select" sortOrder="120" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>condition</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Condition (Recommended)</comment>
+				</field>
+				<field id="description_long" translate="label comment" type="select" sortOrder="130" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>description_long</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Long description (Required)</comment>
+					<validate>validate-no-empty</validate>
+				</field>
+				<field id="description_short" translate="label comment" type="select" sortOrder="140" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>description_short</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Short description</comment>
+				</field>
+				<field id="director" translate="label comment" type="select" sortOrder="150" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>director</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Movie director</comment>
+				</field>
+				<field id="discontinued" translate="label comment" type="select" sortOrder="160" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>discontinued</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Whether product is discontinued or not</comment>
+				</field>
+				<field id="display_type" translate="label comment" type="select" sortOrder="170" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>display_type</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Display type</comment>
+				</field>
+				<field id="edition" translate="label comment" type="select" sortOrder="180" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>edition</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Media edition</comment>
+				</field>
+				<field id="expiration_date" translate="label comment" type="select" sortOrder="190" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>expiration_date</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Expiration date</comment>
+				</field>
+				<field id="features" translate="label comment" type="select" sortOrder="200" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>features</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Special features</comment>
+				</field>
+				<field id="focus_type" translate="label comment" type="select" sortOrder="210" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>focus_type</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Focus type</comment>
+				</field>
+				<field id="format" translate="label comment" type="select" sortOrder="220" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>format</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Format</comment>
+				</field>
+				<field id="functions" translate="label comment" type="select" sortOrder="230" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>functions</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Functions</comment>
+				</field>
+				<field id="genre" translate="label comment" type="select" sortOrder="240" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>genre</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Genre</comment>
+				</field>
+				<field id="heel_height" translate="label comment" type="select" sortOrder="250" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>heel_height</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Heel height</comment>
+				</field>
+				<field id="height" translate="label comment" type="select" sortOrder="260" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>height</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Height</comment>
+				</field>
+				<field id="image_thumb_url" translate="label comment" type="select" sortOrder="270" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>image_thumb_url</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Thumbnail image URL (Recommended)</comment>
+				</field>
+				<field id="image_url" translate="label comment" type="select" sortOrder="280" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>image_url</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Standard image URL (Required)</comment>
+					<validate>validate-no-empty</validate>
+				</field>
+				<field id="installation" translate="label comment" type="select" sortOrder="290" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>installation</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Installation type</comment>
+				</field>
+				<field id="in_stock" translate="label comment" type="select" sortOrder="300" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>in_stock</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Whether product is in stock or not</comment>
+				</field>
+				<field id="isbn" translate="label comment" type="select" sortOrder="310" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>isbn</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Book ISBN</comment>
+				</field>
+				<field id="keywords" translate="label comment" type="select" sortOrder="320" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>keywords</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Space separated list of keywords (Recommended)</comment>
+				</field>
+				<field id="length" translate="label comment" type="select" sortOrder="330" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>length</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Length</comment>
+				</field>
+				<field id="load_type" translate="label comment" type="select" sortOrder="340" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>load_type</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Load type</comment>
+				</field>
+				<field id="location" translate="label comment" type="select" sortOrder="350" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>location</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Shipping location</comment>
+				</field>
+				<field id="made_in" translate="label comment" type="select" sortOrder="360" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>made_in</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Manufacturing country</comment>
+				</field>
+				<field id="manufacturer" translate="label comment" type="select" sortOrder="370" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>manufacturer</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Manufacturer or brand (Recommended)</comment>
+				</field>
+				<field id="material" translate="label comment" type="select" sortOrder="380" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>material</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Construction material</comment>
+				</field>
+				<field id="megapixels" translate="label comment" type="select" sortOrder="390" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>megapixels</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Megapixels</comment>
+				</field>
+				<field id="memory_capacity" translate="label comment" type="select" sortOrder="400" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>memory_capacity</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Memory capacity</comment>
+				</field>
+				<field id="memory_card_slot" translate="label comment" type="select" sortOrder="410" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>memory_card_slot</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Memory card slot type</comment>
+				</field>
+				<field id="memory_type" translate="label comment" type="select" sortOrder="420" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>memory_type</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Memory type</comment>
+				</field>
+				<field id="model_number" translate="label comment" type="select" sortOrder="430" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>model_number</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Model number</comment>
+				</field>
+				<field id="mpn" translate="label comment" type="select" sortOrder="440" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>mpn</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Manufacturer part number</comment>
+				</field>
+				<field id="name" translate="label comment" type="select" sortOrder="450" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>name</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Name or title (Required)</comment>
+					<validate>validate-no-empty</validate>
+				</field>
+				<field id="occasion" translate="label comment" type="select" sortOrder="460" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>occasion</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Recommended usage occasion</comment>
+				</field>
+				<field id="operating_system" translate="label comment" type="select" sortOrder="470" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>operating_system</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Operating system</comment>
+				</field>
+				<field id="optical_drive" translate="label comment" type="select" sortOrder="480" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>optical_drive</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Optical drive type</comment>
+				</field>
+				<field id="pages" translate="label comment" type="select" sortOrder="490" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>pages</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Number of pages</comment>
+				</field>
+				<field id="payment_accepted" translate="label comment" type="select" sortOrder="500" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>payment_accepted</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Accepted payment methods</comment>
+				</field>
+				<field id="payment_notes" translate="label comment" type="select" sortOrder="510" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>payment_notes</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Additional payment notes</comment>
+				</field>
+				<field id="platform" translate="label comment" type="select" sortOrder="520" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>platform</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Platform</comment>
+				</field>
+				<field id="price" translate="label comment" type="select" sortOrder="530" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>price</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Selling price (Required)</comment>
+					<validate>validate-no-empty</validate>
+				</field>
+				<field id="price_retail" translate="label comment" type="select" sortOrder="540" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>price_retail</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Manufacturer suggested retail price</comment>
+				</field>
+				<field id="price_sale" translate="label comment" type="select" sortOrder="550" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>price_sale</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Discount price</comment>
+				</field>
+				<field id="price_shipping" translate="label comment" type="select" sortOrder="560" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>price_shipping</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Shipping price</comment>
+				</field>
+				<field id="processor" translate="label comment" type="select" sortOrder="570" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>processor</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Processor type</comment>
+				</field>
+				<field id="publisher" translate="label comment" type="select" sortOrder="580" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>publisher</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Publisher</comment>
+				</field>
+				<field id="quantity_in_stock" translate="label comment" type="select" sortOrder="590" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>quantity_in_stock</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Number of items in stock</comment>
+				</field>
+				<field id="rating" translate="label comment" type="select" sortOrder="600" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>rating</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Rating</comment>
+				</field>
+				<field id="recommended_usage" translate="label comment" type="select" sortOrder="610" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>recommended_usage</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Recommended usage</comment>
+				</field>
+				<field id="resolution" translate="label comment" type="select" sortOrder="620" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>resolution</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Screen resolution</comment>
+				</field>
+				<field id="screen_size" translate="label comment" type="select" sortOrder="630" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>screen_size</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Screen size</comment>
+				</field>
+				<field id="shipping_method" translate="label comment" type="select" sortOrder="640" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>shipping_method</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Shipping methods</comment>
+				</field>
+				<field id="shoe_size" translate="label comment" type="select" sortOrder="650" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>shoe_size</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Shoe size</comment>
+				</field>
+				<field id="shoe_width" translate="label comment" type="select" sortOrder="660" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>shoe_width</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Shoe width</comment>
+				</field>
+				<field id="size" translate="label comment" type="select" sortOrder="670" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>size</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Size</comment>
+				</field>
+				<field id="sku" translate="label comment" type="select" sortOrder="680" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>sku</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Stock keeping unit (Recommended)</comment>
+				</field>
+				<field id="staring" translate="label comment" type="select" sortOrder="690" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>staring</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Staring actors</comment>
+				</field>
+				<field id="style" translate="label comment" type="select" sortOrder="700" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>style</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Style</comment>
+				</field>
+				<field id="tech_spec_url" translate="label comment" type="select" sortOrder="710" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>tech_spec_url</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Technical specifications URL</comment>
+				</field>
+				<field id="tracks" translate="label comment" type="select" sortOrder="720" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>tracks</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Total number of tracks</comment>
+				</field>
+				<field id="upc" translate="label comment" type="select" sortOrder="730" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>upc</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Universal product code (Recommended)</comment>
+				</field>
+				<field id="weight" translate="label comment" type="select" sortOrder="740" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>weight</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Weight</comment>
+				</field>
+				<field id="width" translate="label comment" type="select" sortOrder="750" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>width</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Width</comment>
+				</field>
+				<field id="wireless_interface" translate="label comment" type="select" sortOrder="760" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>wireless_interface</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Wireless interface</comment>
+				</field>
+				<field id="year" translate="label comment" type="select" sortOrder="770" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>year</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Year of manufacture - YYYY</comment>
+				</field>
+				<field id="zoom" translate="label comment" type="select" sortOrder="780" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>zoom</label>
+					<source_model>Pepperjam\Network\Model\Config\Source\Attribute</source_model>
+					<comment>Maximum zoom</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>
