@@ -16,12 +16,12 @@ class CommissioningCategory extends AbstractSource {
 	}
 
 	public function getAllOptions() {
-		$categoryOptions = [
-			[
+		$categoryOptions = array(
+			array(
 				'value' => '',
 				'label' => ' ',
-			],
-		];
+			),
+		);
 
 		// For reference see: \Magento\Catalog\Helper\Category::getStoreCategories
 		$rootCategoryId = $this->_storeManager->getStore()->getRootCategoryId();
@@ -41,7 +41,7 @@ class CommissioningCategory extends AbstractSource {
 		}
 
 		foreach($categories as $category) {
-			$options[] = ['value' => $category->getId(), 'label' => str_repeat('-', $level) . $category->getName()];
+			$options[] = array('value' => $category->getId(), 'label' => str_repeat('-', $level) . $category->getName());
 
 			$subcategories = $category->getChildrenCategories();
 			$this->_addChildren($options, $subcategories, $level+1);

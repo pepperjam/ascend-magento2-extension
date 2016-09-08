@@ -26,25 +26,28 @@ class Config extends AbstractHelper {
 	public function getTransactionType() {
 		return $this->_scopeConfig->getValue('pepperjam_network/settings/transaction_type');
 	}
-	public function getExpertPath() {
+	public function getExportPath() {
 		return $this->_scopeConfig->getValue('pepperjam_network/settings/export_path');
 	}
 	public function isAttributionEnabled() {
-		return (boolean) $this->_scopeConfig->getValue('pepperjam_network/settings/attribution_enabled');
+		return (boolean) $this->isActive() && $this->_scopeConfig->getValue('pepperjam_network/settings/attribution_enabled');
 	}
 	public function getSourceKeyName() {
 		return $this->_scopeConfig->getValue('pepperjam_network/settings/source_key_name');
 	}
 	public function isProductFeedEnabled() {
-		return (boolean) $this->_scopeConfig->getValue('pepperjam_network/settings/product_feed_enabled');
+		return (boolean) $this->isActive() && $this->_scopeConfig->getValue('pepperjam_network/settings/product_feed_enabled');
 	}
 	public function isOrderCorrectionFeedEnabled() {
-		return (boolean) $this->_scopeConfig->getValue('pepperjam_network/settings/order_correction_feed_enabled');
+		return (boolean) $this->isActive() && $this->_scopeConfig->getValue('pepperjam_network/settings/order_correction_feed_enabled');
+	}
+	public function getProductFeedMap() {
+		return $this->_scopeConfig->getValue('pepperjam_network/product_map');
 	}
 
 	public function getValidSources() {
 		// Magic strings, but they are not used anywhere else
-		return ['eems', 'pepperjam'];
+		return array('eems', 'pepperjam');
 	}
 
 	public function getBeaconBaseUrl() {

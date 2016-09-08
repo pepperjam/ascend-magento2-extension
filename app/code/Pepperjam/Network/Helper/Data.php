@@ -48,7 +48,7 @@ class Data extends AbstractHelper {
 
 		$orderCollection = $this->_collectionFactory->create();
 		$orderCollection->addFieldToFilter(OrderInterface::CUSTOMER_EMAIL, $customerEmail);
-		$orderCollection->addFieldToFilter(OrderInterface::CREATED_AT, ['lt' => $createdAt]);
+		$orderCollection->addFieldToFilter(OrderInterface::CREATED_AT, array('lt' => $createdAt));
 		$orderCollection->load();
 
 		return (boolean) !$orderCollection->count();
