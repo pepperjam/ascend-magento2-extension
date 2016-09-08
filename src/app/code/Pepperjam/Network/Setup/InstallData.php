@@ -23,7 +23,7 @@ class InstallData implements InstallDataInterface {
 		$categorySetup->addAttribute(
 			Product::ENTITY,
 			'commissioning_category',
-			[
+			array(
 				'type' => 'int',
 				'label' => 'Commissioning Category',
 				'input' => 'select',
@@ -36,7 +36,7 @@ class InstallData implements InstallDataInterface {
 				'is_filterable_in_grid' => false,
 				'used_for_promo_rules' => false,
 				'required' => false,
-			]
+			)
 		);
 
 		$setup->endSetup();

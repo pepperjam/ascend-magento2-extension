@@ -25,11 +25,11 @@ class Itemized extends Beacon {
 	}
 
 	protected function _orderParams() {
-		return [
+		return array(
 			'PID' => $this->_config->getProgramId(),
 			'OID' => $this->_order->getIncrementId(),
 			'INT' => $this->_config->getInt(),
-		];
+		);
 	}
 
 	protected function _addItems($params) {

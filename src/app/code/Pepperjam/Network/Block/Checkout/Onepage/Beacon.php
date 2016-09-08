@@ -21,7 +21,7 @@ class Beacon extends Template {
 		BeaconFactory $beaconFactory,
 		CheckoutSession $checkoutSession,
 		Config $config,
-		array $data = []
+		array $data = array()
 	) {
 		parent::__construct($context, $data);
 
