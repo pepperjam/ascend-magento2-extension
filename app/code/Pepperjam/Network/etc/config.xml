@@ -8,6 +8,11 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
 	<default>
 		<pepperjam_network>
+			<feed>
+				<order_correction>
+					<last_run_time />
+				</order_correction>
+			</feed>
 			<settings>
 				<active>0</active>
 				<tracking_type>dynamic</tracking_type>

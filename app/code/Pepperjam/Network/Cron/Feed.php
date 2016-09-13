@@ -26,6 +26,7 @@ abstract class Feed {
 	public function execute() {
 		if ($this->_enabled()) {
 			$this->_writeFile($this->_buildFeedData());
+			$this->_afterWrite();
 		}
 	}
 
@@ -120,5 +121,7 @@ abstract class Feed {
 		return $this;
 	}
 
-	// TODO: lots
+	protected function _afterWrite() {
+		// Hook for OrderCorrection (and future feeds) to update runTime
+	}
 }

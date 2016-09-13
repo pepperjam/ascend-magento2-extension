@@ -54,8 +54,6 @@ class Product extends Feed {
 	}
 
 	protected function _getFileName() {
-		var_dump(sprintf(self::FILENAME_FORMAT, $this->_config->getProgramId()));
-
 		return sprintf(self::FILENAME_FORMAT, $this->_config->getProgramId());
 	}
 

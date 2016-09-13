@@ -8,11 +8,16 @@ use \Magento\Framework\Setup\InstallDataInterface;
 use \Magento\Framework\Setup\ModuleContextInterface;
 use \Magento\Framework\Setup\ModuleDataSetupInterface;
 
+use \Pepperjam\Network\Helper\Config;
+
 class InstallData implements InstallDataInterface {
 	protected $_categorySetupFactory;
 
-	public function __construct(CategorySetupFactory $categorySetupFactory) {
+	protected $_config;
+
+	public function __construct(CategorySetupFactory $categorySetupFactory, Config $config) {
 		$this->_categorySetupFactory = $categorySetupFactory;
+		$this->_config = $config;
 	}
 
 	public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) {
@@ -40,5 +45,7 @@ class InstallData implements InstallDataInterface {
 		);
 
 		$setup->endSetup();
+
+		$this->_config->setOrderCorrectionFeedLastRunTime(time());
 	}
 }

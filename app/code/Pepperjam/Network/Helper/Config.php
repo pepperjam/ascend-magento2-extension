@@ -4,13 +4,17 @@ namespace Pepperjam\Network\Helper;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use \Magento\Framework\App\Helper\AbstractHelper;
 use \Magento\Framework\App\Helper\Context;
+use \Magento\Config\Model\ResourceModel\Config as ConfigResource;
 
 class Config extends AbstractHelper {
+	protected $_configResource;
+
 	protected $_scopeConfig;
 
-	public function __construct(Context $context, ScopeConfigInterface $scopeConfig) {
+	public function __construct(ConfigResource $configResource, Context $context, ScopeConfigInterface $scopeConfig) {
 		parent::__construct($context);
 
+		$this->_configResource = $configResource;
 		$this->_scopeConfig = $scopeConfig;
 	}
 
@@ -57,5 +61,21 @@ class Config extends AbstractHelper {
 
 	public function getInt() {
 		return strtoupper($this->getTrackingType());
+	}
+
+	public function getRequiredProductFeedFields() {
+		$pepperjamConfig = $this->_config->getSection();
+
+		var_dump($pepperjamConfig);
+
+		// TODO finish this method, then use to make sure all products have fields in product feed
+	}
+
+	public function getOrderCorrectionFeedLastRunTime() {
+		return $this->_scopeConfig->getValue('pepperjam_network/feed/order_correction/last_run_time');
+	}
+
+	public function setOrderCorrectionFeedLastRunTime($time) {
+		$this->_configResource->saveConfig('pepperjam_network/feed/order_correction/last_run_time', $time, ScopeConfigInterface::SCOPE_TYPE_DEFAULT, 0);
 	}
 }
