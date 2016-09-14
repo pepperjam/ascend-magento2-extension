@@ -98,7 +98,7 @@ class OrderCorrection {
 	}
 
 	public function getNewToFile($item) {
-		return (int) $this->_helper->isNewToFile($item);
+		return (int) $this->_helper->isNewToFile($item->getOrder());
 	}
 
 	public function getOrderAmount($item) {
