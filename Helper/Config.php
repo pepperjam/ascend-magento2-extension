@@ -1,19 +1,24 @@
 <?php
 namespace Pepperjam\Network\Helper;
 
+use \Magento\Framework\App\Cache\Manager as CacheManager;
+use \Magento\Framework\App\Cache\Type\Config as CacheTypeConfig;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use \Magento\Framework\App\Helper\AbstractHelper;
 use \Magento\Framework\App\Helper\Context;
 use \Magento\Config\Model\ResourceModel\Config as ConfigResource;
 
 class Config extends AbstractHelper {
+	protected $_cacheManager;
+
 	protected $_configResource;
 
 	protected $_scopeConfig;
 
-	public function __construct(ConfigResource $configResource, Context $context, ScopeConfigInterface $scopeConfig) {
+	public function __construct(CacheManager $cacheManager, ConfigResource $configResource, Context $context, ScopeConfigInterface $scopeConfig) {
 		parent::__construct($context);
 
+		$this->_cacheManager = $cacheManager;
 		$this->_configResource = $configResource;
 		$this->_scopeConfig = $scopeConfig;
 	}
@@ -77,5 +82,6 @@ class Config extends AbstractHelper {
 
 	public function setOrderCorrectionFeedLastRunTime($time) {
 		$this->_configResource->saveConfig('pepperjam_network/feed/order_correction/last_run_time', $time, ScopeConfigInterface::SCOPE_TYPE_DEFAULT, 0);
+		$this->_cacheManager->clean(array(CacheTypeConfig::TYPE_IDENTIFIER));
 	}
 }
