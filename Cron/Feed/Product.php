@@ -14,7 +14,6 @@ use \Pepperjam\Network\Helper\Map\Product as ProductMap;
 
 class Product extends Feed {
 	const FILENAME_FORMAT = '%s_product_feed.csv';
-	const FIELD_PRODUCT_URL = 'product_url';
 
 	protected $_config;
 
@@ -37,9 +36,9 @@ class Product extends Feed {
 
 	protected function _applyMapping($item) {
 		$data = array();
-		$fields = $this->_getFields();
-		foreach ($fields as $field) {
-			$data[] = $this->_productMap->get($item, $field);
+		$fields = $this->_getFeedFields();
+		foreach ($fields as $field => $attribute) {
+			$data[] = $this->_productMap->get($item, $field, $attribute);
 		}
 
 		return $data;

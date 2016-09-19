@@ -4,7 +4,7 @@ namespace Pepperjam\Network\Model\Config\Source;
 use \Magento\Eav\Model\Config;
 use \Magento\Framework\Data\OptionSourceInterface;
 
-use \Pepperjam\Network\Cron\Feed\Product;
+use \Pepperjam\Network\Helper\Map\Product;
 
 class Attribute implements OptionSourceInterface {
 	protected $_eavConfig;
@@ -21,7 +21,7 @@ class Attribute implements OptionSourceInterface {
 				'label' => '',
 			),
 			array(
-				'value' => Product::FIELD_PRODUCT_URL,
+				'value' => Product::ATTRIBUTE_PRODUCT_URL,
 				'label' => __('Product URL')
 			),
 		);

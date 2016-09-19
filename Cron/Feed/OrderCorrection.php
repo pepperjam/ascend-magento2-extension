@@ -33,9 +33,9 @@ abstract class OrderCorrection extends Feed {
 
 	protected function _applyMapping($item) {
 		$data = array();
-		$fields = $this->_getFields();
-		foreach($fields as $field) {
-			$data[] = $this->_orderCorrectionMap->get($item, $field);
+		$fields = $this->_getFeedFields();
+		foreach($fields as $field => $attribute) {
+			$data[] = $this->_orderCorrectionMap->get($item, $field, $attribute);
 		}
 
 		return $data;
