@@ -157,7 +157,7 @@ class Product extends AbstractHelper {
 			case self::FIELD_AUTHOR:
 			case self::FIELD_DIRECTOR:
 			case self::FIELD_FEATURES:
-			case self::FIELD_FOCUS:
+			case self::FIELD_FOCUS_TYPE:
 			case self::FIELD_MANUFACTURER:
 			case self::FIELD_MATERIAL:
 			case self::FIELD_MODEL_NUMBER:
