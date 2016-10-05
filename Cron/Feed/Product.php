@@ -38,7 +38,9 @@ class Product extends Feed {
 		$data = array();
 		$fields = $this->_getFeedFields();
 		foreach ($fields as $field => $attribute) {
-			$data[] = $this->_productMap->get($item, $field, $attribute);
+			if ($attribute != '') {
+				$data[] = $attribute . ": " . $this->_productMap->get($item, $field, $attribute);
+			}
 		}
 
 		return $data;

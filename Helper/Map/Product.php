@@ -101,10 +101,10 @@ class Product extends AbstractHelper {
 		if ($attribute == self::ATTRIBUTE_PRODUCT_URL) {
 			$value = $this->getProductUrl($product);
 		} else {
-			$value = $product->getData($field);
+			$value = $product->getData($attribute);
 		}
 
-		return $this->_formatValue($field, $attribute);
+		return $this->_formatValue($field, $value);
 	}
 
 	public function getProductUrl($product) {
@@ -196,7 +196,7 @@ class Product extends AbstractHelper {
 			case self::FIELD_PRICE_RETAIL:
 			case self::FIELD_PRICE_SALE:
 			case self::FIELD_PRICE_SHIPPING:
-				return $this->_helper->formatMoney($value);
+				return $this->_helper->formatMoney((float) $value);
 			case self::FIELD_PAGES:
 			case self::FIELD_QUANTITY_IN_STOCK:
 			case self::FIELD_TRACKS:
@@ -219,6 +219,6 @@ class Product extends AbstractHelper {
 	}
 
 	protected function _trimToMaxLength($value, $maxLength) {
-		substr(trim($value), 0, $maxLength);
+		return substr(trim($value), 0, $maxLength);
 	}
 }

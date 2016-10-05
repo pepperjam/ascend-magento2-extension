@@ -99,8 +99,6 @@ abstract class Feed {
 			$this->_config->getExportPath(),
 			$this->_getFileName()
 		);
-
-		return $normalDir . $normalExport . $normalFilename;
 	}
 
 	protected function _normalizePath() {
