@@ -98,7 +98,7 @@ class Product extends AbstractHelper {
 	}
 
 	public function get($product, $field, $attribute) {
-		if ($attribute == ProductFeed::ATTRIBUTE_PRODUCT_URL) {
+		if ($attribute == self::ATTRIBUTE_PRODUCT_URL) {
 			$value = $this->getProductUrl($product);
 		} else {
 			$value = $product->getData($field);
