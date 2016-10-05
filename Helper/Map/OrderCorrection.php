@@ -29,8 +29,8 @@ class OrderCorrection {
 		$this->_helper = $helper;
 	}
 
-	public function get($item, $field) {
-		switch ($field) {
+	public function get($item, $field, $attribute) {
+		switch ($attribute) {
 			case self::FIELD_CATEGORY:
 				return $this->getCategory($item);
 			case self::FIELD_ITEM_ID:
@@ -90,7 +90,7 @@ class OrderCorrection {
 	}
 
 	public function getItemPrice($item) {
-		if ($this->_config->getTransactionType() === $this->_helper::TRANSACTION_LEAD) {
+		if ($this->_config->getTransactionType() === Data::TRANSACTION_LEAD) {
 			return 0;
 		}
 
