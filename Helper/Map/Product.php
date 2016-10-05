@@ -104,7 +104,7 @@ class Product extends AbstractHelper {
 			$value = $product->getData($field);
 		}
 
-		return $this->formatValue($field, $attribute);
+		return $this->_formatValue($field, $attribute);
 	}
 
 	public function getProductUrl($product) {
