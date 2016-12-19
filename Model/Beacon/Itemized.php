@@ -14,6 +14,8 @@ use \Pepperjam\Network\Model\Beacon;
 
 class Itemized extends Beacon {
 	protected $_couponKey = 'PROMOCODE';
+	protected $_priceKey = 'AMOUNT';
+	protected $_quantityKey = 'QTY';
 	protected $_skuKey = 'ITEM';
 
 	public function getUrl() {
@@ -46,6 +48,8 @@ class Itemized extends Beacon {
 			}
 		}
 
+		$params = $this->_averageItemAmount($params, $itemIndex);
+
 		return $params;
 	}
 
@@ -61,16 +65,16 @@ class Itemized extends Beacon {
 
 	protected function _newItem($params, $item, $itemIndex) {
 		$params[$this->_skuKey . $itemIndex] = $item->getSku();
-		$params['QTY' . $itemIndex] = $this->_getQuantity($item);
-		$params['AMOUNT' . $itemIndex] = $this->_getPrice($item);
+		$params[$this->_quantityKey . $itemIndex] = $this->_getQuantity($item);
+		$params[$this->_priceKey . $itemIndex] = $this->_getPrice($item);
 
 		return $params;
 	}
 
 	protected function _existingItem($params, $item, $itemIndex) {
-		$params['QTY' . $itemIndex] += $this->_getQuantity();
-		$priceKey = 'AMOUNT' . $itemIndex;
-		$params[$priceKey] = $this->_helper->formatMoney($params[$priceKey] + $this->_getPrice());
+		$params[$this->_quantityKey . $itemIndex] += $this->_getQuantity($item);
+		$priceKey = $this->_priceKey . $itemIndex;
+		$params[$priceKey] = $this->_helper->formatMoney($params[$priceKey] + $this->_getPrice($item));
 
 		return $params;
 	}
@@ -87,7 +91,15 @@ class Itemized extends Beacon {
 		if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE && $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC) {
 			return '0.00';
 		} else {
-			return $this->_helper->formatMoney($item->getPrice() - ($item->getDiscountAmount() / $item->getQtyOrdered()));
+			return $item->getRowTotal() - $item->getDiscountAmount();
 		}
+	}
+
+	protected function _averageItemAmount($params, $itemIndex) {
+		for ($i = 1; $i < $itemIndex; $i++) {
+			$params[$this->_priceKey.$i] = $this->_helper->formatMoney($params[$this->_priceKey.$i]/$params[$this->_quantityKey.$i]);
+		}
+
+		return $params;
 	}
 }

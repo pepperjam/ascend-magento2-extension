@@ -34,7 +34,7 @@ class Beacon extends Template {
 	public function getBeaconUrl() {
 		$order = $this->_checkoutSession->getLastRealOrder();
 		$beacon = $this->_beaconFactory->create($this->_config->getTrackingType(), $order);
-		
+
 		return $beacon->getUrl();
 	}
 
@@ -45,6 +45,6 @@ class Beacon extends Template {
 			}
 		}
 
-		return 'beacon';
+		return '';
 	}
 }
