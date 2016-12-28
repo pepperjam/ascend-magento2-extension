@@ -9,7 +9,7 @@ use \Pepperjam\Network\Model\Attribution;
 
 class Tracking implements ObserverInterface {
 	protected $_attribution;
-	
+
 	protected $_config;
 
 	public function __construct(Attribution $attribution, Config $config) {
@@ -19,7 +19,7 @@ class Tracking implements ObserverInterface {
 
 	public function execute(Observer $observer) {
 		if ($this->_config->isActive() && $this->_config->isAttributionEnabled()) {
-			$attribution->create();
+			$this->_attribution->create();
 		}
 	}
 }
