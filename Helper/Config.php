@@ -15,7 +15,8 @@ class Config extends AbstractHelper {
 
 	protected $_scopeConfig;
 
-	public function __construct(CacheManager $cacheManager, ConfigResource $configResource, Context $context, ScopeConfigInterface $scopeConfig) {
+	public function __construct(CacheManager $cacheManager, ConfigResource $configResource, Context $context, 
+		ScopeConfigInterface $scopeConfig) {
 		parent::__construct($context);
 
 		$this->_cacheManager = $cacheManager;
@@ -39,16 +40,19 @@ class Config extends AbstractHelper {
 		return $this->_scopeConfig->getValue('pepperjam_network/settings/export_path');
 	}
 	public function isAttributionEnabled() {
-		return (boolean) $this->isActive() && $this->_scopeConfig->getValue('pepperjam_network/settings/attribution_enabled');
+		return (boolean) $this->isActive() &&
+			$this->_scopeConfig->getValue('pepperjam_network/settings/attribution_enabled');
 	}
 	public function getSourceKeyName() {
 		return $this->_scopeConfig->getValue('pepperjam_network/settings/source_key_name');
 	}
 	public function isProductFeedEnabled() {
-		return (boolean) $this->isActive() && $this->_scopeConfig->getValue('pepperjam_network/settings/product_feed_enabled');
+		return (boolean) $this->isActive() &&
+			$this->_scopeConfig->getValue('pepperjam_network/settings/product_feed_enabled');
 	}
 	public function isOrderCorrectionFeedEnabled() {
-		return (boolean) $this->isActive() && $this->_scopeConfig->getValue('pepperjam_network/settings/order_correction_feed_enabled');
+		return (boolean) $this->isActive() &&
+			$this->_scopeConfig->getValue('pepperjam_network/settings/order_correction_feed_enabled');
 	}
 	public function getProductFeedMap() {
 		return $this->_scopeConfig->getValue('pepperjam_network/product_map');
@@ -56,7 +60,7 @@ class Config extends AbstractHelper {
 
 	public function getValidSources() {
 		// Magic strings, but they are not used anywhere else
-		return array('eems', 'pepperjam');
+		return ['eems', 'pepperjam'];
 	}
 
 	public function getBeaconBaseUrl() {
@@ -70,10 +74,6 @@ class Config extends AbstractHelper {
 
 	public function getRequiredProductFeedFields() {
 		$pepperjamConfig = $this->_config->getSection();
-
-		var_dump($pepperjamConfig);
-
-		// TODO finish this method, then use to make sure all products have fields in product feed
 	}
 
 	public function getOrderCorrectionFeedLastRunTime() {
@@ -81,7 +81,8 @@ class Config extends AbstractHelper {
 	}
 
 	public function setOrderCorrectionFeedLastRunTime($time) {
-		$this->_configResource->saveConfig('pepperjam_network/feed/order_correction/last_run_time', $time, ScopeConfigInterface::SCOPE_TYPE_DEFAULT, 0);
-		$this->_cacheManager->clean(array(CacheTypeConfig::TYPE_IDENTIFIER));
+		$this->_configResource->saveConfig('pepperjam_network/feed/order_correction/last_run_time', $time, 
+			ScopeConfigInterface::SCOPE_TYPE_DEFAULT, 0);
+		$this->_cacheManager->clean([CacheTypeConfig::TYPE_IDENTIFIER]);
 	}
 }

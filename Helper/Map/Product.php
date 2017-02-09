@@ -207,7 +207,7 @@ class Product extends AbstractHelper {
 	}
 
 	protected function _getDateValue($value) {
-		return date('Y-m-d', strtotime($value));	
+		return date('Y-m-d', strtotime($value));
 	}
 
 	protected function _getValueYesNo($value) {

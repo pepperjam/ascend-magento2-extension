@@ -2,11 +2,12 @@
 namespace Pepperjam\Network\Helper\Map;
 
 use \Magento\Catalog\Model\Product\Type as ProductType;
+use \Magento\Framework\App\Helper\AbstractHelper;
 
 use \Pepperjam\Network\Helper\Config;
 use \Pepperjam\Network\Helper\Data;
 
-class OrderCorrection {
+class OrderCorrection extends AbstractHelper {
 	const FIELD_CATEGORY = 'category';
 	const FIELD_ITEM_ID = 'item_id';
 	const FIELD_ITEM_QUANTITY = 'item_quantity';
@@ -73,7 +74,8 @@ class OrderCorrection {
 		// don't allow negative amounts - could happen if a discounted item was cancelled
 		return max(
 			0,
-			$item->getBasePrice() - (($item->getBaseDiscountAmount() - $item->getBaseDiscountRefunded()) / $this->getItemQuantity($item))
+			$item->getBasePrice() - (($item->getBaseDiscountAmount() - $item->getBaseDiscountRefunded())
+				/ $this->getItemQuantity($item))
 		);
 	}
 

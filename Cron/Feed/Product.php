@@ -35,7 +35,7 @@ class Product extends Feed {
 	}
 
 	protected function _applyMapping($item) {
-		$data = array();
+		$data = [];
 		$fields = $this->_getFeedFields();
 		foreach ($fields as $field => $attribute) {
 			if ($attribute != '') {

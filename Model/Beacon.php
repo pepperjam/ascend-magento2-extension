@@ -26,7 +26,7 @@ abstract class Beacon {
 		return $params;
 	}
 
-	public abstract function getUrl();
+	abstract public function getUrl();
 
-	protected abstract function _orderParams();
+	abstract protected function _orderParams();
 }

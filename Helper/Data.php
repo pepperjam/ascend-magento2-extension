@@ -29,13 +29,13 @@ class Data extends AbstractHelper {
 	public function getCommissioningCategory($item) {
 		$category = $item->getProduct()->getCommissioningCategory();
 		if ($category == '' || $category == null) {
-
 			$categoryIds = $item->getProduct()->getCategoryIds();
 			// if there are any categories, grab the first
-			if (count($categoryIds))
+			if (!empty($categoryIds)) {
 				$category = $categoryIds[0];
-			else
+			} else {
 				$category = 0;
+			}
 		}
 
 		return $category;
@@ -48,9 +48,9 @@ class Data extends AbstractHelper {
 
 		$orderCollection = $this->_collectionFactory->create();
 		$orderCollection->addFieldToFilter(OrderInterface::CUSTOMER_EMAIL, $customerEmail);
-		$orderCollection->addFieldToFilter(OrderInterface::CREATED_AT, array('lt' => $createdAt));
+		$orderCollection->addFieldToFilter(OrderInterface::CREATED_AT, ['lt' => $createdAt]);
 		$orderCollection->load();
 
-		return (boolean) !$orderCollection->count();
+		return (boolean) $orderCollection->getSize() == 0;
 	}
 }

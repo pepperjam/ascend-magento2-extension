@@ -6,12 +6,6 @@ use \Magento\Catalog\Model\Product\Type as ProductType;
 
 use \Pepperjam\Network\Model\Beacon;
 
-// TODO with this and Dynamic:
-// add all keys as protected fields
-// so in dynamic _addItems, it can call parent::_newItem without issue
-// then all it has to add is category
-// Similar with orderParams
-
 class Itemized extends Beacon {
 	protected $_couponKey = 'PROMOCODE';
 	protected $_priceKey = 'AMOUNT';
@@ -27,11 +21,11 @@ class Itemized extends Beacon {
 	}
 
 	protected function _orderParams() {
-		return array(
+		return [
 			'PID' => $this->_config->getProgramId(),
 			'OID' => $this->_order->getIncrementId(),
 			'INT' => $this->_config->getInt(),
-		);
+		];
 	}
 
 	protected function _addItems($params) {
@@ -88,7 +82,8 @@ class Itemized extends Beacon {
 	}
 
 	protected function _getPrice($item) {
-		if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE && $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC) {
+		if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE 
+			&& $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC) {
 			return '0.00';
 		} else {
 			return $item->getRowTotal() - $item->getDiscountAmount();
@@ -97,7 +92,8 @@ class Itemized extends Beacon {
 
 	protected function _averageItemAmount($params, $itemIndex) {
 		for ($i = 1; $i < $itemIndex; $i++) {
-			$params[$this->_priceKey.$i] = $this->_helper->formatMoney($params[$this->_priceKey.$i]/$params[$this->_quantityKey.$i]);
+			$params[$this->_priceKey.$i] = $this->_helper
+				->formatMoney($params[$this->_priceKey.$i]/$params[$this->_quantityKey.$i]);
 		}
 
 		return $params;

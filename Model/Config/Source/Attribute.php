@@ -15,24 +15,24 @@ class Attribute implements OptionSourceInterface {
 
 	public function toOptionArray() {
 		// Start with an empty option if you'd like to not include a field
-		$options = array(
-			array(
+		$options = [
+			[
 				'value' => '',
 				'label' => '',
-			),
-			array(
+			],
+			[
 				'value' => Product::ATTRIBUTE_PRODUCT_URL,
 				'label' => __('Product URL')
-			),
-		);
+			],
+		];
 
 		$codes = $this->_eavConfig->getEntityAttributeCodes('catalog_product');
 		foreach ($codes as $code) {
 			$attribute = $this->_eavConfig->getAttribute('catalog_product', $code);
-			$options[] = array(
+			$options[] = [
 				'value' => $code,
 				'label' => $attribute->getFrontendLabel(),
-			);
+			];
 		}
 
 		return $options;
@@ -40,12 +40,12 @@ class Attribute implements OptionSourceInterface {
 
 	public function toArray() {
 		// Start with an empty option if you'd like to not include a field
-		$options = array('' => '');
+		$options = ['' => ''];
 
 		$codes = $this->_eavConfig->getEntityAttributeCodes('catalog_product');
 		foreach ($codes as $code) {
 			$attribute = $this->_eavConfig->getAttribute('catalog_product', $code);
-			$options[] = array($code => $attribute->getFrontendLabel());
+			$options[] = [$code => $attribute->getFrontendLabel()];
 		}
 
 		return $options;

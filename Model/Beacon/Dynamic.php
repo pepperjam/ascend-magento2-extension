@@ -10,12 +10,12 @@ class Dynamic extends Itemized {
 	protected $_skuKey = 'ITEM_ID';
 
 	protected function _orderParams() {
-		return array(
+		return [
 			'PROGRAM_ID' => $this->_config->getProgramId(),
 			'ORDER_ID' => $this->_order->getIncrementId(),
 			'INT' => $this->_config->getInt(),
 			'NEW_TO_FILE' => (int) $this->_helper->isNewToFile($this->_order),
-		);
+		];
 	}
 
 	protected function _newItem($params, $item, $itemIndex) {

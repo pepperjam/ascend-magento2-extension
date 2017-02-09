@@ -32,9 +32,9 @@ abstract class OrderCorrection extends Feed {
 	}
 
 	protected function _applyMapping($item) {
-		$data = array();
+		$data = [];
 		$fields = $this->_getFeedFields();
-		foreach($fields as $field => $attribute) {
+		foreach ($fields as $field => $attribute) {
 			$data[] = $this->_orderCorrectionMap->get($item, $field, $attribute);
 		}
 
@@ -46,7 +46,8 @@ abstract class OrderCorrection extends Feed {
 	}
 
 	protected function _getFileName() {
-		return sprintf(self::FILENAME_FORMAT, $this->_config->getProgramId(), date(static::FILENAME_TIME_FORMAT, $this->_startTime));
+		return sprintf(self::FILENAME_FORMAT, $this->_config->getProgramId(), 
+			date(static::FILENAME_TIME_FORMAT, $this->_startTime));
 	}
 
 	protected function _afterWrite() {

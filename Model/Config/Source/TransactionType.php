@@ -13,22 +13,22 @@ class TransactionType implements OptionSourceInterface {
 	}
 
 	public function toOptionArray() {
-		return array(
-			array(
+		return [
+			[
 				'value' => $this->_helper::TRANSACTION_LEAD,
 				'label' => __('Lead'),
-			),
-			array(
+			],
+			[
 				'value' => $this->_helper::TRANSACTION_SALE,
 				'label' => __('Sale'),
-			),
-		);
+			],
+		];
 	}
 
 	public function toArray() {
-		return array(
+		return [
 			$this->_helper::TRANSACTION_LEAD => __('Lead'),
 			$this->_helper::TRANSACTION_SALE => __('Sale'),
-		);
+		];
 	}
 }

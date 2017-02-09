@@ -36,7 +36,7 @@ abstract class Feed {
 
 		$this->_logger->info("Building feed for $dataCount items");
 
-		return array_map(array($this, '_applyMapping'), $data->getItems());
+		return array_map([$this, '_applyMapping'], $data->getItems());
 	}
 
 	protected function _writeFile($feedData) {
@@ -61,14 +61,12 @@ abstract class Feed {
 		return $this;
 	}
 
-	protected abstract function _getItems();
+	abstract protected function _getItems();
 
-	protected function _applyMapping($item) {
-		$fields = array();
-	}
+	abstract protected function _applyMapping($item);
 
 	protected function _getHeaders() {
-		$headers = array();
+		$headers = [];
 
 		foreach ($this->_getFeedFields() as $key => $field) {
 			if (!is_null($field)) {
@@ -80,7 +78,7 @@ abstract class Feed {
 	}
 
 	protected function _getFields() {
-		$fields = array();
+		$fields = [];
 
 		foreach ($this->_getFeedFields() as $key => $field) {
 			if (!is_null($field)) {
@@ -91,7 +89,7 @@ abstract class Feed {
 		return $fields;
 	}
 
-	protected abstract function _getFeedFields();
+	abstract protected function _getFeedFields();
 
 	protected function _getFilePath() {
 		return $this->_normalizePath(
@@ -109,7 +107,7 @@ abstract class Feed {
 			implode(DIRECTORY_SEPARATOR, array_filter(explode(DIRECTORY_SEPARATOR, $paths)));
 	}
 
-	protected abstract function _getFileName();
+	abstract protected function _getFileName();
 
 	protected function _checkAndCreateFolder($dirPath)
 	{

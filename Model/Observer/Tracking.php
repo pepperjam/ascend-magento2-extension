@@ -17,7 +17,7 @@ class Tracking implements ObserverInterface {
 		$this->_config = $config;
 	}
 
-	public function execute(Observer $observer) {
+	public function execute() {
 		if ($this->_config->isActive() && $this->_config->isAttributionEnabled()) {
 			$this->_attribution->create();
 		}
