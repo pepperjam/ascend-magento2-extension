@@ -5,7 +5,8 @@ use \Magento\Framework\App\ObjectManager;
 
 use \Pepperjam\Network\Helper\Config;
 
-class OrderCorrectionFactory {
+class OrderCorrectionFactory
+{
     protected $_config;
 
     protected $_objectManager;

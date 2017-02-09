@@ -5,7 +5,8 @@ use \Magento\Framework\Data\OptionSourceInterface;
 
 use \Pepperjam\Network\Helper\Data;
 
-class TransactionType implements OptionSourceInterface {
+class TransactionType implements OptionSourceInterface
+{
     protected $_helper;
 
     public function __construct(Data $helper) {

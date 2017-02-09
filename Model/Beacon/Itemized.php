@@ -6,7 +6,8 @@ use \Magento\Catalog\Model\Product\Type as ProductType;
 
 use \Pepperjam\Network\Model\Beacon;
 
-class Itemized extends Beacon {
+class Itemized extends Beacon
+{
     protected $_couponKey = 'PROMOCODE';
     protected $_priceKey = 'AMOUNT';
     protected $_quantityKey = 'QTY';

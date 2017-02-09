@@ -3,7 +3,8 @@ namespace Pepperjam\Network\Model\ResourceModel\Network;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
-class Collection extends AbstractCollection {
+class Collection extends AbstractCollection
+{
     protected function _construct() {
         $this->_init('Pepperjam\Network\Model\Network', 'Pepperjam\Network\Model\ResourceModel\Network');
     }

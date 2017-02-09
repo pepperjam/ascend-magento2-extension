@@ -5,7 +5,8 @@ use \Magento\Framework\App\ObjectManager;
 
 use \Pepperjam\Network\Helper\Data;
 
-class BeaconFactory {
+class BeaconFactory
+{
     protected $_helper;
 
     protected $_objectManager;

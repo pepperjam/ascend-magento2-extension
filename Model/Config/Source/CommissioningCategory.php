@@ -5,7 +5,8 @@ use \Magento\Catalog\Model\CategoryFactory;
 use \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 use \Magento\Store\Model\StoreManagerInterface;
 
-class CommissioningCategory extends AbstractSource {
+class CommissioningCategory extends AbstractSource
+{
     const CATEGORY_LOWEST_LEVEL = 1;
 
     protected $_categoryFactory;

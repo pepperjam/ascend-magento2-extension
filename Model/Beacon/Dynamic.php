@@ -3,7 +3,8 @@ namespace Pepperjam\Network\Model\Beacon;
 
 use \Pepperjam\Network\Model\Beacon\Itemized;
 
-class Dynamic extends Itemized {
+class Dynamic extends Itemized
+{
     protected $_couponKey = 'COUPON';
     protected $_priceKey = 'ITEM_PRICE';
     protected $_quantityKey = 'QUANTITY';

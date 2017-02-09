@@ -12,7 +12,8 @@ use \Pepperjam\Network\Helper\Map\Product as ProductMap;
 
 // TODO: ignore products that don't have all required fields filled.
 
-class Product extends Feed {
+class Product extends Feed
+{
     const FILENAME_FORMAT = '%s_product_feed.csv';
 
     protected $_config;

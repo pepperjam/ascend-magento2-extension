@@ -4,7 +4,8 @@ namespace Pepperjam\Network\Cron\Feed\OrderCorrection;
 use \Pepperjam\Network\Cron\Feed\OrderCorrection\Itemized;
 use \Pepperjam\Network\Helper\Map\OrderCorrection as Map;
 
-class Dynamic extends Itemized {
+class Dynamic extends Itemized
+{
     protected function _getFeedFields() {
         return [
             'PROGRAM_ID' => Map::FIELD_PROGRAM_ID,

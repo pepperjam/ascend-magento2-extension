@@ -10,7 +10,8 @@ use \Magento\Framework\Setup\ModuleDataSetupInterface;
 
 use \Pepperjam\Network\Helper\Config;
 
-class InstallData implements InstallDataInterface {
+class InstallData implements InstallDataInterface
+{
     protected $_categorySetupFactory;
 
     protected $_config;

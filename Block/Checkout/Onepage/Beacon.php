@@ -9,7 +9,8 @@ use \Pepperjam\Network\Helper\Config;
 use \Pepperjam\Network\Model\Attribution;
 use \Pepperjam\Network\Model\BeaconFactory;
 
-class Beacon extends Template {
+class Beacon extends Template
+{
     protected $_attribution;
     protected $_beaconFactory;
     protected $_checkoutSession;

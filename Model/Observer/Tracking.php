@@ -7,7 +7,8 @@ use \Magento\Framework\Event\ObserverInterface;
 use \Pepperjam\Network\Helper\Config;
 use \Pepperjam\Network\Model\Attribution;
 
-class Tracking implements ObserverInterface {
+class Tracking implements ObserverInterface
+{
     protected $_attribution;
 
     protected $_config;

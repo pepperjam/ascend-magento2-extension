@@ -5,7 +5,8 @@ use \Magento\Framework\Data\OptionSourceInterface;
 
 use \Pepperjam\Network\Helper\Data;
 
-class TrackingType implements OptionSourceInterface {
+class TrackingType implements OptionSourceInterface
+{
     protected $_helper;
 
     public function __construct(Data $helper) {

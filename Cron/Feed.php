@@ -6,7 +6,8 @@ use \Psr\Log\LoggerInterface;
 
 use \Pepperjam\Network\Helper\Config;
 
-abstract class Feed {
+abstract class Feed
+{
     protected $_config;
 
     protected $_dir;

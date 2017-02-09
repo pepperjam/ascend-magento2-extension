@@ -6,7 +6,8 @@ use \Magento\Framework\App\Helper\Context;
 use \Magento\Sales\Api\Data\OrderInterface;
 use \Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 
-class Data extends AbstractHelper {
+class Data extends AbstractHelper
+{
     const TRACKING_BASIC = 'basic';
     const TRACKING_ITEMIZED = 'itemized';
     const TRACKING_DYNAMIC = 'dynamic';

@@ -6,7 +6,8 @@ use \Magento\Framework\Data\OptionSourceInterface;
 
 use \Pepperjam\Network\Helper\Map\Product;
 
-class Attribute implements OptionSourceInterface {
+class Attribute implements OptionSourceInterface
+{
     protected $_eavConfig;
 
     public function __construct(Config $eavConfig) {

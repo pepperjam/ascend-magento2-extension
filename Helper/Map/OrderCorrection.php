@@ -7,7 +7,8 @@ use \Magento\Framework\App\Helper\AbstractHelper;
 use \Pepperjam\Network\Helper\Config;
 use \Pepperjam\Network\Helper\Data;
 
-class OrderCorrection extends AbstractHelper {
+class OrderCorrection extends AbstractHelper
+{
     const FIELD_CATEGORY = 'category';
     const FIELD_ITEM_ID = 'item_id';
     const FIELD_ITEM_QUANTITY = 'item_quantity';

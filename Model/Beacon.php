@@ -4,7 +4,8 @@ namespace Pepperjam\Network\Model;
 use \Pepperjam\Network\Helper\Data;
 use \Pepperjam\Network\Helper\Config;
 
-abstract class Beacon {
+abstract class Beacon
+{
     protected $_config;
     protected $_helper;
     protected $_order;

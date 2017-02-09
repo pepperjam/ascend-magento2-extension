@@ -7,7 +7,8 @@ use \Pepperjam\Network\Cron\Feed;
 use \Pepperjam\Network\Helper\Config;
 use \Pepperjam\Network\Helper\Map\OrderCorrection as OrderCorrectionMap;
 
-abstract class OrderCorrection extends Feed {
+abstract class OrderCorrection extends Feed
+{
     const FILENAME_FORMAT = '%s_transactions_corrected_%s.csv';
     const FILENAME_TIME_FORMAT = 'YmdHis';
     const SELECT_TIME_FORMAT = 'Y-m-d H:i:s';

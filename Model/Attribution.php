@@ -6,7 +6,8 @@ use \Magento\Framework\App\RequestInterface;
 
 use \Pepperjam\Network\Helper\Config;
 
-class Attribution {
+class Attribution
+{
     protected $_config;
     protected $_request;
     protected $_session;

@@ -7,7 +7,8 @@ use \Magento\Framework\App\Helper\Context;
 use \Pepperjam\Network\Cron\Feed\Product as ProductFeed;
 use \Pepperjam\Network\Helper\Data;
 
-class Product extends AbstractHelper {
+class Product extends AbstractHelper
+{
     const ATTRIBUTE_PRODUCT_URL = 'product_url';
 
     const FIELD_AGE_RANGE = 'age_range';

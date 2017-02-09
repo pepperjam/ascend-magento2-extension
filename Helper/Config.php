@@ -8,7 +8,8 @@ use \Magento\Framework\App\Helper\AbstractHelper;
 use \Magento\Framework\App\Helper\Context;
 use \Magento\Config\Model\ResourceModel\Config as ConfigResource;
 
-class Config extends AbstractHelper {
+class Config extends AbstractHelper
+{
     protected $_cacheManager;
 
     protected $_configResource;

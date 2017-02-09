@@ -3,7 +3,8 @@ namespace Pepperjam\Network\Model\Beacon;
 
 use \Pepperjam\Network\Model\Beacon;
 
-class Basic extends Beacon {
+class Basic extends Beacon
+{
     protected $_couponKey = 'PROMOCODE';
 
     public function getUrl() {

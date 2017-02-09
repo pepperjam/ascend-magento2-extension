@@ -8,7 +8,8 @@ use \Pepperjam\Network\Cron\Feed\OrderCorrection;
 use \Pepperjam\Network\Helper\Config;
 use \Pepperjam\Network\Helper\Map\OrderCorrection as Map;
 
-class Itemized extends OrderCorrection {
+class Itemized extends OrderCorrection
+{
     protected $_orderItemCollection;
 
     public function __construct(Config $config, LoggerInterface $logger, Map $orderCorrectionMap, OrderCollection $orderItemCollection) {
