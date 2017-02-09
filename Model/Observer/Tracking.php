@@ -8,18 +8,18 @@ use \Pepperjam\Network\Helper\Config;
 use \Pepperjam\Network\Model\Attribution;
 
 class Tracking implements ObserverInterface {
-	protected $_attribution;
+    protected $_attribution;
 
-	protected $_config;
+    protected $_config;
 
-	public function __construct(Attribution $attribution, Config $config) {
-		$this->_attribution = $attribution;
-		$this->_config = $config;
-	}
+    public function __construct(Attribution $attribution, Config $config) {
+        $this->_attribution = $attribution;
+        $this->_config = $config;
+    }
 
-	public function execute() {
-		if ($this->_config->isActive() && $this->_config->isAttributionEnabled()) {
-			$this->_attribution->create();
-		}
-	}
+    public function execute() {
+        if ($this->_config->isActive() && $this->_config->isAttributionEnabled()) {
+            $this->_attribution->create();
+        }
+    }
 }

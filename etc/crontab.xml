@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
-	<group id="default">
-		<job name="pepperjam_network_order_correction_feed" instance="Pepperjam\Network\Cron\OrderCorrectionFactory" method="execute">
-			<schedule>0 3 * * *</schedule>
-		</job>
-		<job name="pepperjam_network_product_feed" instance="Pepperjam\Network\Cron\Feed\Product" method="execute">
-			<schedule>0 3 * * *</schedule>
-		</job>
-	</group>
+    <group id="default">
+        <job name="pepperjam_network_order_correction_feed" instance="Pepperjam\Network\Cron\OrderCorrectionFactory" method="execute">
+            <schedule>0 3 * * *</schedule>
+        </job>
+        <job name="pepperjam_network_product_feed" instance="Pepperjam\Network\Cron\Feed\Product" method="execute">
+            <schedule>0 3 * * *</schedule>
+        </job>
+    </group>
 </config>
