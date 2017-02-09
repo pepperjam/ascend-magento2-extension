@@ -25,63 +25,79 @@ class Config extends AbstractHelper
         $this->_scopeConfig = $scopeConfig;
     }
 
-    public function isActive() {
+    function isActive()
+    {
         return (boolean) $this->_scopeConfig->getValue('pepperjam_network/settings/active');
     }
-    public function getProgramId() {
+    function getProgramId()
+    {
         return $this->_scopeConfig->getValue('pepperjam_network/settings/program_id');
     }
-    public function getTrackingType() {
+    function getTrackingType()
+    {
         return $this->_scopeConfig->getValue('pepperjam_network/settings/tracking_type');
     }
-    public function getTransactionType() {
+    function getTransactionType()
+    {
         return $this->_scopeConfig->getValue('pepperjam_network/settings/transaction_type');
     }
-    public function getExportPath() {
+    function getExportPath()
+    {
         return $this->_scopeConfig->getValue('pepperjam_network/settings/export_path');
     }
-    public function isAttributionEnabled() {
+    function isAttributionEnabled()
+    {
         return (boolean) $this->isActive() &&
             $this->_scopeConfig->getValue('pepperjam_network/settings/attribution_enabled');
     }
-    public function getSourceKeyName() {
+    function getSourceKeyName()
+    {
         return $this->_scopeConfig->getValue('pepperjam_network/settings/source_key_name');
     }
-    public function isProductFeedEnabled() {
+    function isProductFeedEnabled()
+    {
         return (boolean) $this->isActive() &&
             $this->_scopeConfig->getValue('pepperjam_network/settings/product_feed_enabled');
     }
-    public function isOrderCorrectionFeedEnabled() {
+    function isOrderCorrectionFeedEnabled()
+    {
         return (boolean) $this->isActive() &&
             $this->_scopeConfig->getValue('pepperjam_network/settings/order_correction_feed_enabled');
     }
-    public function getProductFeedMap() {
+    function getProductFeedMap()
+    {
         return $this->_scopeConfig->getValue('pepperjam_network/product_map');
     }
 
-    public function getValidSources() {
+    function getValidSources()
+    {
         // Magic strings, but they are not used anywhere else
         return ['eems', 'pepperjam'];
     }
 
-    public function getBeaconBaseUrl() {
+    function getBeaconBaseUrl()
+    {
         // Magic string, but it is not used anywhere else
         return 'https://t.pepperjamnetwork.com/track';
     }
 
-    public function getInt() {
+    function getInt()
+    {
         return strtoupper($this->getTrackingType());
     }
 
-    public function getRequiredProductFeedFields() {
+    function getRequiredProductFeedFields()
+    {
         $pepperjamConfig = $this->_config->getSection();
     }
 
-    public function getOrderCorrectionFeedLastRunTime() {
+    function getOrderCorrectionFeedLastRunTime()
+    {
         return $this->_scopeConfig->getValue('pepperjam_network/feed/order_correction/last_run_time');
     }
 
-    public function setOrderCorrectionFeedLastRunTime($time) {
+    function setOrderCorrectionFeedLastRunTime($time)
+    {
         $this->_configResource->saveConfig('pepperjam_network/feed/order_correction/last_run_time', $time, 
             ScopeConfigInterface::SCOPE_TYPE_DEFAULT, 0);
         $this->_cacheManager->clean([CacheTypeConfig::TYPE_IDENTIFIER]);

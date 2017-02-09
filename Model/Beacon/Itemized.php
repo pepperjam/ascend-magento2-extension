@@ -13,7 +13,8 @@ class Itemized extends Beacon
     protected $_quantityKey = 'QTY';
     protected $_skuKey = 'ITEM';
 
-    public function getUrl() {
+    function getUrl()
+    {
         $params = $this->_orderParams();
         $params = $this->_getCouponCode($params);
         $params = $this->_addItems($params);
@@ -21,7 +22,8 @@ class Itemized extends Beacon
         return $this->_config->getBeaconBaseUrl() . '?' . http_build_query($params);
     }
 
-    protected function _orderParams() {
+    function _orderParams()
+    {
         return [
             'PID' => $this->_config->getProgramId(),
             'OID' => $this->_order->getIncrementId(),
@@ -29,7 +31,8 @@ class Itemized extends Beacon
         ];
     }
 
-    protected function _addItems($params) {
+    function _addItems($params)
+    {
         $itemIndex = 1;
 
         foreach ($this->_order->getAllItems() as $item) {
@@ -48,7 +51,8 @@ class Itemized extends Beacon
         return $params;
     }
 
-    protected function _getPosition($params, $item) {
+    function _getPosition($params, $item)
+    {
         $key = array_search($item->getSku(), $params, true);
 
         if ($key) {
@@ -58,7 +62,8 @@ class Itemized extends Beacon
         }
     }
 
-    protected function _newItem($params, $item, $itemIndex) {
+    function _newItem($params, $item, $itemIndex)
+    {
         $params[$this->_skuKey . $itemIndex] = $item->getSku();
         $params[$this->_quantityKey . $itemIndex] = $this->_getQuantity($item);
         $params[$this->_priceKey . $itemIndex] = $this->_getPrice($item);
@@ -66,7 +71,8 @@ class Itemized extends Beacon
         return $params;
     }
 
-    protected function _existingItem($params, $item, $itemIndex) {
+    function _existingItem($params, $item, $itemIndex)
+    {
         $params[$this->_quantityKey . $itemIndex] += $this->_getQuantity($item);
         $priceKey = $this->_priceKey . $itemIndex;
         $params[$priceKey] = $this->_helper->formatMoney($params[$priceKey] + $this->_getPrice($item));
@@ -74,7 +80,8 @@ class Itemized extends Beacon
         return $params;
     }
 
-    protected function _getQuantity($item) {
+    function _getQuantity($item)
+    {
         if ($item->getProduct()->canConfigure()) {
             return 0;
         } else {
@@ -82,7 +89,8 @@ class Itemized extends Beacon
         }
     }
 
-    protected function _getPrice($item) {
+    function _getPrice($item)
+    {
         if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE 
             && $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC) {
             return '0.00';
@@ -91,7 +99,8 @@ class Itemized extends Beacon
         }
     }
 
-    protected function _averageItemAmount($params, $itemIndex) {
+    function _averageItemAmount($params, $itemIndex)
+    {
         for ($i = 1; $i < $itemIndex; $i++) {
             $params[$this->_priceKey.$i] = $this->_helper
                 ->formatMoney($params[$this->_priceKey.$i]/$params[$this->_quantityKey.$i]);

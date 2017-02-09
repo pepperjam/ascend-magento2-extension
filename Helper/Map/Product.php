@@ -92,13 +92,15 @@ class Product extends AbstractHelper
 
     protected $_helper;
 
-    public function __construct(Context $context, Data $helper) {
+    function __construct(Context $context, Data $helper)
+    {
         parent::__construct($context);
 
         $this->_helper = $helper;
     }
 
-    public function get($product, $field, $attribute) {
+    function get($product, $field, $attribute)
+    {
         if ($attribute == self::ATTRIBUTE_PRODUCT_URL) {
             $value = $this->getProductUrl($product);
         } else {
@@ -108,11 +110,13 @@ class Product extends AbstractHelper
         return $this->_formatValue($field, $value);
     }
 
-    public function getProductUrl($product) {
+    function getProductUrl($product)
+    {
         return $product->getUrlModel()->getUrl($product);
     }
 
-    protected function _formatValue($field, $value) {
+    function _formatValue($field, $value)
+    {
         switch ($field) {
             case self::FIELD_ASPECT_RATIO:
                 return $this->_trimToMaxLength($value, 16);
@@ -207,11 +211,13 @@ class Product extends AbstractHelper
         }
     }
 
-    protected function _getDateValue($value) {
+    function _getDateValue($value)
+    {
         return date('Y-m-d', strtotime($value));
     }
 
-    protected function _getValueYesNo($value) {
+    function _getValueYesNo($value)
+    {
         if ($value) {
             return 'yes';
         } else {
@@ -219,7 +225,8 @@ class Product extends AbstractHelper
         }
     }
 
-    protected function _trimToMaxLength($value, $maxLength) {
+    function _trimToMaxLength($value, $maxLength)
+    {
         return substr(trim($value), 0, $maxLength);
     }
 }

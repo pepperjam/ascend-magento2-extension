@@ -6,7 +6,8 @@ use \Pepperjam\Network\Helper\Map\OrderCorrection as Map;
 
 class Dynamic extends Itemized
 {
-    protected function _getFeedFields() {
+    function _getFeedFields()
+    {
         return [
             'PROGRAM_ID' => Map::FIELD_PROGRAM_ID,
             'ORDER_ID' => Map::FIELD_ORDER_ID,

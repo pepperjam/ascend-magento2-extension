@@ -10,7 +10,8 @@ class Dynamic extends Itemized
     protected $_quantityKey = 'QUANTITY';
     protected $_skuKey = 'ITEM_ID';
 
-    protected function _orderParams() {
+    function _orderParams()
+    {
         return [
             'PROGRAM_ID' => $this->_config->getProgramId(),
             'ORDER_ID' => $this->_order->getIncrementId(),
@@ -19,7 +20,8 @@ class Dynamic extends Itemized
         ];
     }
 
-    protected function _newItem($params, $item, $itemIndex) {
+    function _newItem($params, $item, $itemIndex)
+    {
         $params = parent::_newItem($params, $item, $itemIndex);
         $params['CATEGORY' . $itemIndex] = $this->_helper->getCommissioningCategory($item);
 

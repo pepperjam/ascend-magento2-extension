@@ -23,7 +23,8 @@ abstract class OrderCorrection extends Feed
 
     protected $_startTimeFormatted;
 
-    public function __construct(Config $config, LoggerInterface $logger, OrderCorrectionMap $orderCorrectionMap) {
+    function __construct(Config $config, LoggerInterface $logger, OrderCorrectionMap $orderCorrectionMap)
+    {
         $this->_config = $config;
         $this->_logger = $logger;
         $this->_orderCorrectionMap = $orderCorrectionMap;
@@ -32,7 +33,8 @@ abstract class OrderCorrection extends Feed
         $this->_startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->_startTime);
     }
 
-    protected function _applyMapping($item) {
+    function _applyMapping($item)
+    {
         $data = [];
         $fields = $this->_getFeedFields();
         foreach ($fields as $field => $attribute) {
@@ -42,16 +44,19 @@ abstract class OrderCorrection extends Feed
         return $data;
     }
 
-    protected function _enabled() {
+    function _enabled()
+    {
         return $this->_config->isOrderCorrectionFeedEnabled();
     }
 
-    protected function _getFileName() {
+    function _getFileName()
+    {
         return sprintf(self::FILENAME_FORMAT, $this->_config->getProgramId(), 
             date(static::FILENAME_TIME_FORMAT, $this->_startTime));
     }
 
-    protected function _afterWrite() {
+    function _afterWrite()
+    {
         $this->_config->setOrderCorrectionFeedLastRunTime($this->_startTime);
     }
 }

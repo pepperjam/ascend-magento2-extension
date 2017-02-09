@@ -23,7 +23,8 @@ class Beacon extends Template
         CheckoutSession $checkoutSession,
         Config $config,
         array $data = []
-    ) {
+    )
+    {
         parent::__construct($context, $data);
 
         $this->_attribution = $attribution;
@@ -32,14 +33,16 @@ class Beacon extends Template
         $this->_config = $config;
     }
 
-    public function getBeaconUrl() {
+    function getBeaconUrl()
+    {
         $order = $this->_checkoutSession->getLastRealOrder();
         $beacon = $this->_beaconFactory->create($this->_config->getTrackingType(), $order);
 
         return $beacon->getUrl();
     }
 
-    public function _toHtml() {
+    function _toHtml()
+    {
         if ($this->_config->isActive()) {
             if (!$this->_config->isAttributionEnabled() || $this->_attribution->isValid()) {
                 return parent::_toHtml();

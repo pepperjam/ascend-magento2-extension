@@ -10,16 +10,19 @@ abstract class Beacon
     protected $_helper;
     protected $_order;
 
-    public function __construct(Config $config, Data $helper) {
+    function __construct(Config $config, Data $helper)
+    {
         $this->_config = $config;
         $this->_helper = $helper;
     }
 
-    public function setOrder($order) {
+    function setOrder($order)
+    {
         $this->_order = $order;
     }
 
-    protected function _getCouponCode($params) {
+    function _getCouponCode($params)
+    {
         if (trim($this->_order->getCouponCode()) != '') {
             $params[$this->_couponKey] = trim($order->getCouponCode());
         }

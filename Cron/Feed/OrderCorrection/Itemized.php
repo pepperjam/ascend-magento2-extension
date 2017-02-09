@@ -12,13 +12,15 @@ class Itemized extends OrderCorrection
 {
     protected $_orderItemCollection;
 
-    public function __construct(Config $config, LoggerInterface $logger, Map $orderCorrectionMap, OrderCollection $orderItemCollection) {
+    function __construct(Config $config, LoggerInterface $logger, Map $orderCorrectionMap, OrderCollection $orderItemCollection)
+    {
         parent::__construct($config, $logger, $orderCorrectionMap);
 
         $this->_orderItemCollection = $orderItemCollection;
     }
 
-    protected function _getFeedFields() {
+    function _getFeedFields()
+    {
         return [
             'PID' => Map::FIELD_PROGRAM_ID,
             'OID' => Map::FIELD_ORDER_ID,
@@ -29,7 +31,8 @@ class Itemized extends OrderCorrection
         ];
     }
 
-    protected function _getItems() {
+    function _getItems()
+    {
         $lastRunTime = date(self::SELECT_TIME_FORMAT, $this->_config->getOrderCorrectionFeedLastRunTime());
 
         $collection = $this->_orderItemCollection;

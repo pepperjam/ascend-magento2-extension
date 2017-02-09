@@ -19,7 +19,8 @@ class Basic extends OrderCorrection
         $this->_orderCollection = $orderCollection;
     }
 
-    protected function _getFeedFields() {
+    function _getFeedFields()
+    {
         return [
             'PID' => Map::FIELD_PROGRAM_ID,
             'AMOUNT' => Map::FIELD_ORDER_AMOUNT,
@@ -29,7 +30,8 @@ class Basic extends OrderCorrection
         ];
     }
 
-    protected function _getItems() {
+    function _getItems()
+    {
         $lastRunTime = date(self::SELECT_TIME_FORMAT, $this->_config->getOrderCorrectionFeedLastRunTime());
 
         $collection = $this->_orderCollection;

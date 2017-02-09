@@ -24,7 +24,8 @@ class Product extends Feed
 
     protected $_delimiter = "\t";
 
-    public function __construct(Collection $products, Config $config, LoggerInterface $logger, ProductMap $productMap) {
+    function __construct(Collection $products, Config $config, LoggerInterface $logger, ProductMap $productMap)
+    {
         $this->_config = $config;
         $this->_logger = $logger;
         $this->_productMap = $productMap;
@@ -35,7 +36,8 @@ class Product extends Feed
             ->load();
     }
 
-    protected function _applyMapping($item) {
+    function _applyMapping($item)
+    {
         $data = [];
         $fields = $this->_getFeedFields();
         foreach ($fields as $field => $attribute) {
@@ -47,19 +49,23 @@ class Product extends Feed
         return $data;
     }
 
-    protected function _enabled() {
+    function _enabled()
+    {
         return $this->_config->isProductFeedEnabled();
     }
 
-    protected function _getFeedFields() {
+    function _getFeedFields()
+    {
         return $this->_config->getProductFeedMap();
     }
 
-    protected function _getFileName() {
+    function _getFileName()
+    {
         return sprintf(self::FILENAME_FORMAT, $this->_config->getProgramId());
     }
 
-    protected function _getItems() {
+    function _getItems()
+    {
         $this->_products
             ->addAttributeToSelect('*')
             ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED);

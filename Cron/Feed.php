@@ -18,20 +18,23 @@ abstract class Feed
 
     protected $_enclosure = '"';
 
-    public function construct(Config $config, Dir $dir, LoggerInterface $logger) {
+    function construct(Config $config, Dir $dir, LoggerInterface $logger)
+    {
         $this->_config = $config;
         $this->_dir = $dir;
         $this->_logger = $logger;
     }
 
-    public function execute() {
+    function execute()
+    {
         if ($this->_enabled()) {
             $this->_writeFile($this->_buildFeedData());
             $this->_afterWrite();
         }
     }
 
-    protected function _buildFeedData() {
+    function _buildFeedData()
+    {
         $data = $this->_getItems();
         $dataCount = $data->count();
 
@@ -40,7 +43,8 @@ abstract class Feed
         return array_map([$this, '_applyMapping'], $data->getItems());
     }
 
-    protected function _writeFile($feedData) {
+    function _writeFile($feedData)
+    {
         if (empty($feedData)) {
             return $this;
         }
@@ -66,7 +70,8 @@ abstract class Feed
 
     abstract protected function _applyMapping($item);
 
-    protected function _getHeaders() {
+    function _getHeaders()
+    {
         $headers = [];
 
         foreach ($this->_getFeedFields() as $key => $field) {
@@ -78,7 +83,8 @@ abstract class Feed
         return $headers;
     }
 
-    protected function _getFields() {
+    function _getFields()
+    {
         $fields = [];
 
         foreach ($this->_getFeedFields() as $key => $field) {
@@ -92,7 +98,8 @@ abstract class Feed
 
     abstract protected function _getFeedFields();
 
-    protected function _getFilePath() {
+    function _getFilePath()
+    {
         return $this->_normalizePath(
             BP,
             $this->_config->getExportPath(),
@@ -100,7 +107,8 @@ abstract class Feed
         );
     }
 
-    protected function _normalizePath() {
+    function _normalizePath()
+    {
         $paths = implode(DIRECTORY_SEPARATOR, func_get_args());
         // Retain a single leading slash; otherwise remove all leading, trailing
         // and duplicate slashes.
@@ -118,7 +126,8 @@ abstract class Feed
         return $this;
     }
 
-    protected function _afterWrite() {
+    function _afterWrite()
+    {
         // Hook for OrderCorrection (and future feeds) to update runTime
     }
 }

@@ -11,12 +11,14 @@ class CommissioningCategory extends AbstractSource
 
     protected $_categoryFactory;
 
-    public function __construct(CategoryFactory $categoryFactory, StoreManagerInterface $storeManager) {
+    function __construct(CategoryFactory $categoryFactory, StoreManagerInterface $storeManager)
+    {
         $this->_categoryFactory = $categoryFactory;
         $this->_storeManager = $storeManager;
     }
 
-    public function getAllOptions() {
+    function getAllOptions()
+    {
         $categoryOptions = [
             [
                 'value' => '',
@@ -35,7 +37,8 @@ class CommissioningCategory extends AbstractSource
         return $categoryOptions;
     }
 
-    protected function _addChildren(&$options, $categories, $level) {
+    function _addChildren(&$options, $categories, $level)
+    {
 
         if (empty($categories)) {
             return;

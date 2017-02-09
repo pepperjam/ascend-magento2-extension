@@ -17,17 +17,20 @@ class Data extends AbstractHelper
 
     public $_collectionFactory;
 
-    public function __construct(Context $context, CollectionFactory $collectionFactory) {
+    function __construct(Context $context, CollectionFactory $collectionFactory)
+    {
         parent::__construct($context);
 
         $this->_collectionFactory = $collectionFactory;
     }
 
-    public function formatMoney($amount) {
+    function formatMoney($amount)
+    {
         return number_format($amount, 2, '.', '');
     }
 
-    public function getCommissioningCategory($item) {
+    function getCommissioningCategory($item)
+    {
         $category = $item->getProduct()->getCommissioningCategory();
         if ($category == '' || $category == null) {
             $categoryIds = $item->getProduct()->getCategoryIds();
@@ -42,7 +45,8 @@ class Data extends AbstractHelper
         return $category;
     }
 
-    public function isNewToFile($order) {
+    function isNewToFile($order)
+    {
         // Customers are being identified by email
         $customerEmail = $order->getCustomerEmail();
         $createdAt = $order->getCreatedAt();
