@@ -9,12 +9,12 @@ class TrackingType implements OptionSourceInterface
 {
     protected $_helper;
 
-    function __construct(Data $helper)
+    public function __construct(Data $helper)
     {
         $this->_helper = $helper;
     }
 
-    function toOptionArray()
+    public function toOptionArray()
     {
         return [
             [
@@ -32,7 +32,7 @@ class TrackingType implements OptionSourceInterface
         ];
     }
 
-    function toArray()
+    public function toArray()
     {
         return [
             $this->_helper::TRACKING_BASIC => __('Basic'),

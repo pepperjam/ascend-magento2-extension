@@ -10,12 +10,12 @@ class Attribute implements OptionSourceInterface
 {
     protected $_eavConfig;
 
-    function __construct(Config $eavConfig)
+    public function __construct(Config $eavConfig)
     {
         $this->_eavConfig = $eavConfig;
     }
 
-    function toOptionArray()
+    public function toOptionArray()
     {
         // Start with an empty option if you'd like to not include a field
         $options = [
@@ -41,7 +41,7 @@ class Attribute implements OptionSourceInterface
         return $options;
     }
 
-    function toArray()
+    public function toArray()
     {
         // Start with an empty option if you'd like to not include a field
         $options = ['' => ''];

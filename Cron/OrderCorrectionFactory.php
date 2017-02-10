@@ -13,14 +13,14 @@ class OrderCorrectionFactory
 
     protected $_orderCorrectionFeed;
 
-    function __construct(Config $config)
+    public function __construct(Config $config)
     {
         $this->_config = $config;
 
         $this->_objectManager = ObjectManager::getInstance();
     }
 
-    function execute()
+    public function execute()
     {
         switch ($this->_config->getTrackingType()) {
             case Data::TRACKING_BASIC:

@@ -9,12 +9,12 @@ class TransactionType implements OptionSourceInterface
 {
     protected $_helper;
 
-    function __construct(Data $helper)
+    public function __construct(Data $helper)
     {
         $this->_helper = $helper;
     }
 
-    function toOptionArray()
+    public function toOptionArray()
     {
         return [
             [
@@ -28,7 +28,7 @@ class TransactionType implements OptionSourceInterface
         ];
     }
 
-    function toArray()
+    public function toArray()
     {
         return [
             $this->_helper::TRANSACTION_LEAD => __('Lead'),

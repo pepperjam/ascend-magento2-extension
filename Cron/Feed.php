@@ -18,14 +18,14 @@ abstract class Feed
 
     protected $_enclosure = '"';
 
-    function construct(Config $config, Dir $dir, LoggerInterface $logger)
+    public function __construct(Config $config, Dir $dir, LoggerInterface $logger)
     {
         $this->_config = $config;
         $this->_dir = $dir;
         $this->_logger = $logger;
     }
 
-    function execute()
+    public function execute()
     {
         if ($this->_enabled()) {
             $this->_writeFile($this->_buildFeedData());
@@ -33,7 +33,7 @@ abstract class Feed
         }
     }
 
-    function _buildFeedData()
+    protected function _buildFeedData()
     {
         $data = $this->_getItems();
         $dataCount = $data->count();
@@ -43,7 +43,7 @@ abstract class Feed
         return array_map([$this, '_applyMapping'], $data->getItems());
     }
 
-    function _writeFile($feedData)
+    protected function _writeFile($feedData)
     {
         if (empty($feedData)) {
             return $this;
@@ -70,7 +70,7 @@ abstract class Feed
 
     abstract protected function _applyMapping($item);
 
-    function _getHeaders()
+    protected function _getHeaders()
     {
         $headers = [];
 
@@ -83,7 +83,7 @@ abstract class Feed
         return $headers;
     }
 
-    function _getFields()
+    protected function _getFields()
     {
         $fields = [];
 
@@ -98,7 +98,7 @@ abstract class Feed
 
     abstract protected function _getFeedFields();
 
-    function _getFilePath()
+    protected function _getFilePath()
     {
         return $this->_normalizePath(
             BP,
@@ -107,7 +107,7 @@ abstract class Feed
         );
     }
 
-    function _normalizePath()
+    protected function _normalizePath()
     {
         $paths = implode(DIRECTORY_SEPARATOR, func_get_args());
         // Retain a single leading slash; otherwise remove all leading, trailing
@@ -126,7 +126,7 @@ abstract class Feed
         return $this;
     }
 
-    function _afterWrite()
+    protected function _afterWrite()
     {
         // Hook for OrderCorrection (and future feeds) to update runTime
     }

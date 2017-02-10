@@ -13,7 +13,7 @@ class Itemized extends Beacon
     protected $_quantityKey = 'QTY';
     protected $_skuKey = 'ITEM';
 
-    function getUrl()
+    public function getUrl()
     {
         $params = $this->_orderParams();
         $params = $this->_getCouponCode($params);
@@ -22,7 +22,7 @@ class Itemized extends Beacon
         return $this->_config->getBeaconBaseUrl() . '?' . http_build_query($params);
     }
 
-    function _orderParams()
+    protected function _orderParams()
     {
         return [
             'PID' => $this->_config->getProgramId(),
@@ -31,7 +31,7 @@ class Itemized extends Beacon
         ];
     }
 
-    function _addItems($params)
+    protected function _addItems($params)
     {
         $itemIndex = 1;
 
@@ -51,7 +51,7 @@ class Itemized extends Beacon
         return $params;
     }
 
-    function _getPosition($params, $item)
+    protected function _getPosition($params, $item)
     {
         $key = array_search($item->getSku(), $params, true);
 
@@ -62,7 +62,7 @@ class Itemized extends Beacon
         }
     }
 
-    function _newItem($params, $item, $itemIndex)
+    protected function _newItem($params, $item, $itemIndex)
     {
         $params[$this->_skuKey . $itemIndex] = $item->getSku();
         $params[$this->_quantityKey . $itemIndex] = $this->_getQuantity($item);
@@ -71,7 +71,7 @@ class Itemized extends Beacon
         return $params;
     }
 
-    function _existingItem($params, $item, $itemIndex)
+    protected function _existingItem($params, $item, $itemIndex)
     {
         $params[$this->_quantityKey . $itemIndex] += $this->_getQuantity($item);
         $priceKey = $this->_priceKey . $itemIndex;
@@ -80,7 +80,7 @@ class Itemized extends Beacon
         return $params;
     }
 
-    function _getQuantity($item)
+    protected function _getQuantity($item)
     {
         if ($item->getProduct()->canConfigure()) {
             return 0;
@@ -89,7 +89,7 @@ class Itemized extends Beacon
         }
     }
 
-    function _getPrice($item)
+    protected function _getPrice($item)
     {
         if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE 
             && $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC) {
@@ -99,7 +99,7 @@ class Itemized extends Beacon
         }
     }
 
-    function _averageItemAmount($params, $itemIndex)
+    protected function _averageItemAmount($params, $itemIndex)
     {
         for ($i = 1; $i < $itemIndex; $i++) {
             $params[$this->_priceKey.$i] = $this->_helper

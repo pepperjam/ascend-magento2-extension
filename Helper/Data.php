@@ -17,19 +17,19 @@ class Data extends AbstractHelper
 
     public $_collectionFactory;
 
-    function __construct(Context $context, CollectionFactory $collectionFactory)
+    public function __construct(Context $context, CollectionFactory $collectionFactory)
     {
         parent::__construct($context);
 
         $this->_collectionFactory = $collectionFactory;
     }
 
-    function formatMoney($amount)
+    public function formatMoney($amount)
     {
         return number_format($amount, 2, '.', '');
     }
 
-    function getCommissioningCategory($item)
+    public function getCommissioningCategory($item)
     {
         $category = $item->getProduct()->getCommissioningCategory();
         if ($category == '' || $category == null) {
@@ -45,7 +45,7 @@ class Data extends AbstractHelper
         return $category;
     }
 
-    function isNewToFile($order)
+    public function isNewToFile($order)
     {
         // Customers are being identified by email
         $customerEmail = $order->getCustomerEmail();

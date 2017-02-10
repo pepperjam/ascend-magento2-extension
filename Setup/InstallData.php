@@ -16,13 +16,13 @@ class InstallData implements InstallDataInterface
 
     protected $_config;
 
-    function __construct(CategorySetupFactory $categorySetupFactory, Config $config)
+    public function __construct(CategorySetupFactory $categorySetupFactory, Config $config)
     {
         $this->_categorySetupFactory = $categorySetupFactory;
         $this->_config = $config;
     }
 
-    function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $categorySetup = $this->_categorySetupFactory->create(['setup' => $setup]);
 

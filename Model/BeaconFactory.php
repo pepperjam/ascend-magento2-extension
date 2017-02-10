@@ -11,14 +11,14 @@ class BeaconFactory
 
     protected $_objectManager;
 
-    function __construct(Data $helper)
+    public function __construct(Data $helper)
     {
         $this->_helper = $helper;
 
         $this->_objectManager = ObjectManager::getInstance();
     }
 
-    function createBasic($order)
+    public function createBasic($order)
     {
         $beacon = $this->_objectManager->get('\Pepperjam\Network\Model\Beacon\Basic');
         $beacon->setOrder($order);
@@ -26,7 +26,7 @@ class BeaconFactory
         return $beacon;
     }
 
-    function createItemized($order)
+    public function createItemized($order)
     {
         $beacon = $this->_objectManager->get('\Pepperjam\Network\Model\Beacon\Itemized');
         $beacon->setOrder($order);
@@ -34,7 +34,7 @@ class BeaconFactory
         return $beacon;
     }
 
-    function createDynamic($order)
+    public function createDynamic($order)
     {
         $beacon = $this->_objectManager->get('\Pepperjam\Network\Model\Beacon\Dynamic');
         $beacon->setOrder($order);
@@ -42,7 +42,7 @@ class BeaconFactory
         return $beacon;
     }
 
-    function create($trackingType, $order)
+    public function create($trackingType, $order)
     {
         switch ($trackingType) {
             case $this->_helper::TRACKING_BASIC:

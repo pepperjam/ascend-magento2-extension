@@ -7,7 +7,7 @@ class Basic extends Beacon
 {
     protected $_couponKey = 'PROMOCODE';
 
-    function getUrl()
+    public function getUrl()
     {
         $params = $this->_orderParams();
         $params = $this->_getCouponCode($params);
@@ -15,7 +15,7 @@ class Basic extends Beacon
         return $this->_config->getBeaconBaseUrl() . '?' . http_build_query($params);
     }
 
-    function _orderParams()
+    protected function _orderParams()
     {
         return [
             'PID' => $this->_config->getProgramId(),

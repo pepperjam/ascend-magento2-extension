@@ -33,7 +33,7 @@ class Beacon extends Template
         $this->_config = $config;
     }
 
-    function getBeaconUrl()
+    public function getBeaconUrl()
     {
         $order = $this->_checkoutSession->getLastRealOrder();
         $beacon = $this->_beaconFactory->create($this->_config->getTrackingType(), $order);
@@ -41,7 +41,7 @@ class Beacon extends Template
         return $beacon->getUrl();
     }
 
-    function _toHtml()
+    protected function _toHtml()
     {
         if ($this->_config->isActive()) {
             if (!$this->_config->isAttributionEnabled() || $this->_attribution->isValid()) {

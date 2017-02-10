@@ -92,14 +92,14 @@ class Product extends AbstractHelper
 
     protected $_helper;
 
-    function __construct(Context $context, Data $helper)
+    public function __construct(Context $context, Data $helper)
     {
         parent::__construct($context);
 
         $this->_helper = $helper;
     }
 
-    function get($product, $field, $attribute)
+    public function get($product, $field, $attribute)
     {
         if ($attribute == self::ATTRIBUTE_PRODUCT_URL) {
             $value = $this->getProductUrl($product);
@@ -110,113 +110,122 @@ class Product extends AbstractHelper
         return $this->_formatValue($field, $value);
     }
 
-    function getProductUrl($product)
+    public function getProductUrl($product)
     {
         return $product->getUrlModel()->getUrl($product);
     }
 
-    function _formatValue($field, $value)
+    protected function _formatValue($field, $value)
     {
-        switch ($field) {
-            case self::FIELD_ASPECT_RATIO:
-                return $this->_trimToMaxLength($value, 16);
-            case self::FIELD_AGE_RANGE:
-            case self::FIELD_BATTERY_LIFE:
-            case self::FIELD_BINDING:
-            case self::FIELD_COLOR:
-            case self::FIELD_DISPLAY_TYPE:
-            case self::FIELD_EDITION:
-            case self::FIELD_HEEL_HEIGHT:
-            case self::FIELD_HEIGHT:
-            case self::FIELD_LENGTH:
-            case self::FIELD_LOAD_TYPE:
-            case self::FIELD_MEMORY_CARD_SLOT:
-            case self::FIELD_RATING:
-            case self::FIELD_SCREEN_SIZE:
-            case self::FIELD_SHOE_SIZE:
-            case self::FIELD_SHOE_WIDTH:
-            case self::FIELD_SIZE:
-            case self::FIELD_WEIGHT:
-            case self::FIELD_WIDTH:
-            case self::FIELD_WIRELESS_INTERFACE:
-            case self::FIELD_ZOOM:
-                return $this->_trimToMaxLength($value, 32);
-            case self::FIELD_CONDITION:
-            case self::FIELD_FORMAT:
-            case self::FIELD_FUNCTIONS:
-            case self::FIELD_GENRE:
-            case self::FIELD_INSTALLATION:
-            case self::FIELD_ISBN:
-            case self::FIELD_LOCATION:
-            case self::FIELD_MADE_IN:
-            case self::FIELD_MEMORY_CAPACITY:
-            case self::FIELD_MEMORY_TYPE:
-            case self::FIELD_OPTICAL_DRIVE:
-            case self::FIELD_PLATFORM:
-            case self::FIELD_PROCESSOR:
-            case self::FIELD_RESOLUTION:
-            case self::FIELD_SHIPPING_METHOD:
-            case self::FIELD_STYLE:
-                return $this->_trimToMaxLength($value, 64);
-            case self::FIELD_ARTIST:
-            case self::FIELD_AUTHOR:
-            case self::FIELD_DIRECTOR:
-            case self::FIELD_FEATURES:
-            case self::FIELD_FOCUS_TYPE:
-            case self::FIELD_MANUFACTURER:
-            case self::FIELD_MATERIAL:
-            case self::FIELD_MODEL_NUMBER:
-            case self::FIELD_MPN:
-            case self::FIELD_NAME:
-            case self::FIELD_OCCASION:
-            case self::FIELD_OPERATING_SYSTEM:
-            case self::FIELD_PAYMENT_ACCEPTED:
-            case self::FIELD_PUBLISHER:
-            case self::FIELD_RECOMMENDED_USAGE:
-            case self::FIELD_SKU:
-            case self::FIELD_STARING:
-            case self::FIELD_UPC:
-                return $this->_trimToMaxLength($value, 128);
-            case self::FIELD_CATEGORY_NETWORK:
-            case self::FIELD_CATEGORY_PROGRAM:
-            case self::FIELD_KEYWORDS:
-            case self::FIELD_PAYMENT_NOTES:
-                return $this->_trimToMaxLength($value, 256);
-            case self::FIELD_DESCRIPTION_SHORT:
-                return $this->_trimToMaxLength($value, 512);
-            case self::FIELD_BUY_URL:
-            case self::FIELD_DESCRIPTION_LONG:
-            case self::FIELD_IMAGE_THUMB_URL:
-            case self::FIELD_IMAGE_URL:
-            case self::FIELD_TECH_SPEC_URL:
-                return $this->_trimToMaxLength($value, 2000);
-            case self::FIELD_COLOR_OUTPUT:
-            case self::FIELD_DISCONTINUED:
-            case self::FIELD_IN_STOCK:
-                return $this->_getValueYesNo($value);
-            case self::FIELD_EXPIRATION_DATE:
-                return $this->_getDateValue($value);
-            case self::FIELD_MEGAPIXELS:
-            case self::FIELD_PRICE:
-            case self::FIELD_PRICE_RETAIL:
-            case self::FIELD_PRICE_SALE:
-            case self::FIELD_PRICE_SHIPPING:
-                return $this->_helper->formatMoney((float) $value);
-            case self::FIELD_PAGES:
-            case self::FIELD_QUANTITY_IN_STOCK:
-            case self::FIELD_TRACKS:
-            case self::FIELD_YEAR:
-            default:
-                return $value;
+        if (in_array($field, [self::FIELD_ASPECT_RATIO])) {
+            return $this->_trimToMaxLength($value, 16);
+        } elseif (in_array($field, [
+            self::FIELD_AGE_RANGE,
+            self::FIELD_BATTERY_LIFE,
+            self::FIELD_BINDING,
+            self::FIELD_COLOR,
+            self::FIELD_DISPLAY_TYPE,
+            self::FIELD_EDITION,
+            self::FIELD_HEEL_HEIGHT,
+            self::FIELD_HEIGHT,
+            self::FIELD_LENGTH,
+            self::FIELD_LOAD_TYPE,
+            self::FIELD_MEMORY_CARD_SLOT,
+            self::FIELD_RATING,
+            self::FIELD_SCREEN_SIZE,
+            self::FIELD_SHOE_SIZE,
+            self::FIELD_SHOE_WIDTH,
+            self::FIELD_SIZE,
+            self::FIELD_WEIGHT,
+            self::FIELD_WIDTH,
+            self::FIELD_WIRELESS_INTERFACE,
+            self::FIELD_ZOOM,
+        ])) {
+            return $this->_trimToMaxLength($value, 32);
+        } elseif (in_array($field, [
+            self::FIELD_CONDITION,
+            self::FIELD_FORMAT,
+            self::FIELD_FUNCTIONS,
+            self::FIELD_GENRE,
+            self::FIELD_INSTALLATION,
+            self::FIELD_ISBN,
+            self::FIELD_LOCATION,
+            self::FIELD_MADE_IN,
+            self::FIELD_MEMORY_CAPACITY,
+            self::FIELD_MEMORY_TYPE,
+            self::FIELD_OPTICAL_DRIVE,
+            self::FIELD_PLATFORM,
+            self::FIELD_PROCESSOR,
+            self::FIELD_RESOLUTION,
+            self::FIELD_SHIPPING_METHOD,
+            self::FIELD_STYLE,
+        ])) {
+            return $this->_trimToMaxLength($value, 64);
+        } elseif (in_array($field, [
+            self::FIELD_ARTIST,
+            self::FIELD_AUTHOR,
+            self::FIELD_DIRECTOR,
+            self::FIELD_FEATURES,
+            self::FIELD_FOCUS_TYPE,
+            self::FIELD_MANUFACTURER,
+            self::FIELD_MATERIAL,
+            self::FIELD_MODEL_NUMBER,
+            self::FIELD_MPN,
+            self::FIELD_NAME,
+            self::FIELD_OCCASION,
+            self::FIELD_OPERATING_SYSTEM,
+            self::FIELD_PAYMENT_ACCEPTED,
+            self::FIELD_PUBLISHER,
+            self::FIELD_RECOMMENDED_USAGE,
+            self::FIELD_SKU,
+            self::FIELD_STARING,
+            self::FIELD_UPC,
+        ])) {
+            return $this->_trimToMaxLength($value, 128);
+        } elseif (in_array($field, [
+            self::FIELD_CATEGORY_NETWORK,
+            self::FIELD_CATEGORY_PROGRAM,
+            self::FIELD_KEYWORDS,
+            self::FIELD_PAYMENT_NOTES,
+        ])) {
+            return $this->_trimToMaxLength($value, 256);
+        } elseif (in_array($field, [self::FIELD_DESCRIPTION_SHORT])) {
+            return $this->_trimToMaxLength($value, 512);
+        } elseif (in_array($field, [
+            self::FIELD_BUY_URL,
+            self::FIELD_DESCRIPTION_LONG,
+            self::FIELD_IMAGE_THUMB_URL,
+            self::FIELD_IMAGE_URL,
+            self::FIELD_TECH_SPEC_URL,
+        ])) {
+            return $this->_trimToMaxLength($value, 2000);
+        } elseif (in_array($field, [
+            self::FIELD_COLOR_OUTPUT,
+            self::FIELD_DISCONTINUED,
+            self::FIELD_IN_STOCK,
+        ])) {
+            return $this->_getValueYesNo($value);
+        } elseif (in_array($field, [self::FIELD_EXPIRATION_DATE])) {
+            return $this->_getDateValue($value);
+        } elseif (in_array($field, [
+            self::FIELD_MEGAPIXELS,
+            self::FIELD_PRICE,
+            self::FIELD_PRICE_RETAIL,
+            self::FIELD_PRICE_SALE,
+            self::FIELD_PRICE_SHIPPING,
+        ])) {
+            return $this->_helper->formatMoney((float) $value);
+        } else {
+            return $value;
         }
     }
 
-    function _getDateValue($value)
+    protected function _getDateValue($value)
     {
         return date('Y-m-d', strtotime($value));
     }
 
-    function _getValueYesNo($value)
+    protected function _getValueYesNo($value)
     {
         if ($value) {
             return 'yes';
@@ -225,7 +234,7 @@ class Product extends AbstractHelper
         }
     }
 
-    function _trimToMaxLength($value, $maxLength)
+    protected function _trimToMaxLength($value, $maxLength)
     {
         return substr(trim($value), 0, $maxLength);
     }
