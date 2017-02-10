@@ -1,11 +1,11 @@
 <?php
 namespace Pepperjam\Network\Helper\Map;
 
-use \Magento\Framework\App\Helper\AbstractHelper;
-use \Magento\Framework\App\Helper\Context;
+use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
 
-use \Pepperjam\Network\Cron\Feed\Product as ProductFeed;
-use \Pepperjam\Network\Helper\Data;
+use Pepperjam\Network\Cron\Feed\Product as ProductFeed;
+use Pepperjam\Network\Helper\Data;
 
 class Product extends AbstractHelper
 {

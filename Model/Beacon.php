@@ -1,8 +1,8 @@
 <?php
 namespace Pepperjam\Network\Model;
 
-use \Pepperjam\Network\Helper\Data;
-use \Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Data;
+use Pepperjam\Network\Helper\Config;
 
 abstract class Beacon
 {

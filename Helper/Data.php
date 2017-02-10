@@ -1,10 +1,10 @@
 <?php
 namespace Pepperjam\Network\Helper;
 
-use \Magento\Framework\App\Helper\AbstractHelper;
-use \Magento\Framework\App\Helper\Context;
-use \Magento\Sales\Api\Data\OrderInterface;
-use \Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
+use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
+use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 
 class Data extends AbstractHelper
 {

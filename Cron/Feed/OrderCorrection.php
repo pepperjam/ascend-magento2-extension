@@ -1,11 +1,9 @@
 <?php
 namespace Pepperjam\Network\Cron\Feed;
 
-use \Psr\Log\LoggerInterface;
-
-use \Pepperjam\Network\Cron\Feed;
-use \Pepperjam\Network\Helper\Config;
-use \Pepperjam\Network\Helper\Map\OrderCorrection as OrderCorrectionMap;
+use Pepperjam\Network\Cron\Feed;
+use Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Map\OrderCorrection as OrderCorrectionMap;
 
 abstract class OrderCorrection extends Feed
 {
@@ -15,15 +13,13 @@ abstract class OrderCorrection extends Feed
 
     protected $_config;
 
-    protected $_logger;
-
     protected $_orderCorrectionMap;
 
     protected $_startTime;
 
     protected $_startTimeFormatted;
 
-    public function __construct(Config $config, LoggerInterface $logger, OrderCorrectionMap $orderCorrectionMap)
+    public function __construct(Config $config, OrderCorrectionMap $orderCorrectionMap)
     {
         $this->_config = $config;
         $this->_logger = $logger;
@@ -51,8 +47,11 @@ abstract class OrderCorrection extends Feed
 
     protected function _getFileName()
     {
-        return sprintf(self::FILENAME_FORMAT, $this->_config->getProgramId(), 
-            date(static::FILENAME_TIME_FORMAT, $this->_startTime));
+        return sprintf(
+            self::FILENAME_FORMAT,
+            $this->_config->getProgramId(),
+            date(static::FILENAME_TIME_FORMAT, $this->_startTime)
+        );
     }
 
     protected function _afterWrite()

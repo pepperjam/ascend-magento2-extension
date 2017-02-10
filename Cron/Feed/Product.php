@@ -1,14 +1,14 @@
 <?php
 namespace Pepperjam\Network\Cron\Feed;
 
-use \Magento\Catalog\Api\Data\ProductInterface;
-use \Magento\Catalog\Model\Product\Attribute\Source\Status;
-use \Magento\Catalog\Model\ResourceModel\Product\Collection;
-use \Psr\Log\LoggerInterface;
+use Magento\Catalog\Api\Data\ProductInterface;
+use Magento\Catalog\Model\Product\Attribute\Source\Status;
+use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Psr\Log\LoggerInterface;
 
-use \Pepperjam\Network\Cron\Feed;
-use \Pepperjam\Network\Helper\Config;
-use \Pepperjam\Network\Helper\Map\Product as ProductMap;
+use Pepperjam\Network\Cron\Feed;
+use Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Map\Product as ProductMap;
 
 // TODO: ignore products that don't have all required fields filled.
 

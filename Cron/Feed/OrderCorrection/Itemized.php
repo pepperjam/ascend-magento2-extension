@@ -1,19 +1,23 @@
 <?php
 namespace Pepperjam\Network\Cron\Feed\OrderCorrection;
 
-use \Magento\Sales\Model\ResourceModel\Order\Item\Collection as OrderCollection;
-use \Psr\Log\LoggerInterface;
+use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OrderCollection;
+use Psr\Log\LoggerInterface;
 
-use \Pepperjam\Network\Cron\Feed\OrderCorrection;
-use \Pepperjam\Network\Helper\Config;
-use \Pepperjam\Network\Helper\Map\OrderCorrection as Map;
+use Pepperjam\Network\Cron\Feed\OrderCorrection;
+use Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Map\OrderCorrection as Map;
 
 class Itemized extends OrderCorrection
 {
     protected $_orderItemCollection;
 
-    public function __construct(Config $config, LoggerInterface $logger, Map $orderCorrectionMap, OrderCollection $orderItemCollection)
-    {
+    public function __construct(
+        Config $config,
+        LoggerInterface $logger,
+        Map $orderCorrectionMap,
+        OrderCollection $orderItemCollection
+    ) {
         parent::__construct($config, $logger, $orderCorrectionMap);
 
         $this->_orderItemCollection = $orderItemCollection;

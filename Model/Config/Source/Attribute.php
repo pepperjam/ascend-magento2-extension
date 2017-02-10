@@ -1,10 +1,10 @@
 <?php
 namespace Pepperjam\Network\Model\Config\Source;
 
-use \Magento\Eav\Model\Config;
-use \Magento\Framework\Data\OptionSourceInterface;
+use Magento\Eav\Model\Config;
+use Magento\Framework\Data\OptionSourceInterface;
 
-use \Pepperjam\Network\Helper\Map\Product;
+use Pepperjam\Network\Helper\Map\Product;
 
 class Attribute implements OptionSourceInterface
 {

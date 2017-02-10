@@ -1,11 +1,11 @@
 <?php
 namespace Pepperjam\Network\Helper\Map;
 
-use \Magento\Catalog\Model\Product\Type as ProductType;
-use \Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Catalog\Model\Product\Type as ProductType;
+use Magento\Framework\App\Helper\AbstractHelper;
 
-use \Pepperjam\Network\Helper\Config;
-use \Pepperjam\Network\Helper\Data;
+use Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Data;
 
 class OrderCorrection extends AbstractHelper
 {

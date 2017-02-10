@@ -1,10 +1,10 @@
 <?php
 namespace Pepperjam\Network\Model\Beacon;
 
-use \Magento\Bundle\Model\Product\Price;
-use \Magento\Catalog\Model\Product\Type as ProductType;
+use Magento\Bundle\Model\Product\Price;
+use Magento\Catalog\Model\Product\Type as ProductType;
 
-use \Pepperjam\Network\Model\Beacon;
+use Pepperjam\Network\Model\Beacon;
 
 class Itemized extends Beacon
 {
@@ -91,7 +91,7 @@ class Itemized extends Beacon
 
     protected function _getPrice($item)
     {
-        if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE 
+        if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE
             && $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC) {
             return '0.00';
         } else {

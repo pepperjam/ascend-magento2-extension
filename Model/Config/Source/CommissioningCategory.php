@@ -1,9 +1,9 @@
 <?php
 namespace Pepperjam\Network\Model\Config\Source;
 
-use \Magento\Catalog\Model\CategoryFactory;
-use \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
-use \Magento\Store\Model\StoreManagerInterface;
+use Magento\Catalog\Model\CategoryFactory;
+use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
+use Magento\Store\Model\StoreManagerInterface;
 
 class CommissioningCategory extends AbstractSource
 {

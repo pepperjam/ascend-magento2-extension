@@ -1,13 +1,13 @@
 <?php
 namespace Pepperjam\Network\Block\Checkout\Onepage;
 
-use \Magento\Checkout\Model\Session as CheckoutSession;
-use \Magento\Framework\View\Element\Template;
-use \Magento\Framework\View\Element\Template\Context;
+use Magento\Catalog\Model\Session;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
 
-use \Pepperjam\Network\Helper\Config;
-use \Pepperjam\Network\Model\Attribution;
-use \Pepperjam\Network\Model\BeaconFactory;
+use Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Model\Attribution;
+use Pepperjam\Network\Model\BeaconFactory;
 
 class Beacon extends Template
 {
@@ -20,11 +20,10 @@ class Beacon extends Template
         Context $context,
         Attribution $attribution,
         BeaconFactory $beaconFactory,
-        CheckoutSession $checkoutSession,
+        Session $checkoutSession,
         Config $config,
         array $data = []
-    )
-    {
+    ) {
         parent::__construct($context, $data);
 
         $this->_attribution = $attribution;

@@ -1,9 +1,9 @@
 <?php
 namespace Pepperjam\Network\Model;
 
-use \Magento\Framework\App\ObjectManager;
+use Magento\Framework\App\ObjectManager;
 
-use \Pepperjam\Network\Helper\Data;
+use Pepperjam\Network\Helper\Data;
 
 class BeaconFactory
 {

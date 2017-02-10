@@ -1,9 +1,9 @@
 <?php
 namespace Pepperjam\Network\Cron;
 
-use \Magento\Framework\App\ObjectManager;
+use Magento\Framework\App\ObjectManager;
 
-use \Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Config;
 
 class OrderCorrectionFactory
 {

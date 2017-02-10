@@ -1,7 +1,7 @@
 <?php
 namespace Pepperjam\Network\Model\Beacon;
 
-use \Pepperjam\Network\Model\Beacon\Itemized;
+use Pepperjam\Network\Model\Beacon\Itemized;
 
 class Dynamic extends Itemized
 {

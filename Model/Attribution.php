@@ -1,10 +1,10 @@
 <?php
 namespace Pepperjam\Network\Model;
 
-use \Magento\Backend\Model\Session;
-use \Magento\Framework\App\RequestInterface;
+use Magento\Backend\Model\Session;
+use Magento\Framework\App\RequestInterface;
 
-use \Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Config;
 
 class Attribution
 {

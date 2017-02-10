@@ -1,14 +1,14 @@
 <?php
 namespace Pepperjam\Network\Setup;
 
-use \Magento\Catalog\Model\Product;
-use \Magento\Catalog\Setup\CategorySetupFactory;
-use \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
-use \Magento\Framework\Setup\InstallDataInterface;
-use \Magento\Framework\Setup\ModuleContextInterface;
-use \Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Catalog\Model\Product;
+use Magento\Catalog\Setup\CategorySetupFactory;
+use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
+use Magento\Framework\Setup\InstallDataInterface;
+use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
 
-use \Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Config;
 
 class InstallData implements InstallDataInterface
 {

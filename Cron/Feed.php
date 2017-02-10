@@ -1,10 +1,10 @@
 <?php
 namespace Pepperjam\Network\Cron;
 
-use \Magento\App\Dir;
-use \Psr\Log\LoggerInterface;
+use Magento\App\Dir;
+use Psr\Log\LoggerInterface;
 
-use \Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Config;
 
 abstract class Feed
 {

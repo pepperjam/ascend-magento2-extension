@@ -1,9 +1,9 @@
 <?php
 namespace Pepperjam\Network\Model\Config\Source;
 
-use \Magento\Framework\Data\OptionSourceInterface;
+use Magento\Framework\Data\OptionSourceInterface;
 
-use \Pepperjam\Network\Helper\Data;
+use Pepperjam\Network\Helper\Data;
 
 class TrackingType implements OptionSourceInterface
 {

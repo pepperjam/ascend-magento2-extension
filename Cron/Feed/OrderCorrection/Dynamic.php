@@ -1,8 +1,8 @@
 <?php
 namespace Pepperjam\Network\Cron\Feed\OrderCorrection;
 
-use \Pepperjam\Network\Cron\Feed\OrderCorrection\Itemized;
-use \Pepperjam\Network\Helper\Map\OrderCorrection as Map;
+use Pepperjam\Network\Cron\Feed\OrderCorrection\Itemized;
+use Pepperjam\Network\Helper\Map\OrderCorrection as Map;
 
 class Dynamic extends Itemized
 {
