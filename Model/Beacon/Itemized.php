@@ -102,8 +102,13 @@ class Itemized extends Beacon
     protected function averageItemAmount($params, $itemIndex)
     {
         for ($i = 1; $i < $itemIndex; $i++) {
+            $averageAmount = 0;
+            if ($params[$this->quantityKey.$i] > 0) {
+                $averageAmount = $params[$this->priceKey.$i]/$params[$this->quantityKey.$i]
+            }
+
             $params[$this->priceKey.$i] = $this->helper
-                ->formatMoney($params[$this->priceKey.$i]/$params[$this->quantityKey.$i]);
+                ->formatMoney($averageAmount);
         }
 
         return $params;
