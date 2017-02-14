@@ -16,7 +16,7 @@ class Config extends AbstractHelper
 
     protected $scopeConfig;
 
-    public function __construct (
+    public function __construct(
         CacheManager $cacheManager,
         ConfigResource $configResource,
         Context $context,

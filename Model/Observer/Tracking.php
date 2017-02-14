@@ -13,7 +13,7 @@ class Tracking implements ObserverInterface
 
     protected $config;
 
-    public function __construct (Attribution $attribution, Config $config)
+    public function __construct(Attribution $attribution, Config $config)
     {
         $this->attribution = $attribution;
         $this->config = $config;

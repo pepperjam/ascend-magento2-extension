@@ -92,7 +92,7 @@ class Product extends AbstractHelper
 
     protected $helper;
 
-    public function __construct (Context $context, Data $helper)
+    public function __construct(Context $context, Data $helper)
     {
         parent::__construct($context);
 

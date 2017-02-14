@@ -23,8 +23,6 @@ class OrderCorrectionFactory
 
     public function execute()
     {
-        var_dump('execute');
-        try {
         switch ($this->config->getTrackingType()) {
             case Data::TRACKING_BASIC:
                 $this->orderCorrectionFeed = $this->objectManager
@@ -41,8 +39,5 @@ class OrderCorrectionFactory
         }
 
         $this->orderCorrectionFeed->execute();
-        } catch (\Exception $e) {
-            var_dump($e);
-        }
     }
 }

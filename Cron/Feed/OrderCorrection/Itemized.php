@@ -12,7 +12,7 @@ class Itemized extends OrderCorrection
 {
     protected $orderItemCollection;
 
-    public function __construct (
+    public function __construct(
         Config $config,
         LoggerInterface $logger,
         Map $orderCorrectionMap,
@@ -39,15 +39,10 @@ class Itemized extends OrderCorrection
     {
         $lastRunTime = date(self::SELECT_TIME_FORMAT, $this->config->getOrderCorrectionFeedLastRunTime());
 
-        var_dump($this->startTimeFormatted);
-        var_dump($lastRunTime);
-
         $collection = $this->orderItemCollection;
 
         $collection->addBindParam(':lastRunTime', $lastRunTime)
             ->addBindParam(':startTime', $this->startTimeFormatted);
-
-        var_dump($collection->getSelectSql(true));
 
         return $collection;
     }

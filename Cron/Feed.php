@@ -16,7 +16,7 @@ abstract class Feed
 
     protected $enclosure = '"';
 
-    public function __construct (Config $config,LoggerInterface $logger)
+    public function __construct(Config $config, LoggerInterface $logger)
     {
         $this->config = $config;
         $this->logger = $logger;

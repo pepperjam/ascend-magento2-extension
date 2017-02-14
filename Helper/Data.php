@@ -17,7 +17,7 @@ class Data extends AbstractHelper
 
     public $collectionFactory;
 
-    public function __construct (Context $context, CollectionFactory $collectionFactory)
+    public function __construct(Context $context, CollectionFactory $collectionFactory)
     {
         parent::__construct($context);
 

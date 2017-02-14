@@ -12,7 +12,7 @@ class Attribution
     protected $request;
     protected $session;
 
-    public function __construct (Config $config, RequestInterface $request, Session $session)
+    public function __construct(Config $config, RequestInterface $request, Session $session)
     {
         $this->config = $config;
         $this->request = $request;

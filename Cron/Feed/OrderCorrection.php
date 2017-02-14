@@ -19,7 +19,7 @@ abstract class OrderCorrection extends Feed
 
     protected $startTimeFormatted;
 
-    public function __construct (Config $config, LoggerInterface $logger, OrderCorrectionMap $orderCorrectionMap)
+    public function __construct(Config $config, LoggerInterface $logger, OrderCorrectionMap $orderCorrectionMap)
     {
         parent::__construct($config, $logger);
 

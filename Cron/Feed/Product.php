@@ -24,7 +24,7 @@ class Product extends Feed
 
     protected $delimiter = "\t";
 
-    public function __construct (Collection $products, Config $config, LoggerInterface $logger, ProductMap $productMap)
+    public function __construct(Collection $products, Config $config, LoggerInterface $logger, ProductMap $productMap)
     {
         $this->config = $config;
         $this->logger = $logger;

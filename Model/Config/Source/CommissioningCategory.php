@@ -11,7 +11,7 @@ class CommissioningCategory extends AbstractSource
 
     protected $categoryFactory;
 
-    public function __construct (CategoryFactory $categoryFactory, StoreManagerInterface $storeManager)
+    public function __construct(CategoryFactory $categoryFactory, StoreManagerInterface $storeManager)
     {
         $this->categoryFactory = $categoryFactory;
         $this->storeManager = $storeManager;

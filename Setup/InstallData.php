@@ -16,7 +16,7 @@ class InstallData implements InstallDataInterface
 
     protected $config;
 
-    public function __construct (CategorySetupFactory $categorySetupFactory, Config $config)
+    public function __construct(CategorySetupFactory $categorySetupFactory, Config $config)
     {
         $this->categorySetupFactory = $categorySetupFactory;
         $this->config = $config;

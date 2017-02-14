@@ -11,7 +11,7 @@ class BeaconFactory
 
     protected $objectManager;
 
-    public function __construct (Data $helper)
+    public function __construct(Data $helper)
     {
         $this->helper = $helper;
 

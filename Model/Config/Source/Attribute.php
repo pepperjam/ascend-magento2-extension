@@ -10,7 +10,7 @@ class Attribute implements OptionSourceInterface
 {
     protected $eavConfig;
 
-    public function __construct (Config $eavConfig)
+    public function __construct(Config $eavConfig)
     {
         $this->eavConfig = $eavConfig;
     }

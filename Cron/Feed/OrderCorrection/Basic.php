@@ -12,7 +12,7 @@ class Basic extends OrderCorrection
 {
     protected $orderCollection;
 
-    public function __construct (
+    public function __construct(
         Config $config,
         LoggerInterface $logger,
         Map $orderCorrectionMap,

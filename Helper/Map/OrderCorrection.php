@@ -26,7 +26,7 @@ class OrderCorrection extends AbstractHelper
 
     protected $helper;
 
-    public function __construct (Config $config, Data $helper)
+    public function __construct(Config $config, Data $helper)
     {
         $this->config = $config;
         $this->helper = $helper;

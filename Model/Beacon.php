@@ -10,7 +10,7 @@ abstract class Beacon
     protected $helper;
     protected $order;
 
-    public function __construct (Config $config, Data $helper)
+    public function __construct(Config $config, Data $helper)
     {
         $this->config = $config;
         $this->helper = $helper;
