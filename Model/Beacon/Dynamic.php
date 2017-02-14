@@ -5,25 +5,25 @@ use Pepperjam\Network\Model\Beacon\Itemized;
 
 class Dynamic extends Itemized
 {
-    protected $_couponKey = 'COUPON';
-    protected $_priceKey = 'ITEM_PRICE';
-    protected $_quantityKey = 'QUANTITY';
-    protected $_skuKey = 'ITEM_ID';
+    protected $couponKey = 'COUPON';
+    protected $priceKey = 'ITEM_PRICE';
+    protected $quantityKey = 'QUANTITY';
+    protected $skuKey = 'ITEM_ID';
 
-    protected function _orderParams()
+    protected function orderParams()
     {
         return [
-            'PROGRAM_ID' => $this->_config->getProgramId(),
-            'ORDER_ID' => $this->_order->getIncrementId(),
-            'INT' => $this->_config->getInt(),
-            'NEW_TO_FILE' => (int) $this->_helper->isNewToFile($this->_order),
+            'PROGRAM_ID' => $this->config->getProgramId(),
+            'ORDER_ID' => $this->order->getIncrementId(),
+            'INT' => $this->config->getInt(),
+            'NEW_TO_FILE' => (int) $this->helper->isNewToFile($this->order),
         ];
     }
 
-    protected function _newItem($params, $item, $itemIndex)
+    protected function newItem($params, $item, $itemIndex)
     {
         $params = parent::_newItem($params, $item, $itemIndex);
-        $params['CATEGORY' . $itemIndex] = $this->_helper->getCommissioningCategory($item);
+        $params['CATEGORY' . $itemIndex] = $this->helper->getCommissioningCategory($item);
 
         return $params;
     }

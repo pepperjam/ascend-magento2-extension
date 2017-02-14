@@ -7,20 +7,20 @@ use Pepperjam\Network\Helper\Data;
 
 class BeaconFactory
 {
-    protected $_helper;
+    protected $helper;
 
-    protected $_objectManager;
+    protected $objectManager;
 
-    public function __construct(Data $helper)
+    public function __construct (Data $helper)
     {
-        $this->_helper = $helper;
+        $this->helper = $helper;
 
-        $this->_objectManager = ObjectManager::getInstance();
+        $this->objectManager = ObjectManager::getInstance();
     }
 
     public function createBasic($order)
     {
-        $beacon = $this->_objectManager->get('\Pepperjam\Network\Model\Beacon\Basic');
+        $beacon = $this->objectManager->get('\Pepperjam\Network\Model\Beacon\Basic');
         $beacon->setOrder($order);
 
         return $beacon;
@@ -28,7 +28,7 @@ class BeaconFactory
 
     public function createItemized($order)
     {
-        $beacon = $this->_objectManager->get('\Pepperjam\Network\Model\Beacon\Itemized');
+        $beacon = $this->objectManager->get('\Pepperjam\Network\Model\Beacon\Itemized');
         $beacon->setOrder($order);
 
         return $beacon;
@@ -36,7 +36,7 @@ class BeaconFactory
 
     public function createDynamic($order)
     {
-        $beacon = $this->_objectManager->get('\Pepperjam\Network\Model\Beacon\Dynamic');
+        $beacon = $this->objectManager->get('\Pepperjam\Network\Model\Beacon\Dynamic');
         $beacon->setOrder($order);
 
         return $beacon;
@@ -45,11 +45,11 @@ class BeaconFactory
     public function create($trackingType, $order)
     {
         switch ($trackingType) {
-            case $this->_helper::TRACKING_BASIC:
+            case $this->helper::TRACKING_BASIC:
                 return $this->createBasic($order);
-            case $this->_helper::TRACKING_ITEMIZED:
+            case $this->helper::TRACKING_ITEMIZED:
                 return $this->createItemized($order);
-            case $this->_helper::TRACKING_DYNAMIC:
+            case $this->helper::TRACKING_DYNAMIC:
                 return $this->createDynamic($order);
             default:
                 return false;

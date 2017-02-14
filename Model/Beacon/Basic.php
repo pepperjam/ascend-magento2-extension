@@ -5,24 +5,24 @@ use Pepperjam\Network\Model\Beacon;
 
 class Basic extends Beacon
 {
-    protected $_couponKey = 'PROMOCODE';
+    protected $couponKey = 'PROMOCODE';
 
     public function getUrl()
     {
-        $params = $this->_orderParams();
-        $params = $this->_getCouponCode($params);
+        $params = $this->orderParams();
+        $params = $this->getCouponCode($params);
 
-        return $this->_config->getBeaconBaseUrl() . '?' . http_build_query($params);
+        return $this->config->getBeaconBaseUrl() . '?' . http_build_query($params);
     }
 
-    protected function _orderParams()
+    protected function orderParams()
     {
         return [
-            'PID' => $this->_config->getProgramId(),
-            'OID' => $this->_order->getIncrementId(),
-            'AMOUNT' => $this->_helper->formatMoney($this->_order->getSubtotal()
-                + $this->_order->getDiscountAmount() + $this->_order->getShippingDiscountAmount()),
-            'TYPE' => $this->_config->getTransactionType(),
+            'PID' => $this->config->getProgramId(),
+            'OID' => $this->order->getIncrementId(),
+            'AMOUNT' => $this->helper->formatMoney($this->order->getSubtotal()
+                + $this->order->getDiscountAmount() + $this->order->getShippingDiscountAmount()),
+            'TYPE' => $this->config->getTransactionType(),
         ];
     }
 }

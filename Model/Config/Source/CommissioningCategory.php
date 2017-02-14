@@ -9,12 +9,12 @@ class CommissioningCategory extends AbstractSource
 {
     const CATEGORY_LOWEST_LEVEL = 1;
 
-    protected $_categoryFactory;
+    protected $categoryFactory;
 
-    public function __construct(CategoryFactory $categoryFactory, StoreManagerInterface $storeManager)
+    public function __construct (CategoryFactory $categoryFactory, StoreManagerInterface $storeManager)
     {
-        $this->_categoryFactory = $categoryFactory;
-        $this->_storeManager = $storeManager;
+        $this->categoryFactory = $categoryFactory;
+        $this->storeManager = $storeManager;
     }
 
     public function getAllOptions()
@@ -27,17 +27,17 @@ class CommissioningCategory extends AbstractSource
         ];
 
         // For reference see: \Magento\Catalog\Helper\Category::getStoreCategories
-        $rootCategoryId = $this->_storeManager->getStore()->getRootCategoryId();
-        $rootCategory = $this->_categoryFactory->create();
+        $rootCategoryId = $this->storeManager->getStore()->getRootCategoryId();
+        $rootCategory = $this->categoryFactory->create();
 
         $children = $rootCategory->getCategories($rootCategoryId, self::CATEGORY_LOWEST_LEVEL, true, true, true);
 
-        $this->_addChildren($categoryOptions, $children, 0);
+        $this->addChildren($categoryOptions, $children, 0);
 
         return $categoryOptions;
     }
 
-    protected function _addChildren(&$options, $categories, $level)
+    protected function addChildren(&$options, $categories, $level)
     {
 
         if (empty($categories)) {
@@ -51,7 +51,7 @@ class CommissioningCategory extends AbstractSource
             ];
 
             $subcategories = $category->getChildrenCategories();
-            $this->_addChildren($options, $subcategories, $level+1);
+            $this->addChildren($options, $subcategories, $level+1);
         }
     }
 }

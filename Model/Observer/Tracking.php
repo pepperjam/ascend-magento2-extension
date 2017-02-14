@@ -9,20 +9,20 @@ use Pepperjam\Network\Model\Attribution;
 
 class Tracking implements ObserverInterface
 {
-    protected $_attribution;
+    protected $attribution;
 
-    protected $_config;
+    protected $config;
 
-    public function __construct(Attribution $attribution, Config $config)
+    public function __construct (Attribution $attribution, Config $config)
     {
-        $this->_attribution = $attribution;
-        $this->_config = $config;
+        $this->attribution = $attribution;
+        $this->config = $config;
     }
 
-    public function execute()
+    public function execute(Observer $observer)
     {
-        if ($this->_config->isActive() && $this->_config->isAttributionEnabled()) {
-            $this->_attribution->create();
+        if ($this->config->isActive() && $this->config->isAttributionEnabled()) {
+            $this->attribution->create();
         }
     }
 }

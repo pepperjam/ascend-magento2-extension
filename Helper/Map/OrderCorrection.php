@@ -22,14 +22,14 @@ class OrderCorrection extends AbstractHelper
 
     const REASON = 8;
 
-    protected $_config;
+    protected $config;
 
-    protected $_helper;
+    protected $helper;
 
-    public function __construct(Config $config, Data $helper)
+    public function __construct (Config $config, Data $helper)
     {
-        $this->_config = $config;
-        $this->_helper = $helper;
+        $this->config = $config;
+        $this->helper = $helper;
     }
 
     public function get($item, $field, $attribute)
@@ -50,7 +50,7 @@ class OrderCorrection extends AbstractHelper
             case self::FIELD_ORDER_ID:
                 return $this->getOrderId($item);
             case self::FIELD_PROGRAM_ID:
-                return $this->_config->getProgramId();
+                return $this->config->getProgramId();
             case self::FIELD_REASON:
                 return self::REASON;
             case self::FIELD_TRANSACTION_TYPE:
@@ -60,10 +60,10 @@ class OrderCorrection extends AbstractHelper
 
     public function getCategory($item)
     {
-        return $this->_helper->getCommissioningCategory($item);
+        return $this->helper->getCommissioningCategory($item);
     }
 
-    protected function _getDiscountedItemPrice($item)
+    protected function getDiscountedItemPrice($item)
     {
         // tread bundle items as 0.00 total as their total will be represented by
         // the total of their children products
@@ -101,21 +101,21 @@ class OrderCorrection extends AbstractHelper
 
     public function getItemPrice($item)
     {
-        if ($this->_config->getTransactionType() === Data::TRANSACTION_LEAD) {
+        if ($this->config->getTransactionType() === Data::TRANSACTION_LEAD) {
             return 0;
         }
 
-        return $this->_helper->formatMoney($this->_getDiscountedItemPrice($item));
+        return $this->helper->formatMoney($this->getDiscountedItemPrice($item));
     }
 
     public function getNewToFile($item)
     {
-        return (int) $this->_helper->isNewToFile($item->getOrder());
+        return (int) $this->helper->isNewToFile($item->getOrder());
     }
 
     public function getOrderAmount($item)
     {
-        if ($this->_config->getTransactionType() === Data::TRANSACTION_LEAD) {
+        if ($this->config->getTransactionType() === Data::TRANSACTION_LEAD) {
             return 0;
         }
 
@@ -138,6 +138,6 @@ class OrderCorrection extends AbstractHelper
 
     public function getTransactionType()
     {
-        return $this->_config->getTransactionType();
+        return $this->config->getTransactionType();
     }
 }

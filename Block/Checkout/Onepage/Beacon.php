@@ -1,7 +1,7 @@
 <?php
 namespace Pepperjam\Network\Block\Checkout\Onepage;
 
-use Magento\Catalog\Model\Session;
+use Magento\Checkout\Model\Session;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 
@@ -11,10 +11,10 @@ use Pepperjam\Network\Model\BeaconFactory;
 
 class Beacon extends Template
 {
-    protected $_attribution;
-    protected $_beaconFactory;
-    protected $_checkoutSession;
-    protected $_config;
+    protected $attribution;
+    protected $beaconFactory;
+    protected $checkoutSession;
+    protected $config;
 
     public function __construct(
         Context $context,
@@ -26,24 +26,24 @@ class Beacon extends Template
     ) {
         parent::__construct($context, $data);
 
-        $this->_attribution = $attribution;
-        $this->_beaconFactory = $beaconFactory;
-        $this->_checkoutSession = $checkoutSession;
-        $this->_config = $config;
+        $this->attribution = $attribution;
+        $this->beaconFactory = $beaconFactory;
+        $this->checkoutSession = $checkoutSession;
+        $this->config = $config;
     }
 
     public function getBeaconUrl()
     {
-        $order = $this->_checkoutSession->getLastRealOrder();
-        $beacon = $this->_beaconFactory->create($this->_config->getTrackingType(), $order);
+        $order = $this->checkoutSession->getLastRealOrder();
+        $beacon = $this->beaconFactory->create($this->config->getTrackingType(), $order);
 
         return $beacon->getUrl();
     }
 
     protected function _toHtml()
     {
-        if ($this->_config->isActive()) {
-            if (!$this->_config->isAttributionEnabled() || $this->_attribution->isValid()) {
+        if ($this->config->isActive()) {
+            if (!$this->config->isAttributionEnabled() || $this->attribution->isValid()) {
                 return parent::_toHtml();
             }
         }

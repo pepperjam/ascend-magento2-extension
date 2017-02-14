@@ -1,6 +1,8 @@
 <?php
 namespace Pepperjam\Network\Cron\Feed;
 
+use Psr\Log\LoggerInterface;
+
 use Pepperjam\Network\Cron\Feed;
 use Pepperjam\Network\Helper\Config;
 use Pepperjam\Network\Helper\Map\OrderCorrection as OrderCorrectionMap;
@@ -11,51 +13,49 @@ abstract class OrderCorrection extends Feed
     const FILENAME_TIME_FORMAT = 'YmdHis';
     const SELECT_TIME_FORMAT = 'Y-m-d H:i:s';
 
-    protected $_config;
+    protected $orderCorrectionMap;
 
-    protected $_orderCorrectionMap;
+    protected $startTime;
 
-    protected $_startTime;
+    protected $startTimeFormatted;
 
-    protected $_startTimeFormatted;
-
-    public function __construct(Config $config, OrderCorrectionMap $orderCorrectionMap)
+    public function __construct (Config $config, LoggerInterface $logger, OrderCorrectionMap $orderCorrectionMap)
     {
-        $this->_config = $config;
-        $this->_logger = $logger;
-        $this->_orderCorrectionMap = $orderCorrectionMap;
+        parent::__construct($config, $logger);
 
-        $this->_startTime = time();
-        $this->_startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->_startTime);
+        $this->orderCorrectionMap = $orderCorrectionMap;
+
+        $this->startTime = time();
+        $this->startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->startTime);
     }
 
-    protected function _applyMapping($item)
+    protected function applyMapping($item)
     {
         $data = [];
-        $fields = $this->_getFeedFields();
+        $fields = $this->getFeedFields();
         foreach ($fields as $field => $attribute) {
-            $data[] = $this->_orderCorrectionMap->get($item, $field, $attribute);
+            $data[] = $this->orderCorrectionMap->get($item, $field, $attribute);
         }
 
         return $data;
     }
 
-    protected function _enabled()
+    protected function enabled()
     {
-        return $this->_config->isOrderCorrectionFeedEnabled();
+        return $this->config->isOrderCorrectionFeedEnabled();
     }
 
-    protected function _getFileName()
+    protected function getFileName()
     {
         return sprintf(
             self::FILENAME_FORMAT,
-            $this->_config->getProgramId(),
-            date(static::FILENAME_TIME_FORMAT, $this->_startTime)
+            $this->config->getProgramId(),
+            date(static::FILENAME_TIME_FORMAT, $this->startTime)
         );
     }
 
-    protected function _afterWrite()
+    protected function afterWrite()
     {
-        $this->_config->setOrderCorrectionFeedLastRunTime($this->_startTime);
+        $this->config->setOrderCorrectionFeedLastRunTime($this->startTime);
     }
 }

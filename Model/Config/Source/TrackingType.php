@@ -7,26 +7,26 @@ use Pepperjam\Network\Helper\Data;
 
 class TrackingType implements OptionSourceInterface
 {
-    protected $_helper;
+    protected $helper;
 
-    public function __construct(Data $helper)
+    public function __construct (Data $helper)
     {
-        $this->_helper = $helper;
+        $this->helper = $helper;
     }
 
     public function toOptionArray()
     {
         return [
             [
-                'value' => $this->_helper::TRACKING_BASIC,
+                'value' => $this->helper::TRACKING_BASIC,
                 'label' => __('Basic'),
             ],
             [
-                'value' => $this->_helper::TRACKING_ITEMIZED,
+                'value' => $this->helper::TRACKING_ITEMIZED,
                 'label' => __('Itemized'),
             ],
             [
-                'value' => $this->_helper::TRACKING_DYNAMIC,
+                'value' => $this->helper::TRACKING_DYNAMIC,
                 'label' => __('Dynamic'),
             ],
         ];
@@ -35,9 +35,9 @@ class TrackingType implements OptionSourceInterface
     public function toArray()
     {
         return [
-            $this->_helper::TRACKING_BASIC => __('Basic'),
-            $this->_helper::TRACKING_ITEMIZED => __('Itemized'),
-            $this->_helper::TRACKING_DYNAMIC => __('Dynamic'),
+            $this->helper::TRACKING_BASIC => __('Basic'),
+            $this->helper::TRACKING_ITEMIZED => __('Itemized'),
+            $this->helper::TRACKING_DYNAMIC => __('Dynamic'),
         ];
     }
 }

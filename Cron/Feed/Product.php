@@ -16,60 +16,60 @@ class Product extends Feed
 {
     const FILENAME_FORMAT = '%s_product_feed.csv';
 
-    protected $_config;
+    protected $config;
 
-    protected $_productMap;
+    protected $productMap;
 
-    protected $_products;
+    protected $products;
 
-    protected $_delimiter = "\t";
+    protected $delimiter = "\t";
 
-    public function __construct(Collection $products, Config $config, LoggerInterface $logger, ProductMap $productMap)
+    public function __construct (Collection $products, Config $config, LoggerInterface $logger, ProductMap $productMap)
     {
-        $this->_config = $config;
-        $this->_logger = $logger;
-        $this->_productMap = $productMap;
+        $this->config = $config;
+        $this->logger = $logger;
+        $this->productMap = $productMap;
 
-        $this->_products = $products
+        $this->products = $products
             ->addAttributeToSelect('*')
             ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED)
             ->load();
     }
 
-    protected function _applyMapping($item)
+    protected function applyMapping($item)
     {
         $data = [];
-        $fields = $this->_getFeedFields();
+        $fields = $this->getFeedFields();
         foreach ($fields as $field => $attribute) {
             if ($attribute != '') {
-                $data[] = $this->_productMap->get($item, $field, $attribute);
+                $data[] = $this->productMap->get($item, $field, $attribute);
             }
         }
 
         return $data;
     }
 
-    protected function _enabled()
+    protected function enabled()
     {
-        return $this->_config->isProductFeedEnabled();
+        return $this->config->isProductFeedEnabled();
     }
 
-    protected function _getFeedFields()
+    protected function getFeedFields()
     {
-        return $this->_config->getProductFeedMap();
+        return $this->config->getProductFeedMap();
     }
 
-    protected function _getFileName()
+    protected function getFileName()
     {
-        return sprintf(self::FILENAME_FORMAT, $this->_config->getProgramId());
+        return sprintf(self::FILENAME_FORMAT, $this->config->getProgramId());
     }
 
-    protected function _getItems()
+    protected function getItems()
     {
-        $this->_products
+        $this->products
             ->addAttributeToSelect('*')
             ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED);
         
-        return $this->_products;
+        return $this->products;
     }
 }

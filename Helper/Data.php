@@ -15,13 +15,13 @@ class Data extends AbstractHelper
     const TRANSACTION_LEAD = 'lead';
     const TRANSACTION_SALE = 'sale';
 
-    public $_collectionFactory;
+    public $collectionFactory;
 
-    public function __construct(Context $context, CollectionFactory $collectionFactory)
+    public function __construct (Context $context, CollectionFactory $collectionFactory)
     {
         parent::__construct($context);
 
-        $this->_collectionFactory = $collectionFactory;
+        $this->collectionFactory = $collectionFactory;
     }
 
     public function formatMoney($amount)
@@ -51,7 +51,7 @@ class Data extends AbstractHelper
         $customerEmail = $order->getCustomerEmail();
         $createdAt = $order->getCreatedAt();
 
-        $orderCollection = $this->_collectionFactory->create();
+        $orderCollection = $this->collectionFactory->create();
         $orderCollection->addFieldToFilter(OrderInterface::CUSTOMER_EMAIL, $customerEmail);
         $orderCollection->addFieldToFilter(OrderInterface::CREATED_AT, ['lt' => $createdAt]);
         $orderCollection->load();

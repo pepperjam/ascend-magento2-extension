@@ -12,19 +12,19 @@ use Pepperjam\Network\Helper\Config;
 
 class InstallData implements InstallDataInterface
 {
-    protected $_categorySetupFactory;
+    protected $categorySetupFactory;
 
-    protected $_config;
+    protected $config;
 
-    public function __construct(CategorySetupFactory $categorySetupFactory, Config $config)
+    public function __construct (CategorySetupFactory $categorySetupFactory, Config $config)
     {
-        $this->_categorySetupFactory = $categorySetupFactory;
-        $this->_config = $config;
+        $this->categorySetupFactory = $categorySetupFactory;
+        $this->config = $config;
     }
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        $categorySetup = $this->_categorySetupFactory->create(['setup' => $setup]);
+        $categorySetup = $this->categorySetupFactory->create(['setup' => $setup]);
 
         $setup->startSetup();
 
@@ -49,6 +49,6 @@ class InstallData implements InstallDataInterface
 
         $setup->endSetup();
 
-        $this->_config->setOrderCorrectionFeedLastRunTime(time());
+        $this->config->setOrderCorrectionFeedLastRunTime(time());
     }
 }

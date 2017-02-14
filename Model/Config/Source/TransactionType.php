@@ -7,22 +7,22 @@ use Pepperjam\Network\Helper\Data;
 
 class TransactionType implements OptionSourceInterface
 {
-    protected $_helper;
+    protected $helper;
 
-    public function __construct(Data $helper)
+    public function __construct (Data $helper)
     {
-        $this->_helper = $helper;
+        $this->helper = $helper;
     }
 
     public function toOptionArray()
     {
         return [
             [
-                'value' => $this->_helper::TRANSACTION_LEAD,
+                'value' => $this->helper::TRANSACTION_LEAD,
                 'label' => __('Lead'),
             ],
             [
-                'value' => $this->_helper::TRANSACTION_SALE,
+                'value' => $this->helper::TRANSACTION_SALE,
                 'label' => __('Sale'),
             ],
         ];
@@ -31,8 +31,8 @@ class TransactionType implements OptionSourceInterface
     public function toArray()
     {
         return [
-            $this->_helper::TRANSACTION_LEAD => __('Lead'),
-            $this->_helper::TRANSACTION_SALE => __('Sale'),
+            $this->helper::TRANSACTION_LEAD => __('Lead'),
+            $this->helper::TRANSACTION_SALE => __('Sale'),
         ];
     }
 }

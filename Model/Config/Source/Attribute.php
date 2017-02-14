@@ -8,11 +8,11 @@ use Pepperjam\Network\Helper\Map\Product;
 
 class Attribute implements OptionSourceInterface
 {
-    protected $_eavConfig;
+    protected $eavConfig;
 
-    public function __construct(Config $eavConfig)
+    public function __construct (Config $eavConfig)
     {
-        $this->_eavConfig = $eavConfig;
+        $this->eavConfig = $eavConfig;
     }
 
     public function toOptionArray()
@@ -29,9 +29,9 @@ class Attribute implements OptionSourceInterface
             ],
         ];
 
-        $codes = $this->_eavConfig->getEntityAttributeCodes('catalog_product');
+        $codes = $this->eavConfig->getEntityAttributeCodes('catalog_product');
         foreach ($codes as $code) {
-            $attribute = $this->_eavConfig->getAttribute('catalog_product', $code);
+            $attribute = $this->eavConfig->getAttribute('catalog_product', $code);
             $options[] = [
                 'value' => $code,
                 'label' => $attribute->getFrontendLabel(),
@@ -46,9 +46,9 @@ class Attribute implements OptionSourceInterface
         // Start with an empty option if you'd like to not include a field
         $options = ['' => ''];
 
-        $codes = $this->_eavConfig->getEntityAttributeCodes('catalog_product');
+        $codes = $this->eavConfig->getEntityAttributeCodes('catalog_product');
         foreach ($codes as $code) {
-            $attribute = $this->_eavConfig->getAttribute('catalog_product', $code);
+            $attribute = $this->eavConfig->getAttribute('catalog_product', $code);
             $options[] = [$code => $attribute->getFrontendLabel()];
         }
 

@@ -6,25 +6,25 @@ use Pepperjam\Network\Helper\Config;
 
 abstract class Beacon
 {
-    protected $_config;
-    protected $_helper;
-    protected $_order;
+    protected $config;
+    protected $helper;
+    protected $order;
 
-    public function __construct(Config $config, Data $helper)
+    public function __construct (Config $config, Data $helper)
     {
-        $this->_config = $config;
-        $this->_helper = $helper;
+        $this->config = $config;
+        $this->helper = $helper;
     }
 
     public function setOrder($order)
     {
-        $this->_order = $order;
+        $this->order = $order;
     }
 
-    protected function _getCouponCode($params)
+    protected function getCouponCode($params)
     {
-        if (trim($this->_order->getCouponCode()) != '') {
-            $params[$this->_couponKey] = trim($order->getCouponCode());
+        if (trim($this->order->getCouponCode()) != '') {
+            $params[$this->couponKey] = trim($order->getCouponCode());
         }
 
         return $params;
@@ -32,5 +32,5 @@ abstract class Beacon
 
     abstract public function getUrl();
 
-    abstract protected function _orderParams();
+    abstract protected function orderParams();
 }

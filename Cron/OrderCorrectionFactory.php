@@ -4,39 +4,45 @@ namespace Pepperjam\Network\Cron;
 use Magento\Framework\App\ObjectManager;
 
 use Pepperjam\Network\Helper\Config;
+use Pepperjam\Network\Helper\Data;
 
 class OrderCorrectionFactory
 {
-    protected $_config;
+    protected $config;
 
-    protected $_objectManager;
+    protected $objectManager;
 
-    protected $_orderCorrectionFeed;
+    protected $orderCorrectionFeed;
 
     public function __construct(Config $config)
     {
-        $this->_config = $config;
+        $this->config = $config;
 
-        $this->_objectManager = ObjectManager::getInstance();
+        $this->objectManager = ObjectManager::getInstance();
     }
 
     public function execute()
     {
-        switch ($this->_config->getTrackingType()) {
+        var_dump('execute');
+        try {
+        switch ($this->config->getTrackingType()) {
             case Data::TRACKING_BASIC:
-                $this->_orderCorrectionFeed = $this->_objectManager
+                $this->orderCorrectionFeed = $this->objectManager
                     ->get('\Pepperjam\Network\Cron\Feed\OrderCorrection\Basic');
                 break;
             case Data::TRACKING_ITEMIZED:
-                $this->_orderCorrectionFeed = $this->_objectManager
+                $this->orderCorrectionFeed = $this->objectManager
                     ->get('\Pepperjam\Network\Cron\Feed\OrderCorrection\Itemized');
                 break;
             case Data::TRACKING_DYNAMIC:
-                $this->_orderCorrectionFeed = $this->_objectManager
+                $this->orderCorrectionFeed = $this->objectManager
                     ->get('\Pepperjam\Network\Cron\Feed\OrderCorrection\Dynamic');
                 break;
         }
 
-        $this->_orderCorrectionFeed->execute();
+        $this->orderCorrectionFeed->execute();
+        } catch (\Exception $e) {
+            var_dump($e);
+        }
     }
 }

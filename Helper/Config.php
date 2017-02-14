@@ -10,13 +10,13 @@ use Magento\Config\Model\ResourceModel\Config as ConfigResource;
 
 class Config extends AbstractHelper
 {
-    protected $_cacheManager;
+    protected $cacheManager;
 
-    protected $_configResource;
+    protected $configResource;
 
-    protected $_scopeConfig;
+    protected $scopeConfig;
 
-    public function __construct(
+    public function __construct (
         CacheManager $cacheManager,
         ConfigResource $configResource,
         Context $context,
@@ -24,53 +24,53 @@ class Config extends AbstractHelper
     ) {
         parent::__construct($context);
 
-        $this->_cacheManager = $cacheManager;
-        $this->_configResource = $configResource;
-        $this->_scopeConfig = $scopeConfig;
+        $this->cacheManager = $cacheManager;
+        $this->configResource = $configResource;
+        $this->scopeConfig = $scopeConfig;
     }
 
     public function isActive()
     {
-        return (boolean) $this->_scopeConfig->getValue('pepperjam_network/settings/active');
+        return (boolean) $this->scopeConfig->getValue('pepperjam_network/settings/active');
     }
     public function getProgramId()
     {
-        return $this->_scopeConfig->getValue('pepperjam_network/settings/program_id');
+        return $this->scopeConfig->getValue('pepperjam_network/settings/program_id');
     }
     public function getTrackingType()
     {
-        return $this->_scopeConfig->getValue('pepperjam_network/settings/tracking_type');
+        return $this->scopeConfig->getValue('pepperjam_network/settings/tracking_type');
     }
     public function getTransactionType()
     {
-        return $this->_scopeConfig->getValue('pepperjam_network/settings/transaction_type');
+        return $this->scopeConfig->getValue('pepperjam_network/settings/transaction_type');
     }
     public function getExportPath()
     {
-        return $this->_scopeConfig->getValue('pepperjam_network/settings/export_path');
+        return $this->scopeConfig->getValue('pepperjam_network/settings/export_path');
     }
     public function isAttributionEnabled()
     {
         return (boolean) $this->isActive() &&
-            $this->_scopeConfig->getValue('pepperjam_network/settings/attribution_enabled');
+            $this->scopeConfig->getValue('pepperjam_network/settings/attribution_enabled');
     }
     public function getSourceKeyName()
     {
-        return $this->_scopeConfig->getValue('pepperjam_network/settings/source_key_name');
+        return $this->scopeConfig->getValue('pepperjam_network/settings/source_key_name');
     }
     public function isProductFeedEnabled()
     {
         return (boolean) $this->isActive() &&
-            $this->_scopeConfig->getValue('pepperjam_network/settings/product_feed_enabled');
+            $this->scopeConfig->getValue('pepperjam_network/settings/product_feed_enabled');
     }
     public function isOrderCorrectionFeedEnabled()
     {
         return (boolean) $this->isActive() &&
-            $this->_scopeConfig->getValue('pepperjam_network/settings/order_correction_feed_enabled');
+            $this->scopeConfig->getValue('pepperjam_network/settings/order_correction_feed_enabled');
     }
     public function getProductFeedMap()
     {
-        return $this->_scopeConfig->getValue('pepperjam_network/product_map');
+        return $this->scopeConfig->getValue('pepperjam_network/product_map');
     }
 
     public function getValidSources()
@@ -92,22 +92,22 @@ class Config extends AbstractHelper
 
     public function getRequiredProductFeedFields()
     {
-        $pepperjamConfig = $this->_config->getSection();
+        $pepperjamConfig = $this->config->getSection();
     }
 
     public function getOrderCorrectionFeedLastRunTime()
     {
-        return $this->_scopeConfig->getValue('pepperjam_network/feed/order_correction/last_run_time');
+        return $this->scopeConfig->getValue('pepperjam_network/feed/order_correction/last_run_time');
     }
 
     public function setOrderCorrectionFeedLastRunTime($time)
     {
-        $this->_configResource->saveConfig(
+        $this->configResource->saveConfig(
             'pepperjam_network/feed/order_correction/last_run_time',
             $time,
             ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
             0
         );
-        $this->_cacheManager->clean([CacheTypeConfig::TYPE_IDENTIFIER]);
+        $this->cacheManager->clean([CacheTypeConfig::TYPE_IDENTIFIER]);
     }
 }

@@ -90,13 +90,13 @@ class Product extends AbstractHelper
     const FIELD_YEAR = 'year';
     const FIELD_ZOOM = 'zoom';
 
-    protected $_helper;
+    protected $helper;
 
-    public function __construct(Context $context, Data $helper)
+    public function __construct (Context $context, Data $helper)
     {
         parent::__construct($context);
 
-        $this->_helper = $helper;
+        $this->helper = $helper;
     }
 
     public function get($product, $field, $attribute)
@@ -107,7 +107,7 @@ class Product extends AbstractHelper
             $value = $product->getData($attribute);
         }
 
-        return $this->_formatValue($field, $value);
+        return $this->formatValue($field, $value);
     }
 
     public function getProductUrl($product)
@@ -115,10 +115,10 @@ class Product extends AbstractHelper
         return $product->getUrlModel()->getUrl($product);
     }
 
-    protected function _formatValue($field, $value)
+    protected function formatValue($field, $value)
     {
         if (in_array($field, [self::FIELD_ASPECT_RATIO])) {
-            return $this->_trimToMaxLength($value, 16);
+            return $this->trimToMaxLength($value, 16);
         } elseif (in_array($field, [
             self::FIELD_AGE_RANGE,
             self::FIELD_BATTERY_LIFE,
@@ -141,7 +141,7 @@ class Product extends AbstractHelper
             self::FIELD_WIRELESS_INTERFACE,
             self::FIELD_ZOOM,
         ])) {
-            return $this->_trimToMaxLength($value, 32);
+            return $this->trimToMaxLength($value, 32);
         } elseif (in_array($field, [
             self::FIELD_CONDITION,
             self::FIELD_FORMAT,
@@ -160,7 +160,7 @@ class Product extends AbstractHelper
             self::FIELD_SHIPPING_METHOD,
             self::FIELD_STYLE,
         ])) {
-            return $this->_trimToMaxLength($value, 64);
+            return $this->trimToMaxLength($value, 64);
         } elseif (in_array($field, [
             self::FIELD_ARTIST,
             self::FIELD_AUTHOR,
@@ -181,16 +181,16 @@ class Product extends AbstractHelper
             self::FIELD_STARING,
             self::FIELD_UPC,
         ])) {
-            return $this->_trimToMaxLength($value, 128);
+            return $this->trimToMaxLength($value, 128);
         } elseif (in_array($field, [
             self::FIELD_CATEGORY_NETWORK,
             self::FIELD_CATEGORY_PROGRAM,
             self::FIELD_KEYWORDS,
             self::FIELD_PAYMENT_NOTES,
         ])) {
-            return $this->_trimToMaxLength($value, 256);
+            return $this->trimToMaxLength($value, 256);
         } elseif (in_array($field, [self::FIELD_DESCRIPTION_SHORT])) {
-            return $this->_trimToMaxLength($value, 512);
+            return $this->trimToMaxLength($value, 512);
         } elseif (in_array($field, [
             self::FIELD_BUY_URL,
             self::FIELD_DESCRIPTION_LONG,
@@ -198,15 +198,15 @@ class Product extends AbstractHelper
             self::FIELD_IMAGE_URL,
             self::FIELD_TECH_SPEC_URL,
         ])) {
-            return $this->_trimToMaxLength($value, 2000);
+            return $this->trimToMaxLength($value, 2000);
         } elseif (in_array($field, [
             self::FIELD_COLOR_OUTPUT,
             self::FIELD_DISCONTINUED,
             self::FIELD_IN_STOCK,
         ])) {
-            return $this->_getValueYesNo($value);
+            return $this->getValueYesNo($value);
         } elseif (in_array($field, [self::FIELD_EXPIRATION_DATE])) {
-            return $this->_getDateValue($value);
+            return $this->getDateValue($value);
         } elseif (in_array($field, [
             self::FIELD_MEGAPIXELS,
             self::FIELD_PRICE,
@@ -214,18 +214,18 @@ class Product extends AbstractHelper
             self::FIELD_PRICE_SALE,
             self::FIELD_PRICE_SHIPPING,
         ])) {
-            return $this->_helper->formatMoney((float) $value);
+            return $this->helper->formatMoney((float) $value);
         } else {
             return $value;
         }
     }
 
-    protected function _getDateValue($value)
+    protected function getDateValue($value)
     {
         return date('Y-m-d', strtotime($value));
     }
 
-    protected function _getValueYesNo($value)
+    protected function getValueYesNo($value)
     {
         if ($value) {
             return 'yes';
@@ -234,7 +234,7 @@ class Product extends AbstractHelper
         }
     }
 
-    protected function _trimToMaxLength($value, $maxLength)
+    protected function trimToMaxLength($value, $maxLength)
     {
         return substr(trim($value), 0, $maxLength);
     }

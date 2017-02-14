@@ -8,56 +8,53 @@ use Pepperjam\Network\Helper\Config;
 
 abstract class Feed
 {
-    protected $_config;
+    protected $config;
 
-    protected $_dir;
+    protected $logger;
 
-    protected $_logger;
+    protected $delimiter = ',';
 
-    protected $_delimiter = ',';
+    protected $enclosure = '"';
 
-    protected $_enclosure = '"';
-
-    public function __construct(Config $config, Dir $dir, LoggerInterface $logger)
+    public function __construct (Config $config,LoggerInterface $logger)
     {
-        $this->_config = $config;
-        $this->_dir = $dir;
-        $this->_logger = $logger;
+        $this->config = $config;
+        $this->logger = $logger;
     }
 
     public function execute()
     {
-        if ($this->_enabled()) {
-            $this->_writeFile($this->_buildFeedData());
-            $this->_afterWrite();
+        if ($this->enabled()) {
+            $this->writeFile($this->buildFeedData());
+            $this->afterWrite();
         }
     }
 
-    protected function _buildFeedData()
+    protected function buildFeedData()
     {
-        $data = $this->_getItems();
+        $data = $this->getItems();
         $dataCount = $data->count();
 
-        $this->_logger->info("Building feed for $dataCount items");
+        $this->logger->info("Building feed for $dataCount items");
 
-        return array_map([$this, '_applyMapping'], $data->getItems());
+        return array_map([$this, 'applyMapping'], $data->getItems());
     }
 
-    protected function _writeFile($feedData)
+    protected function writeFile($feedData)
     {
         if (empty($feedData)) {
             return $this;
         }
 
         $tmpFile = fopen('php://temp', 'r+');
-        fputcsv($tmpFile, $this->_getHeaders(), $this->_delimiter, $this->_enclosure);
+        fputcsv($tmpFile, $this->getHeaders(), $this->delimiter, $this->enclosure);
         foreach ($feedData as $row) {
-            fputcsv($tmpFile, $row, $this->_delimiter, $this->_enclosure);
+            fputcsv($tmpFile, $row, $this->delimiter, $this->enclosure);
         }
         rewind($tmpFile);
 
-        $targetPath = $this->_getFilePath();
-        $this->_checkAndCreateFolder(dirname($targetPath));
+        $targetPath = $this->getFilePath();
+        $this->checkAndCreateFolder(dirname($targetPath));
 
         file_put_contents($targetPath, stream_get_contents($tmpFile));
 
@@ -66,15 +63,15 @@ abstract class Feed
         return $this;
     }
 
-    abstract protected function _getItems();
+    abstract protected function getItems();
 
-    abstract protected function _applyMapping($item);
+    abstract protected function applyMapping($item);
 
-    protected function _getHeaders()
+    protected function getHeaders()
     {
         $headers = [];
 
-        foreach ($this->_getFeedFields() as $key => $field) {
+        foreach ($this->getFeedFields() as $key => $field) {
             if ($field !== null) {
                 $headers[] = $key;
             }
@@ -83,11 +80,11 @@ abstract class Feed
         return $headers;
     }
 
-    protected function _getFields()
+    protected function getFields()
     {
         $fields = [];
 
-        foreach ($this->_getFeedFields() as $key => $field) {
+        foreach ($this->getFeedFields() as $key => $field) {
             if ($field !== null) {
                 $fields[] = $field;
             }
@@ -96,18 +93,18 @@ abstract class Feed
         return $fields;
     }
 
-    abstract protected function _getFeedFields();
+    abstract protected function getFeedFields();
 
-    protected function _getFilePath()
+    protected function getFilePath()
     {
-        return $this->_normalizePath(
+        return $this->normalizePath(
             BP,
-            $this->_config->getExportPath(),
-            $this->_getFileName()
+            $this->config->getExportPath(),
+            $this->getFileName()
         );
     }
 
-    protected function _normalizePath()
+    protected function normalizePath()
     {
         $paths = implode(DIRECTORY_SEPARATOR, func_get_args());
         // Retain a single leading slash; otherwise remove all leading, trailing
@@ -116,9 +113,9 @@ abstract class Feed
             implode(DIRECTORY_SEPARATOR, array_filter(explode(DIRECTORY_SEPARATOR, $paths)));
     }
 
-    abstract protected function _getFileName();
+    abstract protected function getFileName();
 
-    protected function _checkAndCreateFolder($dirPath)
+    protected function checkAndCreateFolder($dirPath)
     {
         if (!file_exists($dirPath)) {
             mkdir($dirPath, 0777, true);
@@ -126,7 +123,7 @@ abstract class Feed
         return $this;
     }
 
-    protected function _afterWrite()
+    protected function afterWrite()
     {
         // Hook for OrderCorrection (and future feeds) to update runTime
     }
