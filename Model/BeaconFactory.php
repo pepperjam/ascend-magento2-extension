@@ -45,11 +45,11 @@ class BeaconFactory
     public function create($trackingType, $order)
     {
         switch ($trackingType) {
-            case $this->helper::TRACKING_BASIC:
+            case Data::TRACKING_BASIC:
                 return $this->createBasic($order);
-            case $this->helper::TRACKING_ITEMIZED:
+            case Data::TRACKING_ITEMIZED:
                 return $this->createItemized($order);
-            case $this->helper::TRACKING_DYNAMIC:
+            case Data::TRACKING_DYNAMIC:
                 return $this->createDynamic($order);
             default:
                 return false;
