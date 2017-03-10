@@ -104,7 +104,7 @@ class Itemized extends Beacon
         for ($i = 1; $i < $itemIndex; $i++) {
             $averageAmount = 0;
             if ($params[$this->quantityKey.$i] > 0) {
-                $averageAmount = $params[$this->priceKey.$i]/$params[$this->quantityKey.$i]
+                $averageAmount = $params[$this->priceKey.$i]/$params[$this->quantityKey.$i];
             }
 
             $params[$this->priceKey.$i] = $this->helper

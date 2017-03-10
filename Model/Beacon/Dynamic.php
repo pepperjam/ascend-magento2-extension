@@ -22,7 +22,7 @@ class Dynamic extends Itemized
 
     protected function newItem($params, $item, $itemIndex)
     {
-        $params = parent::_newItem($params, $item, $itemIndex);
+        $params = parent::newItem($params, $item, $itemIndex);
         $params['CATEGORY' . $itemIndex] = $this->helper->getCommissioningCategory($item);
 
         return $params;
