@@ -3,7 +3,6 @@ namespace Pepperjam\Network\Helper;
 
 use Magento\Framework\App\Cache\Manager as CacheManager;
 use Magento\Framework\App\Cache\Type\Config as CacheTypeConfig;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Config\Model\ResourceModel\Config as ConfigResource;
@@ -19,14 +18,13 @@ class Config extends AbstractHelper
     public function __construct(
         CacheManager $cacheManager,
         ConfigResource $configResource,
-        Context $context,
-        ScopeConfigInterface $scopeConfig
+        Context $context
     ) {
         parent::__construct($context);
 
         $this->cacheManager = $cacheManager;
         $this->configResource = $configResource;
-        $this->scopeConfig = $scopeConfig;
+        $this->scopeConfig = $context->getScopeConfig();
     }
 
     public function isActive()
