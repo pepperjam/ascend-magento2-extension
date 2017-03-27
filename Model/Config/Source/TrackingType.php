@@ -18,15 +18,15 @@ class TrackingType implements OptionSourceInterface
     {
         return [
             [
-                'value' => $this->helper::TRACKING_BASIC,
+                'value' => Data::TRACKING_BASIC,
                 'label' => __('Basic'),
             ],
             [
-                'value' => $this->helper::TRACKING_ITEMIZED,
+                'value' => Data::TRACKING_ITEMIZED,
                 'label' => __('Itemized'),
             ],
             [
-                'value' => $this->helper::TRACKING_DYNAMIC,
+                'value' => Data::TRACKING_DYNAMIC,
                 'label' => __('Dynamic'),
             ],
         ];
@@ -35,9 +35,9 @@ class TrackingType implements OptionSourceInterface
     public function toArray()
     {
         return [
-            $this->helper::TRACKING_BASIC => __('Basic'),
-            $this->helper::TRACKING_ITEMIZED => __('Itemized'),
-            $this->helper::TRACKING_DYNAMIC => __('Dynamic'),
+            Data::TRACKING_BASIC => __('Basic'),
+            Data::TRACKING_ITEMIZED => __('Itemized'),
+            Data::TRACKING_DYNAMIC => __('Dynamic'),
         ];
     }
 }
