@@ -92,7 +92,8 @@ class Itemized extends Beacon
     protected function getPrice($item)
     {
         if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE
-            && $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC) {
+            && $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC
+        ) {
             return '0.00';
         } else {
             return $item->getRowTotal() - $item->getDiscountAmount();

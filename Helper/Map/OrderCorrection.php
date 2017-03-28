@@ -35,26 +35,26 @@ class OrderCorrection extends AbstractHelper
     public function get($item, $field, $attribute)
     {
         switch ($attribute) {
-            case self::FIELD_CATEGORY:
-                return $this->getCategory($item);
-            case self::FIELD_ITEM_ID:
-                return $this->getItemId($item);
-            case self::FIELD_ITEM_QUANTITY:
-                return $this->getItemQuantity($item);
-            case self::FIELD_ITEM_PRICE:
-                return $this->getItemPrice($item);
-            case self::FIELD_NEW_TO_FILE:
-                return $this->getNewToFile($item);
-            case self::FIELD_ORDER_AMOUNT:
-                return $this->getOrderAmount($item);
-            case self::FIELD_ORDER_ID:
-                return $this->getOrderId($item);
-            case self::FIELD_PROGRAM_ID:
-                return $this->config->getProgramId();
-            case self::FIELD_REASON:
-                return self::REASON;
-            case self::FIELD_TRANSACTION_TYPE:
-                return $this->getTransactionType();
+        case self::FIELD_CATEGORY:
+            return $this->getCategory($item);
+        case self::FIELD_ITEM_ID:
+            return $this->getItemId($item);
+        case self::FIELD_ITEM_QUANTITY:
+            return $this->getItemQuantity($item);
+        case self::FIELD_ITEM_PRICE:
+            return $this->getItemPrice($item);
+        case self::FIELD_NEW_TO_FILE:
+            return $this->getNewToFile($item);
+        case self::FIELD_ORDER_AMOUNT:
+            return $this->getOrderAmount($item);
+        case self::FIELD_ORDER_ID:
+            return $this->getOrderId($item);
+        case self::FIELD_PROGRAM_ID:
+            return $this->config->getProgramId();
+        case self::FIELD_REASON:
+            return self::REASON;
+        case self::FIELD_TRANSACTION_TYPE:
+            return $this->getTransactionType();
         }
     }
 

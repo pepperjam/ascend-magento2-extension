@@ -20,8 +20,10 @@ class Basic extends Beacon
         return [
             'PID' => $this->config->getProgramId(),
             'OID' => $this->order->getIncrementId(),
-            'AMOUNT' => $this->helper->formatMoney($this->order->getSubtotal()
-                + $this->order->getDiscountAmount() + $this->order->getShippingDiscountAmount()),
+            'AMOUNT' => $this->helper->formatMoney(
+                $this->order->getSubtotal()+ $this->order->getDiscountAmount() 
+                + $this->order->getShippingDiscountAmount()
+            ),
             'TYPE' => $this->config->getTransactionType(),
         ];
     }
