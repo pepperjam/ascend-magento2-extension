@@ -1,0 +1,23 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: phpunit/phpunit:5.0.3
+
+pipelines:
+  default:
+    - step:
+        script:
+          - zip -r pepperjam_network-magento2-module-1.0.0.zip src/
+          - git clone git@github.com:magento/marketplace-tools.git
+          - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-module-1.0.0.zip
+
+  branches:
+    master:
+      - step:
+        script:
+          - zip -r pepperjam_network-magento2-module-1.0.0.zip src/
+          - git clone git@github.com:magento/marketplace-tools.git
+          - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-module-1.0.0.zip
+          - curl -X POST --user "${BB_DOWNLOADS_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/rrobinson/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"pepperjam_network-magento2-module-1.0.0.zip"
