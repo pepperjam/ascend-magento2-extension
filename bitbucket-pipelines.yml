@@ -12,7 +12,7 @@ pipelines:
           - apt-get update && apt-get install --yes zip
           - zip -r pepperjam_network-magento2-module-1.0.0.zip src/
           - git clone https://github.com/magento/marketplace-tools.git
-          - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-extension-1.0.0.zip
+          - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-modu-1.0.0.zip
 
   branches:
     master:
@@ -21,5 +21,5 @@ pipelines:
             - apt-get update && apt-get install --yes zip
             - zip -r pepperjam_network-magento2-module-1.0.0.zip src/
             - git clone https://github.com/magento/marketplace-tools.git
-            - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-extension-1.0.0.zip
+            - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-module-1.0.0.zip
             - curl -X POST --user "${BB_DOWNLOADS_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/rrobinson/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"pepperjam_network-magento2-module-1.0.0.zip"
