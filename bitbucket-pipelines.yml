@@ -9,7 +9,7 @@ pipelines:
   default:
     - step:
         script:
-          - apt-get install --yes zip
+          - apt-get update && apt-get install --yes zip
           - zip -r pepperjam_network-magento2-module-1.0.0.zip src/
           - git clone git@github.com:magento/marketplace-tools.git
           - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-module-1.0.0.zip
@@ -18,7 +18,7 @@ pipelines:
     master:
       - step:
           script:
-            - apt-get install --yes zip
+            - apt-get update && apt-get install --yes zip
             - zip -r pepperjam_network-magento2-module-1.0.0.zip src/
             - git clone git@github.com:magento/marketplace-tools.git
             - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-module-1.0.0.zip
