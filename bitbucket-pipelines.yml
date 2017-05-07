@@ -22,4 +22,4 @@ pipelines:
             - (cd src && zip -r ../pepperjam_network-magento2-module-9.9.9.zip .)
             - git clone https://github.com/magento/marketplace-tools.git
             - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-module-9.9.9.zip
-            - curl -v -X POST --user "${BB_DOWNLOADS_AUTH_STRING}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"pepperjam_network-magento2-module-9.9.9.zip"
+            - curl -v -X POST --user "'${BB_DOWNLOADS_AUTH_STRING}'" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"pepperjam_network-magento2-module-9.9.9.zip"
