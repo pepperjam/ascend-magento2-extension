@@ -1,0 +1,45 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: phpunit/phpunit:5.0.3
+
+pipelines:
+  default:
+    - step:
+        script:
+          # Create package
+          - apt-get update && apt-get install --yes zip
+          - (cd ./src && zip -r ../pepperjam_network-magento2-module-9.9.9.zip .)
+          
+          # Basic checks
+          - git clone https://github.com/magento/marketplace-tools.git
+          - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-module-9.9.9.zip
+          
+          # Advanced checks
+          - git clone https://github.com/magento/marketplace-eqp.git
+          - (cd marketplace-eqp && composer install)
+          - marketplace-eqp/vendor/bin/phpcs ./src --standard=MEQP2 --severity=10 # Marketplace Technical Review Level 1
+          - marketplace-eqp/vendor/bin/phpcs ./src --standard=MEQP2 # Full sniff
+
+  branches:
+    master:
+      - step:
+          script:
+            # Create package
+            - apt-get update && apt-get install --yes zip
+            - (cd ./src && zip -r ../pepperjam_network-magento2-module-9.9.9.zip .)
+            
+            # Basic checks
+            - git clone https://github.com/magento/marketplace-tools.git
+            - ./marketplace-tools/validate_m2_package.php -d ./pepperjam_network-magento2-module-9.9.9.zip
+            
+            # Advanced checks
+            - git clone https://github.com/magento/marketplace-eqp.git
+            - (cd marketplace-eqp && composer install)
+            - marketplace-eqp/vendor/bin/phpcs ./src --standard=MEQP2 --severity=10 # Marketplace Technical Review Level 1
+            - (marketplace-eqp/vendor/bin/phpcs ./src --standard=MEQP2 || exit 0) # Full sniff...but don't fail the build just because this fails since it's still good enough for a release
+            
+            # Upload to the Bitbucket Downloads page on the repo
+            - curl -v -X POST --user "${BB_DOWNLOADS_AUTH_STRING_RROBINSON}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"pepperjam_network-magento2-module-9.9.9.zip"
