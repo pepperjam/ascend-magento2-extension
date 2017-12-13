@@ -1,12 +1,13 @@
 <?php
 namespace Pepperjam\Network\Helper;
 
+use Magento\Config\Model\ResourceModel\Config as ConfigResource;
 use Magento\Framework\App\Cache\Manager as CacheManager;
 use Magento\Framework\App\Cache\Type\Config as CacheTypeConfig;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
-use Magento\Config\Model\ResourceModel\Config as ConfigResource;
+use Magento\Store\Model\ScopeInterface;
 
 class Config extends AbstractHelper
 {
@@ -34,7 +35,7 @@ class Config extends AbstractHelper
     }
     public function getProgramId()
     {
-        return $this->scopeConfig->getValue('pepperjam_network/settings/program_id');
+        return $this->scopeConfig->getValue('pepperjam_network/settings/program_id', ScopeInterface::SCOPE_STORE);
     }
     public function getTrackingType()
     {
