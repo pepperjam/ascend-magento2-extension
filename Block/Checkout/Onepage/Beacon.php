@@ -42,7 +42,7 @@ class Beacon extends Template
 
     protected function _toHtml()
     {
-        if ($this->config->isActive()) {
+        if ($this->config->isActive() && !empty($this->config->getProgramId())) {
             if (!$this->config->isAttributionEnabled() || $this->attribution->isValid()) {
                 return parent::_toHtml();
             }
