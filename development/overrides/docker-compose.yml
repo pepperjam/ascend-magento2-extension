@@ -1,0 +1,88 @@
+# Mark Shust's Docker Configuration for Magento (https://github.com/markoshust/docker-magento)
+# Version 13.0.0
+
+version: "3"
+
+services:
+  app:
+    image: markoshust/magento-nginx:1.13-3
+    ports:
+      - 80:8000
+    links:
+      - db
+      - phpfpm
+    volumes: &appvolumes
+      - ./src:/var/www/html:delegated
+      - ../../../src:/var/www/html/app/code/Pepperjam/Network
+      - ~/.composer:/var/www/html/var/composer_home:delegated
+      - ~/.composer:/var/www/.composer:delegated
+      - sockdata:/sock
+    extra_hosts:
+     - "api-int.pepperjamnetwork.com:10.3.30.4"
+     - "feeds.pepperjamnetwork.com:10.3.30.4"
+     - "help.pepperjamnetwork.com:10.3.30.4"
+     - "onesource.pepperjamnetwork.com:10.3.30.4"
+     - "partner.pepperjamnetwork.com:10.3.30.4"
+     - "t.pepperjamnetwork.com:10.3.30.4"
+     - "webservices.pepperjamnetwork.com:10.3.30.4"
+     - "widgets.pepperjamnetwork.com:10.3.30.4"
+     - "gopjn.com:10.3.30.4"
+     - "www.gopjn.com:10.3.30.4"
+     - "pjatr.com:10.3.30.4"
+     - "www.pjatr.com:10.3.30.4"
+     - "pjtra.com:10.3.30.4"
+     - "www.pjtra.com:10.3.30.4"
+     - "pntra.com:10.3.30.4"
+     - "www.pntra.com:10.3.30.4"
+     - "pntrac.com:10.3.30.4"
+     - "www.pntrac.com:10.3.30.4"
+     - "pntrs.com:10.3.30.4"
+     - "www.pntrs.com:10.3.30.4"
+
+  phpfpm:
+    image: markoshust/magento-php:7.1-fpm-2
+    links:
+      - db
+    volumes: *appvolumes
+    extra_hosts:
+     - "api-int.pepperjamnetwork.com:10.3.30.4"
+     - "feeds.pepperjamnetwork.com:10.3.30.4"
+     - "help.pepperjamnetwork.com:10.3.30.4"
+     - "onesource.pepperjamnetwork.com:10.3.30.4"
+     - "partner.pepperjamnetwork.com:10.3.30.4"
+     - "t.pepperjamnetwork.com:10.3.30.4"
+     - "webservices.pepperjamnetwork.com:10.3.30.4"
+     - "widgets.pepperjamnetwork.com:10.3.30.4"
+     - "gopjn.com:10.3.30.4"
+     - "www.gopjn.com:10.3.30.4"
+     - "pjatr.com:10.3.30.4"
+     - "www.pjatr.com:10.3.30.4"
+     - "pjtra.com:10.3.30.4"
+     - "www.pjtra.com:10.3.30.4"
+     - "pntra.com:10.3.30.4"
+     - "www.pntra.com:10.3.30.4"
+     - "pntrac.com:10.3.30.4"
+     - "www.pntrac.com:10.3.30.4"
+     - "pntrs.com:10.3.30.4"
+     - "www.pntrs.com:10.3.30.4"
+
+  cron:
+    image: markoshust/magento-php:7.1-fpm-2
+    user: root
+    command: /usr/local/bin/cronstart
+    tty: true
+    links:
+      - db
+    volumes: *appvolumes
+
+  db:
+    image: percona:5.7
+    ports:
+      - 3306:3306
+    env_file: env/db.env
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
+  sockdata:
