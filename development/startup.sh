@@ -25,7 +25,7 @@ if [ "$initial_setup" != '' ] || [ ! -d "${ROOT_PATH}/development/vendor/docker-
 
 	cp "${ROOT_PATH}/development/vendor/docker-magento/bin/download" "${ROOT_PATH}/development/bin/"
 
-	"./bin/download" latest-with-samples
+	"./bin/download" with-samples-2.2.4
 
 	rm -rf "${ROOT_PATH}/development/vendor/docker-magento/src"
 
@@ -47,3 +47,12 @@ else
 	cd "${ROOT_PATH}/development/vendor/docker-magento" || exit
 	docker-compose up -d
 fi
+
+# Enable XDebug extension in docker container
+"./bin/xdebug" enable
+docker-compose kill
+docker-compose up -d
+
+# MacOS only: Enable local alias network for XDebug
+# TODO: Make a custom docker image for PHP 7.1 fpm so that this is unnecessary
+sudo ifconfig lo0 alias 10.254.254.254 255.255.255.0
