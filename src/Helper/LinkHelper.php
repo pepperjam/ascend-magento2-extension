@@ -10,7 +10,7 @@ use Magento\Framework\App\Request\Http;
 
 class LinkHelper extends MagentoAbstractHelper
 {
-	const DEFAULT_COOKIE_LIFETIME = 172800; // 2 days
+	const COOKIE_LIFETIME = 172800; // 2 days
 	const CONNECTOR_COOKIE_NAME = 'utm_campaign';
 
 	/**
@@ -87,7 +87,7 @@ class LinkHelper extends MagentoAbstractHelper
 	{
 		$metadata = $this->cookieMetadataFactory
 		->createPublicCookieMetadata()
-		->setDuration($duration ? $duration : static::DEFAULT_COOKIE_LIFETIME)
+		->setDuration($duration ? $duration : static::COOKIE_LIFETIME)
 		->setPath($this->sessionManager->getCookiePath())
 		->setDomain($this->sessionManager->getCookieDomain());
 		if (is_array($value)) {
@@ -117,7 +117,7 @@ class LinkHelper extends MagentoAbstractHelper
 	 */
 	public function getCookieLifetime()
 	{
-		return static::DEFAULT_COOKIE_LIFETIME;
+		return static::COOKIE_LIFETIME;
 	}
 
 	/**
