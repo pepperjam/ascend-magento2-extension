@@ -24,18 +24,18 @@ class OrderCorrectionFactory
     public function execute()
     {
         switch ($this->config->getTrackingType()) {
-        case Data::TRACKING_BASIC:
-            $this->orderCorrectionFeed = $this->objectManager
+            case Data::TRACKING_BASIC:
+                $this->orderCorrectionFeed = $this->objectManager
                 ->get('\Pepperjam\Network\Cron\Feed\OrderCorrection\Basic');
-            break;
-        case Data::TRACKING_ITEMIZED:
-            $this->orderCorrectionFeed = $this->objectManager
+                break;
+            case Data::TRACKING_ITEMIZED:
+                $this->orderCorrectionFeed = $this->objectManager
                 ->get('\Pepperjam\Network\Cron\Feed\OrderCorrection\Itemized');
-            break;
-        case Data::TRACKING_DYNAMIC:
-            $this->orderCorrectionFeed = $this->objectManager
+                break;
+            case Data::TRACKING_DYNAMIC:
+                $this->orderCorrectionFeed = $this->objectManager
                 ->get('\Pepperjam\Network\Cron\Feed\OrderCorrection\Dynamic');
-            break;
+                break;
         }
 
         $this->orderCorrectionFeed->execute();

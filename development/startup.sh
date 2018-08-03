@@ -17,7 +17,7 @@ if [ "$initial_setup" != '' ] || [ ! -d "${ROOT_PATH}/development/vendor/docker-
 	git init
 	git remote add origin https://github.com/markoshust/docker-magento.git
 	git fetch origin
-	git checkout origin/master -- compose/magento-2
+	git checkout 14.0.0 -- compose/magento-2
 	mv compose/magento-2/* .
 	rm -rf compose .git
 

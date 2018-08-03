@@ -5,21 +5,23 @@ use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Pepperjam\Network\Helper\LinkHelper;
 
-class LinkProcessor extends Template {
+class LinkProcessor extends Template
+{
 
-	protected $helper;
+    protected $helper;
 
-	public function __construct(
-		Context $context,
-		array $data = [],
-		LinkHelper $helper
-	) {
-		$this->helper = $helper;
+    public function __construct(
+        Context $context,
+        array $data = [],
+        LinkHelper $helper
+    ) {
+        $this->helper = $helper;
 
-		parent::__construct($context, $data);
-	}
+        parent::__construct($context, $data);
+    }
 
-	public function readUrl() {
-		$this->helper->readUrl();
-	}
+    public function readUrl()
+    {
+        $this->helper->readUrl();
+    }
 }
