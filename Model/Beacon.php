@@ -14,10 +14,10 @@ abstract class Beacon
     protected $config;
     protected $helper;
     protected $order;
-	protected $campaign;
-	protected $link_helper;
+    protected $campaign;
+    protected $link_helper;
 
-	const CAMPAIGN_KEY = 'CLICK_ID';
+    const CAMPAIGN_KEY = 'CLICK_ID';
 
     public function __construct(Config $config, Data $helper, OrderFactory $orderFactory, Session $checkoutSession, LinkHelper $link_helper)
     {
@@ -46,11 +46,11 @@ abstract class Beacon
 
     protected function addCampaign($params)
     {
-	    if ($this->campaign = $this->link_helper->get()) {
-		    $params[static::CAMPAIGN_KEY] = trim($this->campaign);
-	    }
+        if ($this->campaign = $this->link_helper->getClickIds()) {
+            $params[static::CAMPAIGN_KEY] = trim($this->campaign);
+        }
 
-	    return $params;
+        return $params;
     }
 
     abstract public function getUrl();
