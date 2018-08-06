@@ -18,9 +18,10 @@ class Tracking implements ObserverInterface
         $this->attribution = $attribution;
         $this->config = $config;
     }
-
+	// @codingStandardsIgnoreStart - removing the $observer parameter would violate the interface contract
     public function execute(Observer $observer)
     {
+	    // @codingStandardsIgnoreEnd
         if ($this->config->isActive() && $this->config->isAttributionEnabled()) {
             $this->attribution->create();
         }

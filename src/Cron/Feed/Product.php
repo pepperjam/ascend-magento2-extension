@@ -10,8 +10,6 @@ use Pepperjam\Network\Cron\Feed;
 use Pepperjam\Network\Helper\Config;
 use Pepperjam\Network\Helper\Map\Product as ProductMap;
 
-// TODO: ignore products that don't have all required fields filled.
-
 class Product extends Feed
 {
     const FILENAME_FORMAT = '%s_product_feed.csv';
@@ -20,20 +18,20 @@ class Product extends Feed
 
     protected $productMap;
 
-    protected $products;
+    protected $productCollection;
 
     protected $delimiter = "\t";
 
-    public function __construct(Collection $products, Config $config, LoggerInterface $logger, ProductMap $productMap)
-    {
+    public function __construct(
+        Collection $productCollection,
+        Config $config,
+        LoggerInterface $logger,
+        ProductMap $productMap
+    ) {
         $this->config = $config;
         $this->logger = $logger;
         $this->productMap = $productMap;
-
-        $this->products = $products
-            ->addAttributeToSelect('*')
-            ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED)
-            ->load();
+        $this->productCollection = $productCollection;
     }
 
     protected function applyMapping($item)
@@ -66,10 +64,15 @@ class Product extends Feed
 
     protected function getItems()
     {
-        $this->products
+        $products = $this->productCollection
+            ->addAttributeToSelect('*')
+            ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED)
+            ->load();
+
+        $products
             ->addAttributeToSelect('*')
             ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED);
         
-        return $this->products;
+        return $products;
     }
 }

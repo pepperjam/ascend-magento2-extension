@@ -123,8 +123,5 @@ abstract class Feed
         return $this;
     }
 
-    protected function afterWrite()
-    {
-        // Hook for OrderCorrection (and future feeds) to update runTime
-    }
+    abstract protected function afterWrite();
 }
