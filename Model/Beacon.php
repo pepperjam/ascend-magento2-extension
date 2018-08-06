@@ -16,18 +16,22 @@ abstract class Beacon
     protected $order;
     protected $campaign;
     protected $link_helper;
+    protected $orderFactory;
 
     const CAMPAIGN_KEY = 'CLICK_ID';
 
-    public function __construct(Config $config, Data $helper, OrderFactory $orderFactory, Session $checkoutSession, LinkHelper $link_helper)
-    {
+    public function __construct(
+        Config $config,
+        Data $helper,
+        OrderFactory $orderFactory,
+        Session $checkoutSession,
+        LinkHelper $link_helper
+    ) {
         $this->checkoutSession = $checkoutSession;
         $this->config = $config;
         $this->helper = $helper;
         $this->link_helper = $link_helper;
-
-        $lastOrderId = $checkoutSession->getLastRealOrderId();
-        $this->order = $orderFactory->create()->loadByIncrementId($lastOrderId);
+        $this->orderFactory = $orderFactory;
     }
 
     public function setOrder($order)
@@ -37,6 +41,8 @@ abstract class Beacon
 
     protected function getCouponCode($params)
     {
+        $lastOrderId = $this->checkoutSession->getLastRealOrderId();
+        $this->order = $this->orderFactory->create()->loadByIncrementId($lastOrderId);
         if (trim($this->order->getCouponCode()) != '') {
             $params[$this->couponKey] = trim($this->order->getCouponCode());
         }

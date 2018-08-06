@@ -22,8 +22,11 @@ class InstallData implements InstallDataInterface
         $this->config = $config;
     }
 
+    // This is disabled because removing the parameter would break the interface contract
+// @codingStandardsIgnoreStart
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
+// @codingStandardsIgnoreEnd
         $categorySetup = $this->categorySetupFactory->create(['setup' => $setup]);
 
         $setup->startSetup();

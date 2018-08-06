@@ -26,7 +26,9 @@ class CommissioningCategory extends AbstractSource
             ],
         ];
 
+// phpcs:disable Squiz.PHP.CommentedOutCode.Found
         // For reference see: \Magento\Catalog\Helper\Category::getStoreCategories
+// phpcs:enable
         $rootCategoryId = $this->storeManager->getStore()->getRootCategoryId();
         $rootCategory = $this->categoryFactory->create();
 

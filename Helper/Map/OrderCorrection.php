@@ -32,7 +32,8 @@ class OrderCorrection extends AbstractHelper
         $this->helper = $helper;
     }
 
-    public function get($item, $field, $attribute)
+	// @codingStandardsIgnoreStart - Sometimes it's just gotta be a switch statement
+	public function get($item, $attribute)
     {
         switch ($attribute) {
             case self::FIELD_CATEGORY:
@@ -57,6 +58,7 @@ class OrderCorrection extends AbstractHelper
                 return $this->getTransactionType();
         }
     }
+	// @codingStandardsIgnoreEnd
 
     public function getCategory($item)
     {

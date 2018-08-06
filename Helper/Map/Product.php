@@ -115,6 +115,7 @@ class Product extends AbstractHelper
         return $product->getUrlModel()->getUrl($product);
     }
 
+	// @codingStandardsIgnoreStart - this needs refactoring, but it's a complex amount of logic
     protected function formatValue($field, $value)
     {
         if (in_array($field, [self::FIELD_ASPECT_RATIO])) {
@@ -247,6 +248,7 @@ class Product extends AbstractHelper
             return $value;
         }
     }
+	// @codingStandardsIgnoreEnd
 
     protected function getDateValue($value)
     {

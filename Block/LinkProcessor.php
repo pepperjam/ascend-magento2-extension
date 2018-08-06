@@ -12,8 +12,8 @@ class LinkProcessor extends Template
 
     public function __construct(
         Context $context,
-        array $data = [],
-        LinkHelper $helper
+        LinkHelper $helper,
+        array $data = []
     ) {
         $this->helper = $helper;
 

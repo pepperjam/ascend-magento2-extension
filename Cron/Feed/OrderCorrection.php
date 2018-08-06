@@ -17,16 +17,15 @@ abstract class OrderCorrection extends Feed
 
     protected $startTime;
 
-    protected $startTimeFormatted;
-
+	// @codingStandardsIgnoreStart - Not storing the start time at point of construction defeats the purpose
     public function __construct(Config $config, LoggerInterface $logger, OrderCorrectionMap $orderCorrectionMap)
     {
+    	// @codingStandardsIgnoreEnd
         parent::__construct($config, $logger);
 
         $this->orderCorrectionMap = $orderCorrectionMap;
 
         $this->startTime = time();
-        $this->startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->startTime);
     }
 
     protected function applyMapping($item)
@@ -34,7 +33,7 @@ abstract class OrderCorrection extends Feed
         $data = [];
         $fields = $this->getFeedFields();
         foreach ($fields as $field => $attribute) {
-            $data[] = $this->orderCorrectionMap->get($item, $field, $attribute);
+            $data[] = $this->orderCorrectionMap->get($item, $attribute);
         }
 
         return $data;
