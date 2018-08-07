@@ -71,6 +71,10 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <label>Order Correction Feed Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="lookback_duration" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInStore="0" showInWebsite="0">
+                    <label>Click Lookback Period in Days</label>
+                    <comment>Your Lookback Period will be provided to you by Pepperjam</comment>
+                </field>
             </group>
             <group id="product_map" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Product Feed Map</label>
