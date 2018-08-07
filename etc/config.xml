@@ -22,6 +22,7 @@
                 <source_key_name>source</source_key_name>
                 <product_feed_enabled>1</product_feed_enabled>
                 <order_correction_feed_enabled>1</order_correction_feed_enabled>
+                <lookback_duration>60</lookback_duration>
             </settings>
             <product_map>
                 <!--

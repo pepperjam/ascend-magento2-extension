@@ -5,15 +5,14 @@ use Magento\Framework\App\Helper\AbstractHelper as MagentoAbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Framework\Stdlib\Cookie\CookieMetadataFactory;
-use Magento\Framework\Stdlib\CookieManagerInterface;
+use Magento\Framework\Stdlib\Cookie\PhpCookieManager;
 use Magento\Framework\App\Request\Http;
+use Pepperjam\Network\Helper\Config;
 
 class LinkHelper extends MagentoAbstractHelper
 {
-    const LOOKBACK_DEFAULT = 60 * 60 * 24 * 60; // 60 days
+    const COOKIE_LIFETIME       = 60 * 60 * 24 * 365; // 1 year
     const CONNECTOR_COOKIE_NAME = 'utm_campaign';
-    const CLICK_ID_NAME = 'clickId';
-    const CLICK_DATE_NAME = 'clickDate';
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
@@ -39,23 +38,28 @@ class LinkHelper extends MagentoAbstractHelper
      * @var Magento\Framework\App\Request\Http
      */
     protected $request;
-
     protected $utm_campaign;
+    protected $config;
 
     /**
+     * LinkHelper constructor.
+     *
      * @param Context                                    $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param CookieManagerInterface                     $cookieManager
+     * @param PhpCookieManager                           $cookieManager
      * @param CookieMetadataFactory                      $cookieMetadataFactory
      * @param SessionManagerInterface                    $sessionManager
+     * @param Http                                       $request
+     * @param \Pepperjam\Network\Helper\Config           $config
      */
     public function __construct(
         Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        CookieManagerInterface $cookieManager,
+        PhpCookieManager $cookieManager,
         CookieMetadataFactory $cookieMetadataFactory,
         SessionManagerInterface $sessionManager,
-        Http $request
+        Http $request,
+        Config $config
     ) {
         parent::__construct($context);
         $this->storeManager = $storeManager;
@@ -63,12 +67,13 @@ class LinkHelper extends MagentoAbstractHelper
         $this->cookieMetadataFactory = $cookieMetadataFactory;
         $this->sessionManager = $sessionManager;
         $this->request = $request;
+        $this->config = $config;
     }
 
     /**
-     * Get data from cookie
+     * Get current cookie value
      *
-     * @return string
+     * @return array|mixed
      */
     public function get()
     {
@@ -76,7 +81,7 @@ class LinkHelper extends MagentoAbstractHelper
         if ($final_value = json_decode($value, true)) {
             return $final_value;
         } else {
-            return false;
+            return [];
         }
     }
 
@@ -95,7 +100,7 @@ class LinkHelper extends MagentoAbstractHelper
     {
         $metadata = $this->cookieMetadataFactory
             ->createPublicCookieMetadata()
-            ->setDuration($duration ? $duration : $this->getLookBack())
+            ->setDuration($duration ? $duration : $this->getCookieLifetime())
             ->setPath($this->sessionManager->getCookiePath())
             ->setDomain($this->sessionManager->getCookieDomain());
         if (is_array($value)) {
@@ -107,7 +112,7 @@ class LinkHelper extends MagentoAbstractHelper
             $metadata
         );
 
-        return void;
+        return $value;
     }
 
     /**
@@ -127,33 +132,41 @@ class LinkHelper extends MagentoAbstractHelper
         if (! $cookie_data = $this->get()) {
             $cookie_data = [];
         }
-
         if (!$value) {
             return false;
         }
-
         // Add current value
-        $cookie_data[] = [
-        static::CLICK_DATE_NAME => time(),
-        static::CLICK_ID_NAME => $value
-        ];
+        $cookie_data[$value] = time();
 
-        // Now dedupe data and remove expired entries
-        $existing_clickIds = [];
-        foreach ($cookie_data as $entry) {
-            if (!is_array($entry)) {
-                continue;
-            }
-            if (in_array($existing_clickIds, $entry[static::CLICK_ID_NAME])) {
-                continue;
-            }
-            if ($entry[static::CLICK_DATE_NAME] + $this->getCookieLifetime() <= time()) {
-                $final_cookie_data[] = $entry;
-                $existing_clickIds[] = $entry[static::CLICK_ID_NAME];
+        return $this->set($cookie_data, $duration);
+    }
+
+    /**
+     * Pull the Lookback value from configuration
+     *
+     * @return mixed
+     */
+    public function getLookback()
+    {
+        return $this->config->getLookBack();
+    }
+
+    /**
+     * Removes expired entries from Cookie Data
+     *
+     * @param array $cookie_data
+     *
+     * @return array
+     */
+    public function purgeExpired(array $cookie_data = [])
+    {
+        $new_cookie_data = [];
+        foreach ($cookie_data as $click_id => $timestamp) {
+            if ($timestamp + $this->getLookback() <= time()) {
+                $new_cookie_data[$click_id] = $timestamp;
             }
         }
-
-        return $this->set($final_cookie_data, $duration);
+        return $new_cookie_data;
     }
 
     /**
@@ -167,13 +180,13 @@ class LinkHelper extends MagentoAbstractHelper
     }
 
     /**
-     * Used to get the current LookBack
+     * Used to get the current Cookie Lifetime
      *
      * @return int
      */
-    public function getLookBack()
+    public function getCookieLifetime()
     {
-        return static::LOOKBACK_DEFAULT;
+        return static::COOKIE_LIFETIME;
     }
 
     /**
@@ -187,7 +200,7 @@ class LinkHelper extends MagentoAbstractHelper
     public function readUrl()
     {
         if ($this->utm_campaign = $this->request->getParam($this->getCookieName())) {
-            $this->update($this->utm_campaign, $this->getLookBack());
+            $this->update($this->utm_campaign, $this->getCookieLifetime());
         }
 
         return $this;
@@ -205,10 +218,9 @@ class LinkHelper extends MagentoAbstractHelper
     {
         $this->update();
         $click_id_string = '';
-        foreach ($this->get() as $click) {
-            if ($click[static::CLICK_ID_NAME]) {
-                $click_id_string .= $click[static::CLICK_ID_NAME] . ",";
-            }
+        $cookie_values = $this->purgeExpired($this->get());
+        foreach ($cookie_values as $clickId => $timestamp) {
+            $click_id_string .= $clickId . ",";
         }
 
         return trim($click_id_string, ",");
