@@ -116,6 +116,17 @@ class LinkHelper extends MagentoAbstractHelper
     }
 
     /**
+     * Delete current cookie
+     *
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Stdlib\Cookie\FailureToSendException
+     */
+    public function deleteCookie()
+    {
+        return $this->cookieManager->deleteCookie($this->getCookieName());
+    }
+
+    /**
      * Update the current cookie values
      *
      * @param null $value
@@ -128,12 +139,13 @@ class LinkHelper extends MagentoAbstractHelper
      */
     public function update($value = null, $duration = null)
     {
-
-        if (! $cookie_data = $this->get()) {
-            $cookie_data = [];
-        }
         if (!$value) {
             return false;
+        }
+        if (! $cookie_data = $this->get()) {
+            $cookie_data = [];
+        } else {
+            $this->deleteCookie();
         }
         // Add current value
         $cookie_data[$value] = time();
