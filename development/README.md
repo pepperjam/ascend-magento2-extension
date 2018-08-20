@@ -7,17 +7,12 @@ The purpose of this section is to spin up a Magento 2 development instance
 ## Setup
 - `cd development`
 - `./startup.sh`
-- Modify your `/etc/hosts` file so that `magento2.test` points to your local machine
-### XDebug setup for PHPStorm:
-Note: Most of this has been taken from the documentation of the [Magento Docker project by Markohurst](https://github.com/markoshust/docker-magento) which is available under the MIT license.
-- Add an entry to `/etc/hosts`: `127.0.0.1 magento2.test`
-First, enable Xdebug in the PHP-FPM container by running: `./bin/xdebug enable`, the restart the docker containers (CTRL+C, `./bin/start`).
+- Add `127.0.0.1 magento2.test` to your `/etc/hosts` file
 
 Then, open `PHPStorm > Preferences > Languages & Frameworks > PHP` and configure:
 
 - `CLI Interpreter`:
-	- Create a new interpreter and specify `From Docker`, and name it `phpfpm`.
-	- Choose `Docker`, then select the `markoshust/magento-php:7-1-fpm` image name, and set the `PHP Executable` to `php`.
+	- Choose `Docker`, then select the `markoshust/magento-php:7-1-fpm` image name.
 	- Under `Additional > Debugger Extension`, enter
 		- `/usr/local/lib/php/extensions/no-debug-non-zts-20160303/xdebug.so`
 
