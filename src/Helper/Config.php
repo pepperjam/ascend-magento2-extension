@@ -110,4 +110,9 @@ class Config extends AbstractHelper
         );
         $this->cacheManager->clean([CacheTypeConfig::TYPE_IDENTIFIER]);
     }
+
+    public function getLookBack()
+    {
+        return $this->scopeConfig->getValue('pepperjam_network/settings/lookback_duration');
+    }
 }

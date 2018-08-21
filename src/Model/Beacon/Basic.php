@@ -11,6 +11,7 @@ class Basic extends Beacon
     {
         $params = $this->orderParams();
         $params = $this->getCouponCode($params);
+        $params = $this->addCampaign($params);
 
         return $this->config->getBeaconBaseUrl() . '?' . http_build_query($params);
     }
@@ -21,7 +22,7 @@ class Basic extends Beacon
             'PID' => $this->config->getProgramId(),
             'OID' => $this->order->getIncrementId(),
             'AMOUNT' => $this->helper->formatMoney(
-                $this->order->getSubtotal()+ $this->order->getDiscountAmount() 
+                $this->order->getSubtotal()+ $this->order->getDiscountAmount()
                 + $this->order->getShippingDiscountAmount()
             ),
             'TYPE' => $this->config->getTransactionType(),

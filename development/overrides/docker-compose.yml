@@ -17,6 +17,7 @@ services:
       - ~/.composer:/var/www/html/var/composer_home:delegated
       - ~/.composer:/var/www/.composer:delegated
       - sockdata:/sock
+    container_name: magento2-app
     extra_hosts:
      - "api-int.pepperjamnetwork.com:10.3.30.4"
      - "feeds.pepperjamnetwork.com:10.3.30.4"
@@ -44,6 +45,7 @@ services:
     links:
       - db
     volumes: *appvolumes
+    container_name: magento2-php
     extra_hosts:
      - "api-int.pepperjamnetwork.com:10.3.30.4"
      - "feeds.pepperjamnetwork.com:10.3.30.4"
@@ -74,6 +76,7 @@ services:
     links:
       - db
     volumes: *appvolumes
+    container_name: magento2-cron
 
   db:
     image: percona:5.7
@@ -82,6 +85,7 @@ services:
     env_file: env/db.env
     volumes:
       - dbdata:/var/lib/mysql
+    container_name: magento2-db
 
 volumes:
   dbdata:

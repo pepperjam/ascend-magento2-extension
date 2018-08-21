@@ -39,6 +39,8 @@ class Itemized extends Collection
             )
             // The left joins can leave duplicate item rows
             // But the selected items will be identical, so we don't need them.
+            // @codingStandardsIgnoreStart because with the left-joins, it's unclear how to do this without distinct
             ->distinct();
+	        // @codingStandardsIgnoreEnd
     }
 }
