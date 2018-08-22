@@ -75,4 +75,9 @@ class Product extends Feed
         
         return $products;
     }
+
+    protected function afterWrite()
+    {
+        return $this;
+    }
 }
