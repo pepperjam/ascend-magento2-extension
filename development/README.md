@@ -49,3 +49,4 @@ To validate the settings, open up `src/pub/index.php` and set a breakpoint near 
 ## Notes
 - Passing any parameter to `startup.sh` will cause it to delete the existing infrastructure and redownload the Magento source.
 - Passing any parameter to `shutdown.sh` will cause it to fully purge the downloaded Magento source.
+- There is a branch of this repository called `production-mode` that sets the container's Magento instance into Production mode for testing.
