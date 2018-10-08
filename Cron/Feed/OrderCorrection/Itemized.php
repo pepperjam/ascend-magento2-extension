@@ -41,8 +41,10 @@ class Itemized extends OrderCorrection
 
         $collection = $this->orderItemCollection;
 
+        $startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->startTime);
+
         $collection->addBindParam(':lastRunTime', $lastRunTime)
-            ->addBindParam(':startTime', $this->startTimeFormatted);
+            ->addBindParam(':startTime', $startTimeFormatted);
 
         return $collection;
     }
