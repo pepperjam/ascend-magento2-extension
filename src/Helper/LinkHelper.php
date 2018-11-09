@@ -12,7 +12,7 @@ use Pepperjam\Network\Helper\Config;
 class LinkHelper extends MagentoAbstractHelper
 {
     const COOKIE_LIFETIME       = 60 * 60 * 24 * 365; // 1 year
-    const CONNECTOR_COOKIE_NAME = 'utm_campaign';
+    const CONNECTOR_COOKIE_NAME = 'clickId';
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
@@ -38,7 +38,7 @@ class LinkHelper extends MagentoAbstractHelper
      * @var Magento\Framework\App\Request\Http
      */
     protected $request;
-    protected $utm_campaign;
+    protected $clickId;
     protected $config;
 
     /**
@@ -211,8 +211,8 @@ class LinkHelper extends MagentoAbstractHelper
      */
     public function readUrl()
     {
-        if ($this->utm_campaign = $this->request->getParam($this->getCookieName())) {
-            $this->update($this->utm_campaign, $this->getCookieLifetime());
+        if ($this->clickId = $this->request->getParam($this->getCookieName())) {
+            $this->update($this->clickId, $this->getCookieLifetime());
         }
 
         return $this;
