@@ -11,7 +11,7 @@ use Pepperjam\Network\Helper\Config;
 
 class LinkHelper extends MagentoAbstractHelper
 {
-    const COOKIE_LIFETIME       = 60 * 60 * 24 * 365; // 1 year
+    const COOKIE_LIFETIME = 31536000; // 1 year
     const CONNECTOR_COOKIE_NAME = 'clickId';
 
     /**
