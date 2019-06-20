@@ -115,4 +115,14 @@ class Config extends AbstractHelper
     {
         return $this->scopeConfig->getValue('pepperjam_network/settings/lookback_duration');
     }
+
+    public function isTagEnabled()
+    {
+        return (bool)$this->scopeConfig->getValue('pepperjam_network/settings/tag_enabled');
+    }
+
+    public function getTagIdentifier()
+    {
+        return $this->scopeConfig->getValue('pepperjam_network/settings/tag_identifier');
+    }
 }

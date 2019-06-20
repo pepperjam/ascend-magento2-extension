@@ -23,6 +23,8 @@
                 <product_feed_enabled>1</product_feed_enabled>
                 <order_correction_feed_enabled>1</order_correction_feed_enabled>
                 <lookback_duration>60</lookback_duration>
+                <tag_enabled>0</tag_enabled>
+                <tag_indentifier/>
             </settings>
             <product_map>
                 <!--

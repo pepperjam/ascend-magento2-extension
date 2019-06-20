@@ -75,6 +75,18 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <label>Click Lookback Period in Days</label>
                     <comment>Your Lookback Period will be provided to you by Pepperjam</comment>
                 </field>
+                <field id="tag_enabled" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Container Tag</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Container tag is a piece of tracking code added on all store pages which helps tracking when third-party cookies are not available.</comment>
+                </field>
+                <field id="tag_identifier" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Tag Identifier</label>
+                    <depends>
+                        <field id="*/*/tag_enabled">1</field>
+                    </depends>
+                    <comment>Identifier will be provided to you by Pepperjam.</comment>
+                </field>
             </group>
             <group id="product_map" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Product Feed Map</label>
