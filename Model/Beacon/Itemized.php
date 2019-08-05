@@ -35,14 +35,16 @@ class Itemized extends Beacon
     protected function addItems($params)
     {
         $itemIndex = 1;
-
         foreach ($this->order->getAllItems() as $item) {
+            // remove complex sub-items as done in vendor/magento/module-sales/view/frontend/templates/order/items.phtml
+            if ($item->getParentItem()) continue;
+
             $position = $this->getPosition($params, $item);
             if ($position) {
+                // addexisting should be deprecated as no sub-items should be added.
                 $params = $this->existingItem($params, $item, $position);
             } else {
                 $params = $this->newItem($params, $item, $itemIndex);
-
                 $itemIndex++; // Only increment after adding a new item
             }
         }
@@ -72,22 +74,23 @@ class Itemized extends Beacon
         return $params;
     }
 
+    /**
+     * @deprecated
+     */
     protected function existingItem($params, $item, $itemIndex)
     {
+        $qty = $this->getQuantity($item);
+        if (!$qty) return $params;
+
         $params[$this->quantityKey . $itemIndex] += $this->getQuantity($item);
         $priceKey = $this->priceKey . $itemIndex;
         $params[$priceKey] = $this->helper->formatMoney($params[$priceKey] + $this->getPrice($item));
-
         return $params;
     }
 
     protected function getQuantity($item)
     {
-        if ($item->getProduct()->canConfigure()) {
-            return 0;
-        } else {
-            return (int) $item->getQtyOrdered();
-        }
+        return (int) $item->getQtyOrdered();
     }
 
     protected function getPrice($item)
