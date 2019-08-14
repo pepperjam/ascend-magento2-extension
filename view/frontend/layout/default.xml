@@ -5,7 +5,7 @@
         <referenceContainer name="page.top">
             <block class="Pepperjam\Network\Block\LinkProcessor" name="pepperjam.link_processor" template="Pepperjam_Network::html/link_processor.phtml"/>
         </referenceContainer>
-        <referenceContainer name="before.body.end">
+        <referenceContainer name="after.body.start">
             <block class="Pepperjam\Network\Block\Tag" name="pepperjam.tag" template="Pepperjam_Network::html/tag.phtml" after="-"/>
         </referenceContainer>
     </body>
