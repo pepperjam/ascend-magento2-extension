@@ -35,6 +35,8 @@ class OrderCorrectionFeed extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $date = new \DateTime();
+
         switch ($this->config->getTrackingType()) {
             case Data::TRACKING_BASIC:
                 $this->orderCorrectionFeed = $this->objectManager
@@ -49,9 +51,11 @@ class OrderCorrectionFeed extends Command
                     ->get('\Pepperjam\Network\Cron\Feed\OrderCorrection\Dynamic');
                 break;
         }
-        /** @var  */
-        $this->orderCorrectionFeed->execute();
 
+        $this->orderCorrectionFeed->execute();
         $output->writeln('File: '. $this->orderCorrectionFeed->getFilePath());
+
+        $time = $date->diff(new \DateTime());
+        $output->writeln('Done in: '. sprintf('%sH %sm %ss', $time->h, $time->i, $time->s));
     }
 }

@@ -27,7 +27,12 @@ class ProductFeed extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $date = new \DateTime();
+
         $this->productFeed->execute();
         $output->writeln('File: '. $this->productFeed->getFilePath());
+
+        $time = $date->diff(new \DateTime());
+        $output->writeln('Done in: '. sprintf('%sH %sm %ss', $time->h, $time->i, $time->s));
     }
 }
