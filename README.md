@@ -10,7 +10,7 @@ Launching an affiliate marketing program has never been easier. With Pepperjam N
 
 ## Installation
 
-**via composer**
+**A) via composer**
 
 Edit magento's composer.json and add repository 
 
@@ -26,11 +26,19 @@ Edit magento's composer.json and add repository
 Run installation
     
     composer require pepperjam/network-magento2-module:master@dev --update-no-dev
+    php bin/magento set:up
 
+Upgrades are done by specifying the version with composer and run magento setup, for example:
+
+    composer require pepperjam/network-magento2-module:1.0.4 --update-no-dev
+    php bin/magento set:up
     
-**via file transfer**
+    
+**B) via file transfer**
 
-Download the package from releases tab https://github.com/pepperjam/ascend-magento2-extension/releases   
+Download the package from releases tab https://github.com/pepperjam/ascend-magento2-extension/releases
+
+Upgrades are done by replacing the files and running magento setup.   
 
 ## How to get started
 
