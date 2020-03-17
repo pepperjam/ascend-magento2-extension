@@ -95,7 +95,7 @@ abstract class Feed
 
     abstract protected function getFeedFields();
 
-    protected function getFilePath()
+    public function getFilePath()
     {
         return $this->normalizePath(
             BP,
