@@ -50,8 +50,8 @@ class ProductFeed extends Command
 
         $result = $this->productFeed->execute();
 
-        foreach ($result as $file) {
-            $output->writeln('File: ' . $file);
+        foreach ($result as $file => $count) {
+            $output->writeln(sprintf('Added %s items to file: %s', $count, $file));
         }
 
         $time = $date->diff(new \DateTime());
