@@ -1,6 +1,8 @@
 <?php
 namespace Pepperjam\Network\Cron\Feed\OrderCorrection;
 
+use Magento\Store\Model\Store;
+use Magento\Store\Model\StoreRepository;
 use Psr\Log\LoggerInterface;
 
 use Pepperjam\Network\Cron\Feed\OrderCorrection;
@@ -10,17 +12,16 @@ use Pepperjam\Network\Model\ResourceModel\Order\Collection\Basic as OrderCollect
 
 class Basic extends OrderCorrection
 {
-    protected $orderCollection;
-
     public function __construct(
         Config $config,
         LoggerInterface $logger,
+        Store $store,
+        StoreRepository $storeRepository,
         Map $orderCorrectionMap,
         OrderCollection $orderCollection
     ) {
-        parent::__construct($config, $logger, $orderCorrectionMap);
-
         $this->orderCollection = $orderCollection;
+        parent::__construct($config, $logger, $store, $storeRepository, $orderCorrectionMap);
     }
 
     protected function getFeedFields()
@@ -32,18 +33,5 @@ class Basic extends OrderCorrection
             'REASON' => Map::FIELD_REASON,
             'TYPE' => Map::FIELD_TRANSACTION_TYPE,
         ];
-    }
-
-    protected function getItems()
-    {
-        $lastRunTime = date(self::SELECT_TIME_FORMAT, $this->config->getOrderCorrectionFeedLastRunTime());
-
-        $collection = $this->orderCollection;
-
-        $startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->startTime);
-
-        $collection->addBindParam(':lastRunTime', $lastRunTime)
-            ->addBindParam(':startTime', $startTimeFormatted);
-        return $collection;
     }
 }

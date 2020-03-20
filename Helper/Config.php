@@ -33,9 +33,9 @@ class Config extends AbstractHelper
     {
         return (boolean) $this->scopeConfig->getValue('pepperjam_network/settings/active');
     }
-    public function getProgramId()
+    public function getProgramId($storeCode = null)
     {
-        return $this->scopeConfig->getValue('pepperjam_network/settings/program_id', ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('pepperjam_network/settings/program_id', ScopeInterface::SCOPE_STORE, $storeCode);
     }
     public function getTrackingType()
     {
