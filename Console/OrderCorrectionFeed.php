@@ -16,13 +16,18 @@ class OrderCorrectionFeed extends Command
 
     protected $objectManager;
 
+    /** @var \Magento\Framework\App\State **/
+    protected $state;
+
     /** @var \Pepperjam\Network\Cron\Feed\OrderCorrection */
     protected $orderCorrectionFeed;
 
     public function __construct(
+        \Magento\Framework\App\State $state,
         \Pepperjam\Network\Helper\Config $config
     ) {
         $this->config = $config;
+        $this->state = $state;
         $this->objectManager = ObjectManager::getInstance();
 
         parent::__construct();
@@ -39,8 +44,9 @@ class OrderCorrectionFeed extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $date = new \DateTime();
+        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND);
 
+        $date = new \DateTime();
         switch ($this->config->getTrackingType()) {
             case Data::TRACKING_BASIC:
                 $this->orderCorrectionFeed = $this->objectManager

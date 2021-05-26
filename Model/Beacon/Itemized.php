@@ -83,7 +83,7 @@ class Itemized extends Beacon
 
     protected function getQuantity($item)
     {
-        if ($item->getProduct()->canConfigure()) {
+        if ($item->getProduct() && $item->getProduct()->canConfigure()) {
             return 0;
         } else {
             return (int) $item->getQtyOrdered();
@@ -92,7 +92,8 @@ class Itemized extends Beacon
 
     protected function getPrice($item)
     {
-        if ($item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE
+        if ($item->getProduct()
+            && $item->getProduct()->getTypeId() === ProductType::TYPE_BUNDLE
             && $item->getProduct()->getPriceType() === Price::PRICE_TYPE_DYNAMIC
         ) {
             return '0.00';
