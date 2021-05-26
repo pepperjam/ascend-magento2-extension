@@ -31,6 +31,8 @@ class Data extends AbstractHelper
 
     public function getCommissioningCategory($item)
     {
+        if (!$item->getProduct()) return 0;
+        
         $category = $item->getProduct()->getCommissioningCategory();
         if ($category == '' || $category == null) {
             $categoryIds = $item->getProduct()->getCategoryIds();
