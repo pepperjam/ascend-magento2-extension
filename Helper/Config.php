@@ -129,15 +129,6 @@ class Config extends AbstractHelper
         return $this->scopeConfig->getValue('pepperjam_network/settings/tag_identifier');
     }
 
-    public function getNoJsEndpoint()
-    {
-        if ($this->isCustomDomainEnabled()) {
-            return '//'. $this->scopeConfig->getValue('pepperjam_network/settings/domain_url');
-        } else {
-            return '//'. $this->scopeConfig->getValue('pepperjam_network/settings/tag_endpoint_nojs');
-        }
-    }
-
     public function getJsEndpoint()
     {
         if ($this->isCustomDomainEnabled()) {
