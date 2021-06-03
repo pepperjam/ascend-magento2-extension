@@ -30,17 +30,16 @@ class Validate extends Action
     {
         $return = true;
         try {
-            $domain = 'https://'. $this->getRequest()->getParam('url');
-            $ch = curl_init($domain. '/whatismyname');
-            curl_setopt($ch, CURLOPT_HEADER, true);
-            curl_setopt($ch, CURLOPT_NOBODY, true);
+            $domain = rtrim($this->getRequest()->getParam('url'),"/");
+            $ch = curl_init('https://'. $domain. '/whatismyname');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
             curl_setopt($ch, CURLOPT_TIMEOUT,100);
-            curl_exec($ch);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $resp = curl_exec($ch);
             $retCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $retUrl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
             curl_close($ch);
-            if (!in_array($retCode, ['200', '301', '302']) || $retUrl != $domain) {
+            if (!in_array($retCode, ['200', '301', '302']) || trim(trim($resp)) != $domain) {
                 $return = false;
             }
         } catch (\Exception $e) {
