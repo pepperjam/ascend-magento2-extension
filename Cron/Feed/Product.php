@@ -4,6 +4,8 @@ namespace Pepperjam\Network\Cron\Feed;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\Store\Model\Store;
+use Magento\Store\Model\StoreRepository;
 use Psr\Log\LoggerInterface;
 
 use Pepperjam\Network\Cron\Feed;
@@ -12,7 +14,7 @@ use Pepperjam\Network\Helper\Map\Product as ProductMap;
 
 class Product extends Feed
 {
-    const FILENAME_FORMAT = '%s_product_feed.csv';
+    const FILENAME_FORMAT = '%s_%s_product_feed.csv';
 
     protected $config;
 
@@ -23,15 +25,16 @@ class Product extends Feed
     protected $delimiter = "\t";
 
     public function __construct(
-        Collection $productCollection,
         Config $config,
         LoggerInterface $logger,
+        Store $store,
+        StoreRepository $storeRepository,
+        Collection $productCollection,
         ProductMap $productMap
     ) {
-        $this->config = $config;
-        $this->logger = $logger;
         $this->productMap = $productMap;
         $this->productCollection = $productCollection;
+        parent::__construct($config, $logger, $store, $storeRepository);
     }
 
     protected function applyMapping($item)
@@ -47,7 +50,7 @@ class Product extends Feed
         return $data;
     }
 
-    protected function enabled()
+    public function enabled()
     {
         return $this->config->isProductFeedEnabled();
     }
@@ -59,18 +62,26 @@ class Product extends Feed
 
     protected function getFileName()
     {
-        return sprintf(self::FILENAME_FORMAT, $this->config->getProgramId());
+        $store = $this->getStore();
+        return sprintf(
+            self::FILENAME_FORMAT,
+            $store ? $store->getId() : 0,
+            $this->config->getProgramId($store ? $store->getId() : null)
+        );
     }
 
     protected function getItems()
     {
-        $products = $this->productCollection
-            ->addAttributeToSelect('*')
+        $id = $this->store->getId();
+        $products = clone $this->productCollection;
+        $products->addAttributeToSelect('*')
+            ->setStoreId($id)->addStoreFilter($id)
             ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED)
             ->load();
 
         $products
             ->addAttributeToSelect('*')
+            ->setStoreId($id)->addStoreFilter($id)
             ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED);
         
         return $products;

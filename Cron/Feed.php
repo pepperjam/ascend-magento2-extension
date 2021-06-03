@@ -3,7 +3,8 @@ namespace Pepperjam\Network\Cron;
 
 use Magento\App\Dir;
 use Psr\Log\LoggerInterface;
-
+use Magento\Store\Model\Store;
+use Magento\Store\Model\StoreRepository;
 use Pepperjam\Network\Helper\Config;
 
 abstract class Feed
@@ -16,18 +17,60 @@ abstract class Feed
 
     protected $enclosure = '"';
 
-    public function __construct(Config $config, LoggerInterface $logger)
-    {
+    /**
+     * @var Store
+     */
+    protected $store;
+
+    protected $storeRepository;
+
+    public function __construct(
+        Config $config,
+        LoggerInterface $logger,
+        Store $store,
+        StoreRepository $storeRepository
+    ) {
         $this->config = $config;
         $this->logger = $logger;
+        $this->store = $store;
+        $this->storeRepository = $storeRepository;
     }
 
     public function execute()
     {
+        $return = [];
         if ($this->enabled()) {
-            $this->writeFile($this->buildFeedData());
-            $this->afterWrite();
+            $ids = [];
+            if ($id = $this->store->getId()) {
+                $ids[] = $id;
+            } else {
+                foreach ($this->storeRepository->getList() as $item) {
+                    $id = $item->getId();
+                    if ($id) $ids[] = $id;
+                }
+            }
+            foreach ($ids as $storeId) {
+                $this->setStore($storeId);
+                $this->writeFile($this->buildFeedData());
+                $this->afterWrite();
+                $return[$this->getFilePath()] = $this->getItems()->count();
+            }
         }
+        return $return;
+    }
+
+    public function setStore($storeId)
+    {
+        $this->store = $this->storeRepository->getById($storeId);
+        return $this;
+    }
+
+    /**
+     * @return \Magento\Store\Model\Store
+     */
+    public function getStore()
+    {
+        return $this->store;
     }
 
     protected function buildFeedData()

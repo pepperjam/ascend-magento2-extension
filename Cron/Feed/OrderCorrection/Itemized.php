@@ -1,6 +1,8 @@
 <?php
 namespace Pepperjam\Network\Cron\Feed\OrderCorrection;
 
+use Magento\Store\Model\Store;
+use Magento\Store\Model\StoreRepository;
 use Psr\Log\LoggerInterface;
 
 use Pepperjam\Network\Cron\Feed\OrderCorrection;
@@ -10,17 +12,16 @@ use Pepperjam\Network\Model\ResourceModel\Order\Item\Collection\Itemized as Orde
 
 class Itemized extends OrderCorrection
 {
-    protected $orderItemCollection;
-
     public function __construct(
         Config $config,
         LoggerInterface $logger,
+        Store $store,
+        StoreRepository $storeRepository,
         Map $orderCorrectionMap,
-        OrderItemized $orderItemCollection
+        OrderItemized $orderCollection
     ) {
-        parent::__construct($config, $logger, $orderCorrectionMap);
-
-        $this->orderItemCollection = $orderItemCollection;
+        $this->orderCollection = $orderCollection;
+        parent::__construct($config, $logger, $store, $storeRepository, $orderCorrectionMap);
     }
 
     protected function getFeedFields()
@@ -33,19 +34,5 @@ class Itemized extends OrderCorrection
             'QUANTITY' => Map::FIELD_ITEM_QUANTITY,
             'REASON' => Map::FIELD_REASON,
         ];
-    }
-
-    protected function getItems()
-    {
-        $lastRunTime = date(self::SELECT_TIME_FORMAT, $this->config->getOrderCorrectionFeedLastRunTime());
-
-        $collection = $this->orderItemCollection;
-
-        $startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->startTime);
-
-        $collection->addBindParam(':lastRunTime', $lastRunTime)
-            ->addBindParam(':startTime', $startTimeFormatted);
-
-        return $collection;
     }
 }
