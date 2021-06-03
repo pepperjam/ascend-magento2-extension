@@ -1,0 +1,6 @@
+<?php if ($block->isEnabled()): ?>
+<!--START Pepperjam CODE-->
+<noscript> <iframe src="<?php echo $block->getNoJsEndpoint(); ?>/<?php echo $block->getIdentifier(); ?>.html" width="1" height="1" frameborder="0"></iframe></noscript>
+<script> (function(){ var a=document.createElement("script"); a.type="text/javascript", a.async=!0, a.src="<?php echo $block->getJsEndpoint(); ?>/<?php echo $block->getIdentifier(); ?>.js"; var b=document.getElementsByTagName("head")[0]; if(b) b.appendChild(a,b); else { var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b) } })(); </script>
+<!--END Pepperjam CODE-->
+<?php endif; ?>

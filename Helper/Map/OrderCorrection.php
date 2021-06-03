@@ -69,7 +69,7 @@ class OrderCorrection extends AbstractHelper
     {
         // tread bundle items as 0.00 total as their total will be represented by
         // the total of their children products
-        if ($item->getProduct()->getTypeId() == ProductType::TYPE_BUNDLE) {
+        if ($item->getProduct() && $item->getProduct()->getTypeId() == ProductType::TYPE_BUNDLE) {
             return 0;
         }
 

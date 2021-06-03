@@ -23,6 +23,10 @@
                 <product_feed_enabled>1</product_feed_enabled>
                 <order_correction_feed_enabled>1</order_correction_feed_enabled>
                 <lookback_duration>60</lookback_duration>
+                <tag_enabled>0</tag_enabled>
+                <tag_indentifier/>
+                <tag_endpoint_nojs>//nojscontainer.pepperjam.com</tag_endpoint_nojs>
+                <tag_endpoint_js>//container.pepperjam.com</tag_endpoint_js>
             </settings>
             <product_map>
                 <!--
