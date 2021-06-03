@@ -1,0 +1,70 @@
+<?php /* @var $block \Pepperjam\Network\Adminhtml\Domain */ ?>
+
+<script>
+    require([
+        'jquery'
+    ], function(jQuery){
+        var validateSpan = jQuery('#validate_span');
+        jQuery('#validate_button').click(function () {
+            var params = {'url' : jQuery('#pepperjam_network_settings_domain_url').val()};
+            new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                parameters:     params,
+                loaderArea:     false,
+                asynchronous:   true,
+                method:         'POST',
+                onCreate: function() {
+                    validateSpan.find('.success').hide();
+                    validateSpan.find('.loading').show();
+                    validateSpan.find('.message-error').hide();
+                },
+                onSuccess: function(response) {
+                    var json = response.responseJSON;
+                    if (json.success == true) {
+                        validateSpan.find('.success').show();
+                        jQuery('#save').prop('disabled', false);
+                    } else {
+                        validateSpan.find('.message-error').css('display', 'inline-block');
+                    }
+                },
+                onFailure: function(response) {
+                    validateSpan.find('.message-error').html(response.statusText);
+                    validateSpan.find('.message-error').css('display', 'inline-block');
+                },
+                onComplete: function(response) {
+                    validateSpan.find('.loading').hide();
+                }
+            });
+        });
+
+        var domainUrl = jQuery('#pepperjam_network_settings_domain_url');
+        var domainEnabled = jQuery('#pepperjam_network_settings_domain_enabled');
+        domainUrl.change(function () {
+            jQuery('#save').prop('disabled', true);
+        });
+        domainEnabled.change(function () {
+            if (domainEnabled.val() == 1) {
+                jQuery('#save').prop('disabled', true);
+            } else {
+                jQuery('#save').prop('disabled', false);
+            }
+        });
+    });
+</script>
+<table style="margin: 0 0 5px 0">
+    <tr>
+        <td style="padding:0"><input id="pepperjam_network_settings_domain_url" type="text" name="groups[settings][fields][domain_url][value]" class="input-text admin__control-text" placeholder="subdomain.yourdomain.com" value="<?php echo $block->getDomainValue(); ?>"/></td>
+        <td style="padding:0; width:60px;"><?php echo $block->getButtonHtml() ?></td>
+    </tr>
+</table>
+<span class="validate-indicator" id="validate_span">
+    <img class="loading" hidden="hidden" alt="Validating" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <img class="success" hidden="hidden" alt="Validated" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+    <span class="message message-error" hidden="hidden">Your custom domain has not been properly provisioned in Ascend. Log in <a href="https://ascend.pepperjam.com/merchant/integration/tracking-domains">here</a> to complete the provisioning</span>
+</span>
+<ul>
+    <li>The host part of the uri https://pepperjam.my-domain.com should match your primary domain.</li>
+    <li>The sub-domain part of the uri https://pepperjam.my-domain.com will be a separate sub-domain setup for the purpose of integrating with the feature. It will need to be separate from any other sub-domain currently in use. Pepperjam is used as a placeholder in this instance.</li>
+    <li>Your custom domain must be provisioned in ascend before you can complete the integration</li>
+    <li>Your custom domain must match the exact value entered in Ascend</li>
+    <li>You can set up your domain in Ascend <a href="https://ascend.pepperjam.com/merchant/integration/tracking-domains" target="_blank">here</a></li>
+</ul>
