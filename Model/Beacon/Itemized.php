@@ -56,7 +56,8 @@ class Itemized extends Beacon
 
     protected function getPosition($params, $item)
     {
-        $key = array_search($item->getSku(), $params, true);
+        $sku = $this->getSku($item);
+        $key = array_search($sku, $params, true);
 
         if ($key) {
             return (int) str_replace($this->skuKey, '', $key);
@@ -67,7 +68,8 @@ class Itemized extends Beacon
 
     protected function newItem($params, $item, $itemIndex)
     {
-        $params[$this->skuKey . $itemIndex] = $item->getSku();
+        $sku = $this->getSku($item);
+        $params[$this->skuKey . $itemIndex] = $sku;
         $params[$this->quantityKey . $itemIndex] = $this->getQuantity($item);
         $params[$this->priceKey . $itemIndex] = $this->getPrice($item);
 
@@ -90,11 +92,7 @@ class Itemized extends Beacon
 
     protected function getQuantity($item)
     {
-        if ($item->getProduct() && $item->getProduct()->canConfigure()) {
-            return 0;
-        } else {
-            return (int) $item->getQtyOrdered();
-        }
+        return (int) $item->getQtyOrdered();
     }
 
     protected function getPrice($item)
@@ -105,7 +103,21 @@ class Itemized extends Beacon
         ) {
             return '0.00';
         } else {
-            return $item->getRowTotal() - $item->getDiscountAmount();
+
+            $itemTotal = (float)$item->getRowTotal();
+            $orderTotal = (float)$this->order->getSubtotal();
+            $orderDiscount = -(float)$this->order->getDiscountAmount();
+
+            $itemDiscount = $item->getDiscountAmount();
+            $return_old = $itemTotal - $itemDiscount;
+
+            $itemCalculateddiscount = 1;
+            if ($orderDiscount > 0) {
+                $itemCalculateddiscount = 1 - ($orderDiscount / $orderTotal);
+            }
+
+            $return = $itemTotal * $itemCalculateddiscount;
+            return $return;
         }
     }
 
@@ -122,5 +134,15 @@ class Itemized extends Beacon
         }
 
         return $params;
+    }
+
+    protected function getSku($item) {
+        $sku = $item->getSku();
+        if (array_key_exists('options', $item->getProductOptions())) {
+            foreach ($item->getProductOptions()['options'] as $option) {
+                $sku .= '-'.$option['value'];
+            }
+        }
+        return $sku;
     }
 }
