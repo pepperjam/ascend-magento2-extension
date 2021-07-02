@@ -132,7 +132,7 @@ class Config extends AbstractHelper
     public function getJsEndpoint()
     {
         if ($this->isCustomDomainEnabled()) {
-            return '//'. $this->scopeConfig->getValue('pepperjam_network/settings/domain_url');
+            return '//cdn.'. $this->scopeConfig->getValue('pepperjam_network/settings/domain_url');
         } else {
             return '//'. $this->scopeConfig->getValue('pepperjam_network/settings/tag_endpoint_js');
         }
