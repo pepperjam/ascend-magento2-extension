@@ -81,8 +81,11 @@ class Config extends AbstractHelper
 
     public function getBeaconBaseUrl()
     {
-        // Magic string, but it is not used anywhere else
-        return 'https://t.pepperjamnetwork.com/track';
+        if ($this->isCustomDomainEnabled()) {
+            return 'https://'. $this->scopeConfig->getValue('pepperjam_network/settings/domain_url') . '/track';
+        } else {
+            return 'https://'. $this->scopeConfig->getValue('pepperjam_network/settings/beacon_base_url') . '/track';
+        }
     }
 
     public function getInt()
@@ -126,13 +129,17 @@ class Config extends AbstractHelper
         return $this->scopeConfig->getValue('pepperjam_network/settings/tag_identifier');
     }
 
-    public function getNoJsEndpoint()
-    {
-        return $this->scopeConfig->getValue('pepperjam_network/settings/tag_endpoint_nojs');
-    }
-
     public function getJsEndpoint()
     {
-        return $this->scopeConfig->getValue('pepperjam_network/settings/tag_endpoint_js');
+        if ($this->isCustomDomainEnabled()) {
+            return '//cdn.'. $this->scopeConfig->getValue('pepperjam_network/settings/domain_url');
+        } else {
+            return '//'. $this->scopeConfig->getValue('pepperjam_network/settings/tag_endpoint_js');
+        }
+    }
+
+    public function isCustomDomainEnabled()
+    {
+        return (bool)$this->scopeConfig->getValue('pepperjam_network/settings/domain_enabled');
     }
 }

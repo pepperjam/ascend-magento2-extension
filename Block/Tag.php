@@ -30,11 +30,6 @@ class Tag extends Template
         return $this->config->isTagEnabled() && !empty($this->getIdentifier());
     }
 
-    public function getNoJsEndpoint()
-    {
-        return $this->config->getNoJsEndpoint();
-    }
-
     public function getJsEndpoint()
     {
         return $this->config->getJsEndpoint();
