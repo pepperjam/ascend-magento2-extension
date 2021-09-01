@@ -126,7 +126,7 @@ class Config extends AbstractHelper
 
     public function getTagIdentifier()
     {
-        return $this->scopeConfig->getValue('pepperjam_network/settings/tag_identifier');
+        return $this->scopeConfig->getValue('pepperjam_network/settings/tag_identifier', ScopeInterface::SCOPE_STORE);
     }
 
     public function getJsEndpoint()

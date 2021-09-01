@@ -71,7 +71,7 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Container tag is a piece of tracking code added on all store pages which helps tracking when third-party cookies are not available.</comment>
                 </field>
-                <field id="tag_identifier" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="tag_identifier" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Tag Identifier</label>
                     <depends>
                         <field id="*/*/tag_enabled">1</field>
