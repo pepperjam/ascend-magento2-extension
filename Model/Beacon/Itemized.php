@@ -143,6 +143,9 @@ class Itemized extends Beacon
                 $sku .= '-'.$option['value'];
             }
         }
+        if (strlen($sku) >= $this->config->getBeaconProductIdMaxSize()) {
+            $sku = $item->getSku(). '-'. md5($sku);
+        }
         return $sku;
     }
 }
