@@ -142,4 +142,9 @@ class Config extends AbstractHelper
     {
         return (bool)$this->scopeConfig->getValue('pepperjam_network/settings/domain_enabled');
     }
+
+    public function getBeaconProductIdMaxSize()
+    {
+        return (int)$this->scopeConfig->getValue('beacon_product_id_max_size');
+    }
 }

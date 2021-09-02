@@ -29,6 +29,7 @@
                 <tag_enabled>0</tag_enabled>
                 <tag_indentifier/>
                 <tag_endpoint_js>container.pepperjam.com</tag_endpoint_js>
+                <beacon_product_id_max_size>128</beacon_product_id_max_size>
             </settings>
             <product_map>
                 <!--
