@@ -57,4 +57,17 @@ abstract class OrderCorrection extends Feed
     {
         $this->config->setOrderCorrectionFeedLastRunTime($this->startTime);
     }
+
+    protected function getItems()
+    {
+        $lastRunTime = date(self::SELECT_TIME_FORMAT, (int)$this->config->getOrderCorrectionFeedLastRunTime());
+        $startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->startTime);
+
+        $collection = clone $this->orderCollection;
+        $collection->addFieldToFilter('o.'.OrderInterface::STORE_ID, $this->store->getId());
+        $collection->addBindParam(':lastRunTime', $lastRunTime)
+            ->addBindParam(':startTime', $startTimeFormatted);
+
+        return $collection;
+    }
 }
