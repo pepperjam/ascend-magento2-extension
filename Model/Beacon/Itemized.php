@@ -137,15 +137,6 @@ class Itemized extends Beacon
     }
 
     protected function getSku($item) {
-        $sku = $item->getSku();
-        if (array_key_exists('options', $item->getProductOptions())) {
-            foreach ($item->getProductOptions()['options'] as $option) {
-                $sku .= '-'.$option['value'];
-            }
-        }
-        if (strlen($sku) >= $this->config->getBeaconProductIdMaxSize()) {
-            $sku = $item->getSku(). '-'. md5($sku);
-        }
-        return $sku;
+        return $this->helper->getProductItemId($item);
     }
 }

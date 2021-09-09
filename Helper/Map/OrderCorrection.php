@@ -88,7 +88,7 @@ class OrderCorrection extends AbstractHelper
 
     public function getItemId($item)
     {
-        return $item->getSku();
+        return urlencode($this->helper->getProductItemId($item));
     }
 
     public function getItemOrderId($item)

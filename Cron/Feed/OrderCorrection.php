@@ -69,7 +69,7 @@ abstract class OrderCorrection extends Feed
 
     protected function getItems()
     {
-        $lastRunTime = date(self::SELECT_TIME_FORMAT, $this->config->getOrderCorrectionFeedLastRunTime());
+        $lastRunTime = date(self::SELECT_TIME_FORMAT, (int)$this->config->getOrderCorrectionFeedLastRunTime());
         $startTimeFormatted = date(self::SELECT_TIME_FORMAT, $this->startTime);
 
         $collection = clone $this->orderCollection;
