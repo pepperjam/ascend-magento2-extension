@@ -6,6 +6,7 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 
+
 class Data extends AbstractHelper
 {
     const TRACKING_BASIC = 'basic';
@@ -17,11 +18,17 @@ class Data extends AbstractHelper
 
     public $collectionFactory;
 
-    public function __construct(Context $context, CollectionFactory $collectionFactory)
-    {
+    public $config;
+
+    public function __construct(
+        Context $context,
+        CollectionFactory $collectionFactory,
+        \Pepperjam\Network\Helper\Config $config
+    ) {
         parent::__construct($context);
 
         $this->collectionFactory = $collectionFactory;
+        $this->config = $config;
     }
 
     public function formatMoney($amount)
@@ -59,5 +66,19 @@ class Data extends AbstractHelper
         $orderCollection->load();
 
         return (boolean) $orderCollection->getSize() == 0;
+    }
+
+    public function getProductItemId($item)
+    {
+        $id = $item->getSku();
+        if (array_key_exists('options', $item->getProductOptions())) {
+            foreach ($item->getProductOptions()['options'] as $option) {
+                $id .= '-'.$option['value'];
+            }
+        }
+        if (strlen($id) >= $this->config->getBeaconProductIdMaxSize()) {
+            $id = $item->getSku(). '-'. md5($id);
+        }
+        return $id;
     }
 }
