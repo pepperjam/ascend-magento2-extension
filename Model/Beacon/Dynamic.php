@@ -12,12 +12,16 @@ class Dynamic extends Itemized
 
     protected function orderParams()
     {
-        return [
+        $params = [
             'PROGRAM_ID' => $this->config->getProgramId(),
             'ORDER_ID' => $this->order->getIncrementId(),
             'INT' => $this->config->getInt(),
             'NEW_TO_FILE' => (int) $this->helper->isNewToFile($this->order),
         ];
+        if ($this->config->isCurrencySupportEnabled()) {
+            $params['CURRENCY'] = $this->order->getData('order_currency_code');
+        }
+        return $params;
     }
 
     protected function newItem($params, $item, $itemIndex)

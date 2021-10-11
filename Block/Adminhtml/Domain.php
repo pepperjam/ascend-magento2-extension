@@ -89,6 +89,6 @@ class Domain extends Field
      */
     public function getDomainValue()
     {
-        return $this->_scopeConfig->getValue('pepperjam_network/settings/domain_url');
+        return $this->_scopeConfig->getValue('pepperjam_network/custom_domain/url');
     }
 }

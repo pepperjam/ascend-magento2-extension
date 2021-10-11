@@ -6,7 +6,7 @@
     ], function(jQuery){
         var validateSpan = jQuery('#validate_span');
         jQuery('#validate_button').click(function () {
-            var params = {'url' : jQuery('#pepperjam_network_settings_domain_url').val()};
+            var params = {'url' : jQuery('#pepperjam_network_custom_domain_url').val()};
             new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
                 parameters:     params,
                 loaderArea:     false,
@@ -36,7 +36,7 @@
             });
         });
 
-        var domainUrl = jQuery('#pepperjam_network_settings_domain_url');
+        var domainUrl = jQuery('#pepperjam_network_custom_domain_url');
         var domainEnabled = jQuery('#pepperjam_network_settings_domain_enabled');
         domainUrl.change(function () {
             jQuery('#save').prop('disabled', true);
@@ -52,7 +52,7 @@
 </script>
 <table style="margin: 0 0 5px 0">
     <tr>
-        <td style="padding:0"><input id="pepperjam_network_settings_domain_url" type="text" name="groups[settings][fields][domain_url][value]" class="input-text admin__control-text" placeholder="subdomain.yourdomain.com" value="<?php echo $block->getDomainValue(); ?>"/></td>
+        <td style="padding:0"><input id="pepperjam_network_custom_domain_url" type="text" name="groups[custom_domain][fields][url][value]" class="input-text admin__control-text" placeholder="subdomain.yourdomain.com" value="<?php echo $block->getDomainValue(); ?>"/></td>
         <td style="padding:0; width:60px;"><?php echo $block->getButtonHtml() ?></td>
     </tr>
 </table>

@@ -47,7 +47,7 @@ class Config extends AbstractHelper
     }
     public function getExportPath()
     {
-        return $this->scopeConfig->getValue('pepperjam_network/settings/export_path');
+        return $this->scopeConfig->getValue('pepperjam_network/feeds/export_path');
     }
     public function isAttributionEnabled()
     {
@@ -61,12 +61,12 @@ class Config extends AbstractHelper
     public function isProductFeedEnabled()
     {
         return (boolean) $this->isActive() &&
-            $this->scopeConfig->getValue('pepperjam_network/settings/product_feed_enabled');
+            $this->scopeConfig->getValue('pepperjam_network/feeds/product_feed_enabled');
     }
     public function isOrderCorrectionFeedEnabled()
     {
         return (boolean) $this->isActive() &&
-            $this->scopeConfig->getValue('pepperjam_network/settings/order_correction_feed_enabled');
+            $this->scopeConfig->getValue('pepperjam_network/feeds/order_correction_feed_enabled');
     }
     public function getProductFeedMap()
     {
@@ -82,7 +82,7 @@ class Config extends AbstractHelper
     public function getBeaconBaseUrl()
     {
         if ($this->isCustomDomainEnabled()) {
-            return 'https://'. $this->scopeConfig->getValue('pepperjam_network/settings/domain_url') . '/track';
+            return 'https://'. $this->scopeConfig->getValue('pepperjam_network/custom_domain/url') . '/track';
         } else {
             return 'https://'. $this->scopeConfig->getValue('pepperjam_network/settings/beacon_base_url') . '/track';
         }
@@ -121,30 +121,35 @@ class Config extends AbstractHelper
 
     public function isTagEnabled()
     {
-        return (bool)$this->scopeConfig->getValue('pepperjam_network/settings/tag_enabled');
+        return (bool)$this->scopeConfig->getValue('pepperjam_network/container_tag/enabled');
     }
 
     public function getTagIdentifier()
     {
-        return $this->scopeConfig->getValue('pepperjam_network/settings/tag_identifier', ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue('pepperjam_network/container_tag/identifier', ScopeInterface::SCOPE_STORE);
     }
 
     public function getJsEndpoint()
     {
         if ($this->isCustomDomainEnabled()) {
-            return '//cdn.'. $this->scopeConfig->getValue('pepperjam_network/settings/domain_url');
+            return '//cdn.'. $this->scopeConfig->getValue('pepperjam_network/custom_domain/url');
         } else {
-            return '//'. $this->scopeConfig->getValue('pepperjam_network/settings/tag_endpoint_js');
+            return '//'. $this->scopeConfig->getValue('pepperjam_network/container_tag/endpoint_js');
         }
     }
 
     public function isCustomDomainEnabled()
     {
-        return (bool)$this->scopeConfig->getValue('pepperjam_network/settings/domain_enabled');
+        return (bool)$this->scopeConfig->getValue('pepperjam_network/custom_domain/enabled');
     }
 
     public function getBeaconProductIdMaxSize()
     {
         return (int)$this->scopeConfig->getValue('pepperjam_network/settings/beacon_product_id_max_size');
+    }
+
+    public function isCurrencySupportEnabled()
+    {
+        return (bool)$this->scopeConfig->getValue('pepperjam_network/settings/currency_support');
     }
 }
