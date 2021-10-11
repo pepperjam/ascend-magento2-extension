@@ -147,4 +147,9 @@ class Config extends AbstractHelper
     {
         return (int)$this->scopeConfig->getValue('pepperjam_network/settings/beacon_product_id_max_size');
     }
+
+    public function isCurrencySupportEnabled()
+    {
+        return (bool)$this->scopeConfig->getValue('pepperjam_network/settings/currency_support');
+    }
 }

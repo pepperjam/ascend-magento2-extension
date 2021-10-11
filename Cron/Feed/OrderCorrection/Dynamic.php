@@ -8,7 +8,7 @@ class Dynamic extends Itemized
 {
     protected function getFeedFields()
     {
-        return [
+        $fields = [
             'PROGRAM_ID' => Map::FIELD_PROGRAM_ID,
             'ORDER_ID' => Map::FIELD_ORDER_ID,
             'ITEM_ID' => Map::FIELD_ITEM_ID,
@@ -17,5 +17,9 @@ class Dynamic extends Itemized
             'CATEGORY' => Map::FIELD_CATEGORY,
             'NEW_TO_FILE' => Map::FIELD_NEW_TO_FILE,
         ];
+        if ($this->config->isCurrencySupportEnabled()) {
+            $fields['CURRENCY'] = MAP::FIELD_CURRENCY;
+        }
+        return $fields;
     }
 }

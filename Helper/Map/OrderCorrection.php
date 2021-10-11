@@ -19,6 +19,7 @@ class OrderCorrection extends AbstractHelper
     const FIELD_PROGRAM_ID = 'program_id';
     const FIELD_REASON = 'reason';
     const FIELD_TRANSACTION_TYPE = 'transaction_type';
+    const FIELD_CURRENCY = 'currency';
 
     const REASON = 8;
 
@@ -56,6 +57,8 @@ class OrderCorrection extends AbstractHelper
                 return self::REASON;
             case self::FIELD_TRANSACTION_TYPE:
                 return $this->getTransactionType();
+            case self::FIELD_CURRENCY:
+                return $item->getOrder()->getData('order_currency_code');
         }
     }
 	// @codingStandardsIgnoreEnd
