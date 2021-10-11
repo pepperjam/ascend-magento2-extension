@@ -23,6 +23,7 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
             <label>Pepperjam Network</label>
             <tab>pepperjam</tab>
             <resource>Pepperjam_Network::pepperjam_Network</resource>
+
             <group id="settings" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General</label>
                 <comment>
@@ -36,7 +37,6 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <label>Program Id</label>
                     <comment>Your Program Id will be provided to you by Pepperjam</comment>
                 </field>
-
                 <field id="tracking_type" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Program Tracking Type</label>
                     <source_model>Pepperjam\Network\Model\Config\Source\TrackingType</source_model>
@@ -49,7 +49,7 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                         <field id="*/*/tracking_type">basic</field>
                     </depends>
                 </field>
-                <field id="currency_support" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">>
+                <field id="currency_support" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Non-Native Currency Support</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>When the Non-Native Currency Support field is enabled, your Ascend conversion pixel and correction files will include the Currency for the amounts provided within them.  This will allow you to pass your order information to Ascend in a currency other than your native currency.</comment>
@@ -61,7 +61,6 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <label>Click Lookback Period in Days</label>
                     <comment>Your Lookback Period will be provided to you by Pepperjam</comment>
                 </field>
-
                 <field id="attribution_enabled" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Conditional Pixel</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -74,6 +73,7 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     </depends>
                 </field>
             </group>
+
             <group id="container_tag" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Container Tag</label>
                 <field id="enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -89,6 +89,7 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <comment>Identifier will be provided to you by Pepperjam.</comment>
                 </field>
             </group>
+
             <group id="custom_domain" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Custom Domain Tracking</label>
                 <field id="enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -103,6 +104,7 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <frontend_model>Pepperjam\Network\Block\Adminhtml\Domain</frontend_model>
                 </field>
             </group>
+
             <group id="feeds" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Feeds Settings</label>
                 <field id="product_feed_enabled" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -118,6 +120,7 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <comment>Default local path to export feeds to. These feeds will need to be made available to Pepperjam via FTP.</comment>
                 </field>
             </group>
+
             <group id="product_map" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Product Feed Map</label>
                 <field id="age_range" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
