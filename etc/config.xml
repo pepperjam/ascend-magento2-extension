@@ -24,13 +24,18 @@
                 <order_correction_feed_enabled>1</order_correction_feed_enabled>
                 <lookback_duration>60</lookback_duration>
                 <beacon_base_url>t.pepperjamnetwork.com</beacon_base_url>
-                <domain_enabled>0</domain_enabled>
-                <domain_url></domain_url>
-                <tag_enabled>0</tag_enabled>
-                <tag_indentifier/>
-                <tag_endpoint_js>container.pepperjam.com</tag_endpoint_js>
                 <beacon_product_id_max_size>128</beacon_product_id_max_size>
+                <currency_support>0</currency_support>
             </settings>
+            <custom_domain>
+                <enabled>0</enabled>
+                <url/>
+            </custom_domain>
+            <container_tag>
+                <enabled>0</enabled>
+                <indentifier/>
+                <endpoint_js>container.pepperjam.com</endpoint_js>
+            </container_tag>
             <product_map>
                 <!--
                 The purpose of this mapping is enabled the coexistence of both

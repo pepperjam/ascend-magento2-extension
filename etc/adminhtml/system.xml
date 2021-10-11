@@ -49,6 +49,14 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                         <field id="*/*/tracking_type">basic</field>
                     </depends>
                 </field>
+                <field id="currency_support" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">>
+                    <label>Non-Native Currency Support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When the Non-Native Currency Support field is enabled, your Ascend conversion pixel and correction files will include the Currency for the amounts provided within them.  This will allow you to pass your order information to Ascend in a currency other than your native currency.</comment>
+                    <depends>
+                        <field id="*/*/tracking_type">dynamic</field>
+                    </depends>
+                </field>
                 <field id="lookback_duration" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInStore="0" showInWebsite="0">
                     <label>Click Lookback Period in Days</label>
                     <comment>Your Lookback Period will be provided to you by Pepperjam</comment>
@@ -65,36 +73,41 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                         <field id="*/*/attribution_enabled">1</field>
                     </depends>
                 </field>
+            </group>
 
-                <field id="tag_enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="container_tag" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Container Tag</label>
+                <field id="enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Enable Container Tag</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Container tag is a piece of tracking code added on all store pages which helps tracking when third-party cookies are not available.</comment>
                 </field>
-                <field id="tag_identifier" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="identifier" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Tag Identifier</label>
                     <depends>
-                        <field id="*/*/tag_enabled">1</field>
+                        <field id="*/container_tag/enabled">1</field>
                     </depends>
                     <comment>Identifier will be provided to you by Pepperjam.</comment>
                 </field>
+            </group>
 
-                <field id="domain_enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="custom_domain" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Custom Domain Tracking</label>
+                <field id="enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Custom Tracking Domains</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment></comment>
                 </field>
-                <field id="domain_url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>https://</label>
                     <depends>
-                        <field id="*/*/domain_enabled">1</field>
+                        <field id="*/custom_domain/enabled">1</field>
                     </depends>
                     <frontend_model>Pepperjam\Network\Block\Adminhtml\Domain</frontend_model>
                 </field>
+            </group>
 
-            <!--</group>-->
-            <!--<group id="settings" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">-->
-                <!--<label>Feeds Settings</label>-->
+            <group id="feeds" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Feeds Settings</label>
                 <field id="product_feed_enabled" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Product Feed Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -108,7 +121,8 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <comment>Default local path to export feeds to. These feeds will need to be made available to Pepperjam via FTP.</comment>
                 </field>
             </group>
-            <group id="product_map" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+
+            <group id="product_map" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Product Feed Map</label>
                 <field id="age_range" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>age_range</label>
