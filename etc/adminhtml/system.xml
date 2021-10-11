@@ -74,7 +74,6 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     </depends>
                 </field>
             </group>
-
             <group id="container_tag" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Container Tag</label>
                 <field id="enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -90,7 +89,6 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <comment>Identifier will be provided to you by Pepperjam.</comment>
                 </field>
             </group>
-
             <group id="custom_domain" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Custom Domain Tracking</label>
                 <field id="enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -105,7 +103,6 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <frontend_model>Pepperjam\Network\Block\Adminhtml\Domain</frontend_model>
                 </field>
             </group>
-
             <group id="feeds" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Feeds Settings</label>
                 <field id="product_feed_enabled" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -121,7 +118,6 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <comment>Default local path to export feeds to. These feeds will need to be made available to Pepperjam via FTP.</comment>
                 </field>
             </group>
-
             <group id="product_map" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Product Feed Map</label>
                 <field id="age_range" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
