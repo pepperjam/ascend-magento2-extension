@@ -77,7 +77,7 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
             <group id="container_tag" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Container Tag</label>
                 <field id="enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Enable Container Tag</label>
+                    <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Container tag is a piece of tracking code added on all store pages which helps tracking when third-party cookies are not available.</comment>
                 </field>
@@ -91,9 +91,9 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
             </group>
 
             <group id="custom_domain" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
-                <label>Custom Domain Tracking</label>
+                <label>Custom Tracking Domain</label>
                 <field id="enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Custom Tracking Domains</label>
+                    <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="url" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
@@ -108,11 +108,11 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
             <group id="feeds" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Feeds Settings</label>
                 <field id="product_feed_enabled" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Product Feed Enabled</label>
+                    <label>Enable Product Feed</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="order_correction_feed_enabled" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Order Correction Feed Enabled</label>
+                    <label>Enable Order Correction Feed</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="export_path" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="0" showInStore="0">
