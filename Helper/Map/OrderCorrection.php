@@ -76,17 +76,17 @@ class OrderCorrection extends AbstractHelper
             return 0;
         }
 
-        // return base price if below will divide by 0
+        // return price if everything was refunded or canceled
         if ($this->getItemQuantity($item) == 0) {
-            return $item->getBasePrice();
+            $discount = $item->getDiscountPercent() ? $item->getDiscountPercent() * $item->getPrice() / 100 : 0;
+            return $item->getPrice() - $discount;
         }
 
         // don't allow negative amounts - could happen if a discounted item was cancelled
-        return max(
-            0,
-            $item->getBasePrice() - (($item->getBaseDiscountAmount() - $item->getBaseDiscountRefunded())
-                / $this->getItemQuantity($item))
-        );
+        $price = $item->getPrice() - (
+                ($item->getDiscountAmount() - $item->getDiscountRefunded()) / $this->getItemQuantity($item)
+            );
+        return max(0, $price);
     }
 
     public function getItemId($item)
@@ -106,7 +106,8 @@ class OrderCorrection extends AbstractHelper
 
     public function getItemPrice($item)
     {
-        if ($this->config->getTransactionType() === Data::TRANSACTION_LEAD) {
+        if ($this->config->getTransactionType() === Data::TRANSACTION_LEAD
+            || $item->getData('qty_canceled') == $item->getData('qty_ordered')) {
             return 0;
         }
 
