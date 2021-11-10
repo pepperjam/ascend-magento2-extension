@@ -72,8 +72,13 @@ class OrderCorrection extends AbstractHelper
     {
         // tread bundle items as 0.00 total as their total will be represented by
         // the total of their children products
-        if ($item->getProduct() && $item->getProduct()->getTypeId() == ProductType::TYPE_BUNDLE) {
-            return 0;
+        if ($this->isBundle($item)) {
+            $price = 0;
+            $chidren = $item->getChildrenItems();
+            foreach ($chidren as $i) {
+                $price += $this->getDiscountedItemPrice($i) * $this->getItemQuantity($i);
+            }
+            return $price / max(1, $this->getItemQuantity($item));
         }
 
         // return price if everything was refunded or canceled
@@ -86,6 +91,7 @@ class OrderCorrection extends AbstractHelper
         $price = $item->getPrice() - (
                 ($item->getDiscountAmount() - $item->getDiscountRefunded()) / $this->getItemQuantity($item)
             );
+
         return max(0, $price);
     }
 
@@ -101,6 +107,9 @@ class OrderCorrection extends AbstractHelper
 
     public function getItemQuantity($item)
     {
+        if ($this->isBundle($item)) {
+            return $item->getQtyOrdered() - $item->getQtyCanceled();
+        }
         return $item->getQtyOrdered() - $item->getQtyRefunded() - $item->getQtyCanceled();
     }
 
@@ -145,5 +154,11 @@ class OrderCorrection extends AbstractHelper
     public function getTransactionType()
     {
         return $this->config->getTransactionType();
+    }
+
+    public function isBundle($item)
+    {
+        return $item->getHasChildren() && $item->getProduct()
+            && $item->getProduct()->getTypeId() == ProductType::TYPE_BUNDLE;
     }
 }

@@ -3,6 +3,7 @@ namespace Pepperjam\Network\Cron\Feed;
 
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreRepository;
+use Magento\Catalog\Model\Product\Type as ProductType;
 use Psr\Log\LoggerInterface;
 
 use Pepperjam\Network\Cron\Feed;
@@ -33,6 +34,23 @@ abstract class OrderCorrection extends Feed
         $this->startTime = time();
 
         parent::__construct($config, $logger, $store, $storeRepository);
+    }
+
+    protected function buildFeedData()
+    {
+        $items = $this->getItems()->getItems();
+        foreach ($items as $item) {
+            if ($this->orderCorrectionMap->isBundle($item)) {
+                $chidren = $item->getChildrenItems();
+                foreach ($chidren as $i) {
+                    unset($items[$i->getId()]);
+                }
+            }
+        }
+        $dataCount = count($items);
+        $this->logger->info("Building feed for $dataCount items");
+
+        return array_map([$this, 'applyMapping'], $items);
     }
 
     protected function applyMapping($item)
