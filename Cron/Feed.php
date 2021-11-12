@@ -50,10 +50,11 @@ abstract class Feed
                 }
             }
             foreach ($ids as $storeId) {
+                $rows = $this->buildFeedData();
                 $this->setStore($storeId);
-                $this->writeFile($this->buildFeedData());
+                $this->writeFile($rows);
                 $this->afterWrite();
-                $return[$this->getFilePath()] = $this->getItems()->count();
+                $return[$this->getFilePath()] = count($rows);
             }
         }
         return $return;
