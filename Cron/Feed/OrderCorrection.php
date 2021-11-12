@@ -51,10 +51,14 @@ abstract class OrderCorrection extends Feed
         $data = [];
         $fields = $this->getFeedFields();
         foreach ($fields as $field => $attribute) {
-            $data[] = $this->orderCorrectionMap->get($item, $attribute);
+            $data[$attribute] = $this->orderCorrectionMap->get($item, $attribute);
         }
-
-        return $data;
+        // Set QTY = 0 for bundle items having price = 0
+        if ($this->orderCorrectionMap->isBundle($item)
+            && (int)$data[OrderCorrectionMap::FIELD_ITEM_PRICE] == 0) {
+            $data[OrderCorrectionMap::FIELD_ITEM_QUANTITY] = 0;
+        }
+        return array_values($data);
     }
 
     protected function enabled()
