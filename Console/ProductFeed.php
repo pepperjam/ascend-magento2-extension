@@ -10,11 +10,10 @@ class ProductFeed extends Command
     protected $productFeed;
 
     public function __construct(
-        \Pepperjam\Network\Cron\Feed\Product $productFeed,
-        $name = null
+        \Pepperjam\Network\Cron\Feed\Product $productFeed
     ) {
         $this->productFeed = $productFeed;
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure()

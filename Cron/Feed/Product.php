@@ -3,7 +3,7 @@ namespace Pepperjam\Network\Cron\Feed;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
-use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Psr\Log\LoggerInterface;
 
 use Pepperjam\Network\Cron\Feed;
@@ -18,12 +18,12 @@ class Product extends Feed
 
     protected $productMap;
 
-    protected $productCollection;
+    protected $productCollectionFactory;
 
     protected $delimiter = "\t";
 
     public function __construct(
-        Collection $productCollection,
+        CollectionFactory $productCollectionFactory,
         Config $config,
         LoggerInterface $logger,
         ProductMap $productMap
@@ -31,7 +31,7 @@ class Product extends Feed
         $this->config = $config;
         $this->logger = $logger;
         $this->productMap = $productMap;
-        $this->productCollection = $productCollection;
+        $this->productCollectionFactory = $productCollectionFactory;
     }
 
     protected function applyMapping($item)
@@ -64,7 +64,7 @@ class Product extends Feed
 
     protected function getItems()
     {
-        $products = $this->productCollection
+        $products = $this->productCollectionFactory->create()
             ->addAttributeToSelect('*')
             ->addFieldToFilter(ProductInterface::STATUS, Status::STATUS_ENABLED)
             ->load();
