@@ -47,7 +47,7 @@ class Product extends Feed
         return $data;
     }
 
-    protected function enabled()
+    public function enabled()
     {
         return $this->config->isProductFeedEnabled();
     }

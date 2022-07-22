@@ -58,10 +58,16 @@ class OrderCorrectionFeed extends Command
                 break;
         }
 
-        $this->orderCorrectionFeed->execute();
-        $output->writeln('File: '. $this->orderCorrectionFeed->getFilePath());
+        if ($this->orderCorrectionFeed->enabled()) {
 
-        $time = $date->diff(new \DateTime());
-        $output->writeln('Done in: '. sprintf('%sH %sm %ss', $time->h, $time->i, $time->s));
+            $this->orderCorrectionFeed->execute();
+            $output->writeln('File: '. $this->orderCorrectionFeed->getFilePath());
+
+            $time = $date->diff(new \DateTime());
+            $output->writeln('Done in: '. sprintf('%sH %sm %ss', $time->h, $time->i, $time->s));
+        } else {
+            $output->writeln('Order Feed or tracking is disabled');
+        }
+
     }
 }

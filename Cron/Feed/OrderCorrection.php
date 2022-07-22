@@ -61,7 +61,7 @@ abstract class OrderCorrection extends Feed
         return array_values($data);
     }
 
-    protected function enabled()
+    public function enabled()
     {
         return $this->config->isOrderCorrectionFeedEnabled();
     }

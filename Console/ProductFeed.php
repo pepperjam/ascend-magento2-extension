@@ -27,11 +27,16 @@ class ProductFeed extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $date = new \DateTime();
+        if ($this->productFeed->enabled()) {
 
-        $this->productFeed->execute();
-        $output->writeln('File: '. $this->productFeed->getFilePath());
+            $this->productFeed->execute();
+            $output->writeln('File: '. $this->productFeed->getFilePath());
 
-        $time = $date->diff(new \DateTime());
-        $output->writeln('Done in: '. sprintf('%sH %sm %ss', $time->h, $time->i, $time->s));
+            $time = $date->diff(new \DateTime());
+            $output->writeln('Done in: '. sprintf('%sH %sm %ss', $time->h, $time->i, $time->s));
+        } else {
+            $output->writeln('Product Feed or tracking is disabled');
+        }
+
     }
 }
