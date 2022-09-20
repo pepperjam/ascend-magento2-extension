@@ -78,7 +78,7 @@ class LinkHelper extends MagentoAbstractHelper
     public function get()
     {
         $value = $this->cookieManager->getCookie($this->getCookieName());
-        if ($final_value = json_decode($value, true)) {
+        if ($value && $final_value = json_decode($value, true)) {
             return $final_value;
         } else {
             return [];
@@ -142,7 +142,7 @@ class LinkHelper extends MagentoAbstractHelper
         if (!$value) {
             return false;
         }
-        if (! $cookie_data = $this->get()) {
+        if (!$cookie_data = $this->get()) {
             $cookie_data = [];
         } else {
             $this->deleteCookie();
