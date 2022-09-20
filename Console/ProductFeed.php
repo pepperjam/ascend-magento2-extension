@@ -36,7 +36,8 @@ class ProductFeed extends Command
             $output->writeln('Done in: '. sprintf('%sH %sm %ss', $time->h, $time->i, $time->s));
         } else {
             $output->writeln('Product Feed or tracking is disabled');
+            return 1;
         }
-
+        return 0;
     }
 }

@@ -43,8 +43,9 @@ abstract class Beacon
     {
         $lastOrderId = $this->checkoutSession->getLastRealOrderId();
         $this->order = $this->orderFactory->create()->loadByIncrementId($lastOrderId);
-        if (trim($this->order->getCouponCode()) != '') {
-            $params[$this->couponKey] = trim($this->order->getCouponCode());
+        $couponCode = $this->order->getCouponCode();
+        if ($couponCode && trim($couponCode) != '') {
+            $params[$this->couponKey] = trim($couponCode);
         }
 
         return $params;

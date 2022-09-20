@@ -39,7 +39,7 @@ class Validate extends Action
             $resp = curl_exec($ch);
             $retCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close($ch);
-            if (!in_array($retCode, ['200', '301', '302']) || trim(trim($resp)) != $domain) {
+            if (!$resp || !in_array($retCode, ['200', '301', '302']) || trim(trim($resp)) != $domain) {
                 $return = false;
             }
         } catch (\Exception $e) {
