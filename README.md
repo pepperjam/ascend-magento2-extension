@@ -30,7 +30,7 @@ Run installation
 
 Upgrades are done by specifying the version with composer and run magento setup, for example:
 
-    composer require pepperjam/network-magento2-module:1.5.1 --update-no-dev
+    composer require pepperjam/network-magento2-module:1.5.2 --update-no-dev
     php bin/magento set:up
     
     
