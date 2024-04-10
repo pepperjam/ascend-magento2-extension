@@ -23,6 +23,7 @@
                         validateSpan.find('.success').show();
                         jQuery('#save').prop('disabled', false);
                     } else {
+                        validateSpan.find('.message-error').html(json.message);
                         validateSpan.find('.message-error').css('display', 'inline-block');
                     }
                 },
@@ -59,7 +60,7 @@
 <span class="validate-indicator" id="validate_span">
     <img class="loading" hidden="hidden" alt="Validating" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
     <img class="success" hidden="hidden" alt="Validated" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
-    <span class="message message-error" hidden="hidden">Your custom domain has not been properly provisioned in Ascend. Log in <a href="https://ascend.pepperjam.com/merchant/integration/tracking-domains">here</a> to complete the provisioning</span>
+    <span class="message message-error" hidden="hidden"></span>
 </span>
 <ul>
     <li>The host part of the uri https://pepperjam.my-domain.com should match your primary domain.</li>
