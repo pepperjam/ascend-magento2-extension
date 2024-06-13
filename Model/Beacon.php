@@ -60,6 +60,15 @@ abstract class Beacon
         return $params;
     }
 
+    protected function addPlatform($params)
+    {
+        $platform_id = $this->config->getPlatformIdentifier();
+        if ($platform_id) {
+            $params['PLATFORM'] = $platform_id;
+        }
+        return $params;
+    }
+
     abstract public function getUrl();
 
     abstract protected function orderParams();

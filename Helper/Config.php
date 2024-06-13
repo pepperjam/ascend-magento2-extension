@@ -152,4 +152,9 @@ class Config extends AbstractHelper
     {
         return (bool)$this->scopeConfig->getValue('pepperjam_network/settings/currency_support');
     }
+
+    public function getPlatformIdentifier()
+    {
+        return $this->scopeConfig->getValue('pepperjam_network/settings/platform_id');
+    }
 }

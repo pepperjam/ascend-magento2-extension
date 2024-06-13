@@ -19,6 +19,7 @@ class Itemized extends Beacon
         $params = $this->getCouponCode($params);
         $params = $this->addItems($params);
         $params = $this->addCampaign($params);
+        $params = $this->addPlatform($params);
 
         return $this->config->getBeaconBaseUrl() . '?' . http_build_query($params);
     }

@@ -37,6 +37,10 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                     <label>Program Id</label>
                     <comment>Your Program Id will be provided to you by Pepperjam</comment>
                 </field>
+                <field id="platform_id" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Platform</label>
+                    <comment>Unless provided by Pepperjam, leave this unchanged.</comment>
+                </field>
                 <field id="tracking_type" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Program Tracking Type</label>
                     <source_model>Pepperjam\Network\Model\Config\Source\TrackingType</source_model>
