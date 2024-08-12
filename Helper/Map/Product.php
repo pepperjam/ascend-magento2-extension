@@ -266,6 +266,6 @@ class Product extends AbstractHelper
 
     protected function trimToMaxLength($value, $maxLength)
     {
-        return substr(trim($value), 0, $maxLength);
+        return $value ? substr(trim($value), 0, $maxLength) : $value;
     }
 }

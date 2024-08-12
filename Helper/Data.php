@@ -77,7 +77,7 @@ class Data extends AbstractHelper
             }
         }
         if (strlen($id) >= $this->config->getBeaconProductIdMaxSize()) {
-            $id = $item->getSku(). '-'. md5($id);
+            $id = $item->getSku(). '-'. hash('sha1', $id);
         }
         return $id;
     }

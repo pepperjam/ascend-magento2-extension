@@ -15,6 +15,7 @@
             </feed>
             <settings>
                 <active>0</active>
+                <platform_id>ADOBE1</platform_id>
                 <tracking_type>dynamic</tracking_type>
                 <transaction_type>sale</transaction_type>
                 <export_path>var/export/pepperjam_network/</export_path>
