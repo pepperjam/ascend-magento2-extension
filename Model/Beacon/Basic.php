@@ -13,6 +13,7 @@ class Basic extends Beacon
         $params = $this->getCouponCode($params);
         $params = $this->addCampaign($params);
         $params = $this->addPlatform($params);
+        $params = $this->addSignature($params);
 
         return $this->config->getBeaconBaseUrl() . '?' . http_build_query($params);
     }
