@@ -69,6 +69,18 @@ abstract class Beacon
         return $params;
     }
 
+    protected function addSignature($params)
+    {
+        $enabled = $this->config->isSignatureEnabled();
+        $secret = $this->config->getSignaturePrivateKey();
+        if ($enabled and !empty($secret)) {
+            $orderId = $this->order->getIncrementId();
+            $signature = hash_hmac('sha256', $orderId, $secret);
+            $params['SIGNATURE'] = $signature;
+        }
+        return $params;
+    }
+
     abstract public function getUrl();
 
     abstract protected function orderParams();

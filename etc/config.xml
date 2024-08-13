@@ -28,15 +28,20 @@
                 <beacon_product_id_max_size>128</beacon_product_id_max_size>
                 <currency_support>0</currency_support>
             </settings>
-            <custom_domain>
+            <pixel_signature>
                 <enabled>0</enabled>
-                <url/>
-            </custom_domain>
+                <private_key/>
+                <doc_url>https://www.ascendpartner.com/merchant/integration/pixel-signing</doc_url>
+            </pixel_signature>
             <container_tag>
                 <enabled>0</enabled>
                 <indentifier/>
                 <endpoint_js>container.pepperjam.com</endpoint_js>
             </container_tag>
+            <custom_domain>
+                <enabled>0</enabled>
+                <url/>
+            </custom_domain>
             <product_map>
                 <!--
                 The purpose of this mapping is enabled the coexistence of both

@@ -157,4 +157,19 @@ class Config extends AbstractHelper
     {
         return $this->scopeConfig->getValue('pepperjam_network/settings/platform_id');
     }
+
+    public function isSignatureEnabled()
+    {
+        return (bool)$this->scopeConfig->getValue('pepperjam_network/pixel_signature/enabled');
+    }
+
+    public function getSignaturePrivateKey()
+    {
+        return $this->scopeConfig->getValue('pepperjam_network/pixel_signature/private_key');
+    }
+
+    public function getSignatureDocUrl()
+    {
+        return $this->scopeConfig->getValue('pepperjam_network/pixel_signature/doc_url');
+    }
 }

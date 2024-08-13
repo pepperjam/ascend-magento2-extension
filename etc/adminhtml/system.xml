@@ -74,6 +74,24 @@ http://assets.pepperjam.com/legal/magento-connect-extension-eula.pdf
                 </field>
             </group>
 
+            <group id="pixel_signature" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Pixel Signature</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="private_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Private Key</label>
+                    <comment>The private key which will be used to create the pixel signature.</comment>
+                    <depends>
+                        <field id="*/pixel_signature/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="note" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Pepperjam\Network\Block\Adminhtml\Note</frontend_model>
+                </field>
+            </group>
+
             <group id="container_tag" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
                 <label>Container Tag</label>
                 <field id="enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
