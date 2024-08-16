@@ -49,6 +49,44 @@
                 jQuery('#save').prop('disabled', false);
             }
         });
+
+        // Dependent fields validation
+        function toggleRequiredField(enableField, dependentField) {
+            if (enableField.val() == '1') {
+                dependentField.addClass('required-entry highlight-required');
+            } else {
+                dependentField.removeClass('required-entry highlight-required');
+            }
+        }
+        jQuery(document).ready(function() {
+            var cond_enable = jQuery('#pepperjam_network_settings_attribution_enabled');
+            var cond_key = jQuery('#pepperjam_network_settings_source_key_name');
+            toggleRequiredField(cond_enable, cond_key);
+            cond_enable.change(function () {
+                toggleRequiredField(cond_enable, cond_key);
+            });
+
+            var sign_enable = jQuery('#pepperjam_network_pixel_signature_enabled');
+            var sign_key = jQuery('#pepperjam_network_pixel_signature_private_key');
+            toggleRequiredField(sign_enable, sign_key);
+            sign_enable.change(function () {
+                toggleRequiredField(sign_enable, sign_key);
+            });
+
+            var tag_enable = jQuery('#pepperjam_network_container_tag_enabled');
+            var tag_id = jQuery('#pepperjam_network_container_tag_identifier');
+            toggleRequiredField(tag_enable, tag_id);
+            tag_enable.change(function () {
+                toggleRequiredField(tag_enable, tag_id);
+            });
+
+            var domain_enable = jQuery('#pepperjam_network_custom_domain_enabled');
+            var domain_url = jQuery('#pepperjam_network_custom_domain_url');
+            toggleRequiredField(domain_enable, domain_url);
+            domain_enable.change(function () {
+                toggleRequiredField(domain_enable, domain_url);
+            });
+        });
     });
 </script>
 <table style="margin: 0 0 5px 0">
