@@ -12,7 +12,7 @@ class Note extends Field
     public function __construct(Context $context,
                                 Config $config,
                                 array $data = [],
-                                SecureHtmlRenderer $secureRenderer = null)
+                                ?SecureHtmlRenderer $secureRenderer = null)
     {
         $this->config = $config;
         parent::__construct($context, $data, $secureRenderer);

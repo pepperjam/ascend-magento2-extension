@@ -47,9 +47,9 @@ abstract class Feed
         }
 
         $tmpFile = fopen('php://temp', 'r+');
-        fputcsv($tmpFile, $this->getHeaders(), $this->delimiter, $this->enclosure);
+        fputcsv($tmpFile, $this->getHeaders(), $this->delimiter, $this->enclosure, "\\");
         foreach ($feedData as $row) {
-            fputcsv($tmpFile, $row, $this->delimiter, $this->enclosure);
+            fputcsv($tmpFile, $row, $this->delimiter, $this->enclosure, "\\");
         }
         rewind($tmpFile);
 
