@@ -7,7 +7,7 @@
         var validateSpan = jQuery('#validate_span');
         jQuery('#validate_button').click(function () {
             var params = {'url' : jQuery('#pepperjam_network_custom_domain_url').val()};
-            new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+            new Ajax.Request('<?= $escaper->escapeUrl($block->getAjaxUrl()) ?>', {
                 parameters:     params,
                 loaderArea:     false,
                 asynchronous:   true,
@@ -91,13 +91,13 @@
 </script>
 <table style="margin: 0 0 5px 0">
     <tr>
-        <td style="padding:0"><input id="pepperjam_network_custom_domain_url" type="text" name="groups[custom_domain][fields][url][value]" class="input-text admin__control-text" placeholder="subdomain.yourdomain.com" value="<?php echo $block->getDomainValue(); ?>"/></td>
-        <td style="padding:0; width:60px;"><?php echo $block->getButtonHtml() ?></td>
+        <td style="padding:0"><input id="pepperjam_network_custom_domain_url" type="text" name="groups[custom_domain][fields][url][value]" class="input-text admin__control-text" placeholder="subdomain.yourdomain.com" value="<?= $escaper->escapeHtmlAttr($block->getDomainValue()) ?>"/></td>
+        <td style="padding:0; width:60px;"><?= $block->getButtonHtml() ?></td>
     </tr>
 </table>
 <span class="validate-indicator" id="validate_span">
-    <img class="loading" hidden="hidden" alt="Validating" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
-    <img class="success" hidden="hidden" alt="Validated" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+    <img class="loading" hidden="hidden" alt="Validating" src="<?= $escaper->escapeHtmlAttr($block->getViewFileUrl('images/process_spinner.gif')) ?>"/>
+    <img class="success" hidden="hidden" alt="Validated" src="<?= $escaper->escapeHtmlAttr($block->getViewFileUrl('images/rule_component_apply.gif')) ?>"/>
     <span class="message message-error" hidden="hidden"></span>
 </span>
 <ul>
